@@ -10,81 +10,159 @@ import java.util.Map;
 
 public class Player {
 	
+	/**
+	 * Global variable declarations
+	 */
     private int health, mana;
+    private final int MAX_HEALTH, MAX_MANA;
     private boolean isDead;
     private String name, gender;
     private LinkedList<Item> inventory;
     private PlayerClass player_class;
     
-    // The player's class
+    // The player's class, either mage, rogue, or warrior.
     public enum PlayerClass {
-        WARRIOR,
         MAGE,
-        ROGUE
+        ROGUE,
+        WARRIOR
     }
 
-    // Getters and setters
+    /**
+     * @return The player's gender.
+     */
     public String getGender() {
         return gender;
     }
-
+    
+    /**
+     * @param gender The player's new gender.
+     */
     public void setGender(String gender) {
         this.gender = gender;
     }
-
+    
+    /**
+     * @return The player's name.
+     */
     public String getName() {
         return name;
     }
     
+    /**
+     * @param name The player's new name.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    /**
+     * @return The player's class (not to be confused with the .java class of this file).
+     */
     public PlayerClass getPlayerClass()
     {
     	return player_class;
     }
-
-    public void setName(String name) {
-        this.name = name;
+    
+    /**
+     * @param player_class The player's new class.
+     */
+    public void setPlayerClass(PlayerClass player_class)
+    {
+    	this.player_class = player_class;
     }
-
+    
+    /**
+     * @return The player's current health.
+     */
     public int getHealth() {
         return health;
     }
-
+    
+    /**
+     * @param health The player's new health. If set to above the value for their maximum health, then their health gets clamped down to their maximum health. If their health reaches 0 or below, they die.
+     */
     public void setHealth(int health) {
         this.health = health;
+        if ( health > MAX_HEALTH )
+        	health = MAX_HEALTH;
+        if ( health <= 0 )
+        	die();
     }
     
+    /**
+     * @param value The amount to change the player's health by. If this would exceed their maximum health, then their health gets clamped down to their maximum health. If their health reaches 0 or below, they die.
+     */
     public void changeHealth(int value)
     {
     	health += value;
+    	if ( health > MAX_HEALTH )
+    		health = MAX_HEALTH;
     	if ( health <= 0 )
-		{
-			System.out.println("The hero" + (gender.equals("M") ? "" : "ine") + " falls dead, succumbing to their wounds as the world fades to black around them...");
-			System.out.println("GAME OVER...");
-			isDead = true;
-		}
+    		die();
     }
-
+    
+    /**
+     * Method to kill the player. Somehow, this should allow the player to easily restart the game (unimplemented so far).
+     */
+    public void die()
+    {
+    	System.out.println("The hero" + (gender.equals("M") ? "" : "ine") + " falls dead, succumbing to their wounds as the world fades to black around them...");
+		System.out.println("GAME OVER...");
+		isDead = true;
+    }
+    
+    /**
+     * @return The player's current amount of mana.
+     */
     public int getMana() {
 		return mana;
 	}
-
+    
+    /**
+     * @param mana The amount of mana to set the player's current mana to. If this would increase their mana above their maximum mana, then it will get clamped to their maximum mana.
+     */
 	public void setMana(int mana) {
 		this.mana = mana;
+		if ( mana > MAX_MANA )
+			mana = MAX_MANA;
+		if ( mana < 0 )
+			mana = 0;
 	}
 	
+	/**
+	 * @param value The amount of mana to change the player's current mana by. If this would increase their mana above their maximum mana, then it will get clamped to their maximum mana.
+	 */
+	public void changeMana(int value)
+	{
+		mana += value;
+		if ( mana > MAX_MANA )
+			mana = MAX_MANA;
+		if ( mana < 0 )
+			mana = 0;
+	}
+	
+	/**
+	 * @return The player's maximum amount of mana.
+	 */
+	public int getMaxMana()
+	{
+		return MAX_MANA;
+	}
+	
+	/**
+	 * @return If the player is currently dead or not.
+	 */
 	public boolean getIsDead()
 	{
 		return isDead;
 	}
 	
+	/**
+	 * @param isDead Either true or false if the player is currently dead or not.
+	 */
 	public void setIsDead(boolean isDead)
 	{
 		this.isDead = isDead;
-	}
-	
-	public void changeMana(int value)
-	{
-		mana += value;
 	}
 
 	/**
@@ -97,8 +175,10 @@ public class Player {
         isDead = false;
         inventory = new LinkedList<>();
         player_class = PlayerClass.WARRIOR;
-        this.setHealth(100);
-        this.setMana(0);
+        this.MAX_HEALTH = 100;
+        this.MAX_MANA = 0;
+        this.setHealth(MAX_HEALTH);
+        this.setMana(MAX_MANA);
     }
 
     /**
@@ -117,25 +197,31 @@ public class Player {
         // Switch statement for assigning health based on player_class enum
         switch (this.player_class) {
             case WARRIOR:
-                this.setHealth(100);
-                this.setMana(0);
+            	this.MAX_HEALTH = 100;
+            	this.MAX_MANA = 0;
+                
                 break;
             case ROGUE:
-                this.setHealth(80);
-                this.setMana(0);
+            	this.MAX_HEALTH = 80;
+            	this.MAX_MANA = 0;
                 break;
             case MAGE:
-                this.setHealth(60);
-                this.setMana(10);
+            	this.MAX_HEALTH = 60;
+            	this.MAX_MANA = 10;
                 break;
             default:
-                this.setHealth(100); // Default health value
-                this.setMana(0); // Default mana value
+            	this.MAX_HEALTH = 100;
+            	this.MAX_MANA = 0;
                 break;
         }
+        
+        this.setHealth(MAX_HEALTH);
+        this.setMana(MAX_MANA);
     }
-
-
+    
+    /**
+     * Allows for a much better formatted player object when it is converted into a String, rather than the default garbage a Java class displays as with ToString().
+     */
     @Override
     public String toString() {
         String playerClassFormatted = player_class.toString().toLowerCase();
@@ -191,7 +277,7 @@ public class Player {
     
     /**
      * Finds and returns an item from the player's inventory.
-     * @param The item to find. This must be an Item class object that has been properly initialized.
+     * @param item The item to find. This must be an Item class object that has been properly initialized.
      * @return The item from the player's inventory, or null if the player does not have that item.
      */
     public Item getItemFromInventory(Item item)
@@ -209,7 +295,8 @@ public class Player {
     }
     
     /**
-     * Prints the player's inventory.
+     * Prints and automatically sorts the player's inventory. Dynamically resizes and formats the inventory list based on the current items in the inventory. Automatically hides entire item categories if the
+     * player does not have any items of that category. Displays items alphabetically first by the type of items (e.g. Armor displays first, then food, then keys, etc.), then by the names of the items themselves.
      */
     public void printInventory() {
         System.out.println("\nINVENTORY:");

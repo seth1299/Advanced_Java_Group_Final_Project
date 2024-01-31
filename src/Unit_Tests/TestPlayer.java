@@ -10,7 +10,10 @@ import Player_Related_Stuff.Player;
 import Player_Related_Stuff.Player.PlayerClass;
 
 public class TestPlayer {
-
+	
+	/**
+	 * Tests the creation of a Player object with a default constructor.
+	 */
 	@Test
 	public void testPlayerCreation()
 	{
@@ -18,6 +21,9 @@ public class TestPlayer {
 		assertEquals("Name: John Doe" + "\n" + "Gender: M" + "\n" + "Player class: Warrior" + "\n" + "Health: " + 100, player_default.toString());		
 	}
 	
+	/**
+	 * Tests some of the methods of the Player class by uusing a Player object to access them.
+	 */
 	@Test
 	public void testPlayerMethods()
 	{
@@ -28,6 +34,9 @@ public class TestPlayer {
 		assertEquals("Name: Ben Grimm" + "\n" + "Gender: M" + "\n" + "Player class: Warrior" + "\n" + "Health: " + 20, the_Thing.toString());
 	}
 	
+	/**
+	 * Speecifically tests the player's inventory.
+	 */
 	@Test
 	public void testPlayerInventory()
 	{
