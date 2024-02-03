@@ -7,27 +7,143 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Player {
 	
 	/**
 	 * Global variable declarations
 	 */
-    private int health, mana;
+    private int health, mana, speed;
     private final int MAX_HEALTH, MAX_MANA;
     private boolean isDead;
     private String name, gender;
     private LinkedList<Item> inventory;
+    private LinkedList<Spell> spells;
+    private final LinkedList<Spell> ALL_POSSIBLE_SPELLS = new LinkedList<>();
     private PlayerClass player_class;
     
-    // The player's class, either mage, rogue, or warrior.
+    /**
+     * The player's class, either mage, rogue, or warrior.
+     */
     public enum PlayerClass {
         MAGE,
         ROGUE,
         WARRIOR
     }
-
+    
     /**
+     * The possible moves that the player can take during combat.
+     */
+    public enum PlayerMoves {
+    	ATTACK,
+    	DEFEND,
+    	FLEE,
+    	ITEM,
+    	MAGIC
+    }
+    
+    /**
+     * This method is only to add all possible spells to the ALL_POSSIBLE_SPELLS final LinkedList<Spell> during the Player class instantiation. It will never be invoked again after the class instantiation.
+     */
+    public void ADD_ALL_SPELLS() {
+        try (BufferedReader br = new BufferedReader(new FileReader("spells.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                // Split the line by comma to get spell attributes
+                String[] spellAttributes = line.split(",");
+                if (spellAttributes.length == 3) {
+                    // Parse spell attributes and add the spell to ALL_POSSIBLE_SPELLS
+                    String name = spellAttributes[0];
+                    int manaCost = Integer.parseInt(spellAttributes[1]);
+                    Spell.SpellType type = Spell.SpellType.valueOf(spellAttributes[2]);
+                    Spell spellToAdd = new Spell(name, manaCost, type);
+                    ALL_POSSIBLE_SPELLS.add(spellToAdd);
+                } else {
+                    System.out.println("Invalid line format: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading spells file: " + e.getMessage());
+        }
+    }
+    
+    /**
+     * @param spell The spell to add to the player's current spell list.
+     */
+    public void addSpell(Spell spell)
+    {
+    	if ( spell != null && spells != null && !spells.contains(spell) )
+    		spells.add(spell);
+    }
+    
+    /**
+     * Adds any spells with a mana cost of less than or equal to the player's maximum mana into the player's possible spells LinkedList.
+     */
+    public void addValidSpells()
+    {
+    	for ( Spell spell : ALL_POSSIBLE_SPELLS )
+    	{
+    		if ( spell != null && spell.getManaCost() <= MAX_MANA )
+    			addSpell(spell);
+    	}
+    }
+    
+    public void displaySpellList() {
+        if (MAX_MANA == 0 || spells == null)
+            return;
+        else {
+        	
+        	System.out.println("SPELLS: \n");
+            // Initialize a map to store spells grouped by type
+            Map<Spell.SpellType, List<Spell>> groupedSpells = new HashMap<>();
+
+            // Group spells by type
+            for (Spell spell : spells) {
+                groupedSpells.computeIfAbsent(spell.getSpellType(), k -> new ArrayList<>()).add(spell);
+            }
+
+            // Iterate through the grouped spells and print them
+            for (Map.Entry<Spell.SpellType, List<Spell>> entry : groupedSpells.entrySet()) {
+                // Print spell type
+                String spellTypeFormatted = entry.getKey().toString().toLowerCase();
+                spellTypeFormatted = spellTypeFormatted.substring(0, 1).toUpperCase() + spellTypeFormatted.substring(1);
+                System.out.println(spellTypeFormatted + ":");
+
+                // Sort spells by name within the type
+                entry.getValue().sort(Comparator.comparing(Spell::getName));
+
+                // Print spells within the type
+                for (Spell spell : entry.getValue()) {
+                    System.out.println("* " + spell.getName() + " (" + spell.getManaCost() + ")");
+                }
+
+                System.out.println();
+            }
+        }
+    }
+
+
+    
+    /**
+     * @return The player's speed value (i.e. how fast they move in combat).
+     */
+    public int getSpeed() {
+		return speed;
+	}
+    
+    /**
+     * @param speed The new value for the player's speed value (i.e. how fast they move in combat).
+     */
+    public void setSpeed(int speed)
+    {
+    	this.speed = speed;
+    }
+    
+
+	/**
      * @return The player's gender.
      */
     public String getGender() {
@@ -174,11 +290,14 @@ public class Player {
         gender = "M";
         isDead = false;
         inventory = new LinkedList<>();
+        spells = new LinkedList<>();
         player_class = PlayerClass.WARRIOR;
         this.MAX_HEALTH = 100;
         this.MAX_MANA = 0;
         this.setHealth(MAX_HEALTH);
         this.setMana(MAX_MANA);
+        setSpeed(5);
+        ALL_POSSIBLE_SPELLS.clear();
     }
 
     /**
@@ -191,6 +310,7 @@ public class Player {
         this.name = name;
         this.gender = gender;
         inventory = new LinkedList<>();
+        spells = new LinkedList<>();
         this.player_class = player_class;
         isDead = false;
 
@@ -199,25 +319,35 @@ public class Player {
             case WARRIOR:
             	this.MAX_HEALTH = 100;
             	this.MAX_MANA = 0;
-                
+                setSpeed(5);
+                ALL_POSSIBLE_SPELLS.clear();
                 break;
             case ROGUE:
             	this.MAX_HEALTH = 80;
             	this.MAX_MANA = 0;
+            	setSpeed(10);
+            	ALL_POSSIBLE_SPELLS.clear();
                 break;
             case MAGE:
             	this.MAX_HEALTH = 60;
             	this.MAX_MANA = 10;
+            	setSpeed(1);
                 break;
             default:
             	this.MAX_HEALTH = 100;
             	this.MAX_MANA = 0;
+            	setSpeed(5);
                 break;
         }
         
         this.setHealth(MAX_HEALTH);
         this.setMana(MAX_MANA);
+        ADD_ALL_SPELLS();
+        addValidSpells();
+        addItemsToInventoryFromTextFile();
     }
+    
+    
     
     /**
      * Allows for a much better formatted player object when it is converted into a String, rather than the default garbage a Java class displays as with ToString().
@@ -231,7 +361,36 @@ public class Player {
         else
         	return "Name: " + name + "\nGender: " + gender + "\nPlayer class: " + playerClassFormatted + "\nHealth: " + health;
     }
-
+    
+    public void addItemsToInventoryFromTextFile() {
+        try (BufferedReader br = new BufferedReader(new FileReader("items.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                // Split the line into parts based on the delimiter (assuming items are formatted as "name, description, type, amount")
+                String[] parts = line.split(", ");
+                
+                // Ensure that the line contains the necessary information
+                if (parts.length == 4) {
+                    String name = parts[0];
+                    String description = parts[1];
+                    Item.ItemType type = Item.ItemType.valueOf(parts[2].toUpperCase());
+                    int amount = Integer.parseInt(parts[3]);
+                    
+                    // Create a new item and add it to the player's inventory
+                    Item newItem = new Item(name, description, type);
+                    addItemToInventory(newItem, amount);
+                } else {
+                    System.out.println("Invalid format for item: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid amount format for item: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.err.println("Invalid item type: " + e.getMessage());
+        }
+    }
 
     /**
      * Adds an item to the player's inventory.
