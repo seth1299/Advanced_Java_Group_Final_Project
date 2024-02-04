@@ -48,12 +48,13 @@ public class Player {
     /**
      * This method is only to add all possible spells to the ALL_POSSIBLE_SPELLS final LinkedList<Spell> during the Player class instantiation. It will never be invoked again after the class instantiation.
      */
-    public void ADD_ALL_SPELLS() {
-        try (BufferedReader br = new BufferedReader(new FileReader("spells.txt"))) {
+    public void ADD_ALL_SPELLS(String filepath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line;
+            final String DELIMITER = ", ";
             while ((line = br.readLine()) != null) {
                 // Split the line by comma to get spell attributes
-                String[] spellAttributes = line.split(",");
+                String[] spellAttributes = line.split(DELIMITER);
                 if (spellAttributes.length == 3) {
                     // Parse spell attributes and add the spell to ALL_POSSIBLE_SPELLS
                     String name = spellAttributes[0];
@@ -66,7 +67,7 @@ public class Player {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error reading spells file: " + e.getMessage());
+            System.out.println("Error reading spells file: " + filepath + "\n" + e.getMessage());
         }
     }
     
@@ -342,9 +343,9 @@ public class Player {
         
         this.setHealth(MAX_HEALTH);
         this.setMana(MAX_MANA);
-        ADD_ALL_SPELLS();
+        ADD_ALL_SPELLS("spells.txt");
         addValidSpells();
-        addItemsToInventoryFromTextFile();
+        addItemsToInventoryFromTextFile("items.txt");
     }
     
     
@@ -362,12 +363,13 @@ public class Player {
         	return "Name: " + name + "\nGender: " + gender + "\nPlayer class: " + playerClassFormatted + "\nHealth: " + health;
     }
     
-    public void addItemsToInventoryFromTextFile() {
-        try (BufferedReader br = new BufferedReader(new FileReader("items.txt"))) {
+    public void addItemsToInventoryFromTextFile(String filepath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line;
+            String DELIMITER = ", ";
             while ((line = br.readLine()) != null) {
                 // Split the line into parts based on the delimiter (assuming items are formatted as "name, description, type, amount")
-                String[] parts = line.split(", ");
+                String[] parts = line.split(DELIMITER);
                 
                 // Ensure that the line contains the necessary information
                 if (parts.length == 4) {
