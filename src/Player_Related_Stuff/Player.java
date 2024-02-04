@@ -46,12 +46,39 @@ public class Player {
     }
     
     /**
-     * This method is only to add all possible spells to the ALL_POSSIBLE_SPELLS final LinkedList<Spell> during the Player class instantiation. It will never be invoked again after the class instantiation.
+     * This is the actual method to add items to the player's spell list, not all the spells in the game at once.
+     * @param filepath The file path to read from. This is generally a .txt file, such as "spellsFromChest1.txt"
      */
-    public void ADD_ALL_SPELLS(String filepath) {
+    public void addSpellsFromFile(String filepath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line;
-            final String DELIMITER = ", ";
+            final String DELIMITER = "\\|";
+            while ((line = br.readLine()) != null) {
+                // Split the line by comma to get spell attributes
+                String[] spellAttributes = line.split(DELIMITER);
+                if (spellAttributes.length == 3) {
+                    // Parse spell attributes and add the spell to the spells LinkedList
+                    String name = spellAttributes[0];
+                    int manaCost = Integer.parseInt(spellAttributes[1]);
+                    Spell.SpellType type = Spell.SpellType.valueOf(spellAttributes[2]);
+                    Spell spellToAdd = new Spell(name, manaCost, type);
+                    spells.add(spellToAdd);
+                } else {
+                    System.out.println("Invalid line format: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading spells file: " + filepath + "\n" + e.getMessage());
+        }
+    }
+    
+    /**
+     * This method is only to add all possible spells to the ALL_POSSIBLE_SPELLS final LinkedList<Spell> during the Player class instantiation. It will never be invoked again after the class instantiation.
+     */
+    final public void ADD_ALL_SPELLS(String filepath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
+            String line;
+            final String DELIMITER = "\\|";
             while ((line = br.readLine()) != null) {
                 // Split the line by comma to get spell attributes
                 String[] spellAttributes = line.split(DELIMITER);
@@ -70,6 +97,8 @@ public class Player {
             System.out.println("Error reading spells file: " + filepath + "\n" + e.getMessage());
         }
     }
+    
+   
     
     /**
      * @param spell The spell to add to the player's current spell list.
@@ -366,7 +395,7 @@ public class Player {
     public void addItemsToInventoryFromTextFile(String filepath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line;
-            String DELIMITER = ", ";
+            String DELIMITER = "\\|";
             while ((line = br.readLine()) != null) {
                 // Split the line into parts based on the delimiter (assuming items are formatted as "name, description, type, amount")
                 String[] parts = line.split(DELIMITER);
