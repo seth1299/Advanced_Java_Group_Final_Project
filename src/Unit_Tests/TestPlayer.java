@@ -78,4 +78,16 @@ public class TestPlayer {
 		System.out.println(Sally_McKnight.toString());
 		Sally_McKnight.printInventory();
 	}
+	
+	/**
+	 * Specifically tests the player's spell list.
+	 */
+	@Test
+	public void testPlayerSpells()
+	{
+		Player Merlin = new Player("Merlin", "M", PlayerClass.MAGE);
+		Merlin.displaySpellList();
+		Player Arthur = new Player("Arthur", "M", PlayerClass.WARRIOR);
+		Arthur.displaySpellList(); // Should not display anything
+	}
 }
