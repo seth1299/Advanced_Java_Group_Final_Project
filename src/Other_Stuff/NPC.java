@@ -31,6 +31,7 @@ public class NPC {
 		this.name = name;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void createDialogueFromJsonFile(String filepath, Player player) {
 	    try (FileReader reader = new FileReader(filepath)) {
 	        JsonParser parser = new JsonParser();
@@ -38,8 +39,6 @@ public class NPC {
 	        JsonArray jsonArray = jsonElement.getAsJsonArray();
 
 	        dialogue = new ArrayList<>();
-	        Gson gson = new Gson();
-
 	        for (JsonElement element : jsonArray) {
 	            JsonObject dialogueObject = element.getAsJsonObject();
 	            String line = dialogueObject.get("line").getAsString();

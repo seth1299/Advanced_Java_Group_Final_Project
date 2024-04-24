@@ -545,7 +545,10 @@ public class Player {
         String playerClassFormatted = player_class.toString().toLowerCase();
         playerClassFormatted = playerClassFormatted.substring(0, 1).toUpperCase() + playerClassFormatted.substring(1);
         if ( playerClassFormatted.equals("Mage"))
+        {
+        	displaySpellList();
         	return "Name: " + name + "\nGender: " + gender + "\nPlayer class: " + playerClassFormatted + "\nHealth: " + health + "\nMana: " + mana;
+        }
         else
         	return "Name: " + name + "\nGender: " + gender + "\nPlayer class: " + playerClassFormatted + "\nHealth: " + health;
     }
