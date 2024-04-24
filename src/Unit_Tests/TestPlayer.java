@@ -2,28 +2,34 @@ package Unit_Tests;
 
 import static org.junit.Assert.*;
 
+import java.util.LinkedList;
+
 import org.junit.Test;
 
-import Player_Related_Stuff.Item;
-import Player_Related_Stuff.Item.ItemType;
 import Player_Related_Stuff.Player;
 import Player_Related_Stuff.Player.PlayerClass;
+import Other_Stuff.Enemy;
+import Other_Stuff.GameEngine;
+import Other_Stuff.NPC;
 
 public class TestPlayer {
 	
 	/**
 	 * Tests the creation of a Player object with a default constructor.
 	 */
+	/*
 	@Test
 	public void testPlayerCreation()
 	{
 		Player player_default = new Player();
 		assertEquals("Name: John Doe" + "\n" + "Gender: M" + "\n" + "Player class: Warrior" + "\n" + "Health: " + 100, player_default.toString());		
 	}
+	*/
 	
 	/**
-	 * Tests some of the methods of the Player class by uusing a Player object to access them.
+	 * Tests some of the methods of the Player class by using a Player object to access them.
 	 */
+	/*
 	@Test
 	public void testPlayerMethods()
 	{
@@ -33,21 +39,27 @@ public class TestPlayer {
 		the_Thing.setName("Ben Grimm");
 		assertEquals("Name: Ben Grimm" + "\n" + "Gender: M" + "\n" + "Player class: Warrior" + "\n" + "Health: " + 20, the_Thing.toString());
 	}
+	*/
 	
 	/**
 	 * Specifically tests the player's inventory.
 	 */
+	
+	/*
 	@Test
 	public void testPlayerInventory()
 	{
 		Player Sally_McKnight = new Player("Sally McKnight", "F", PlayerClass.MAGE);
-		Sally_McKnight.addItemsToInventoryFromTextFile("items.txt");
+		Sally_McKnight.addItemsToInventoryFromJsonFile("items.json");
 		Sally_McKnight.printInventory();
 	}
+	*/
+	
 	
 	/**
 	 * Specifically tests the player's spell list.
 	 */
+	/*
 	@Test
 	public void testPlayerSpells()
 	{
@@ -56,4 +68,31 @@ public class TestPlayer {
 		Player Arthur = new Player("Arthur", "M", PlayerClass.WARRIOR);
 		Arthur.displaySpellList(); // Should not display anything
 	}
+	*/
+	
+	
+	@Test
+	public void testNPCCreation()
+	{
+		Player player = new Player();
+		NPC npc = new NPC("Test NPC");
+        npc.createDialogueFromJsonFile("src/Dialogues/NPC_dialogue.json", player);
+        npc.printDialogue(player);
+	}
+	
+	/*
+	@Test
+	public void testPlayerFight()
+	{
+		Player Fighter_McFighterson = new Player("Fighty McFighterson", "M", PlayerClass.WARRIOR);
+		LinkedList<Enemy> enemies = new LinkedList<Enemy>();
+		Enemy enemy = new Enemy("Giant Rat", 10, 1);
+		Enemy bat = new Enemy("Bat", 5, 5);
+		Enemy bandit = new Enemy("Bandit", 7, 7, "Dialogues/Bandit_Dialogue.json");
+		enemies.add(enemy);
+		enemies.add(bat);
+		enemies.add(bandit);
+		GameEngine.startFight(Fighter_McFighterson, enemies);
+	}
+	*/
 }

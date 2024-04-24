@@ -1,9 +1,0 @@
-Fireball|5|DAMAGE
-Frostbite|5|DAMAGE
-Heal|5|BUFF
-Heal More|5|BUFF
-Weakness|5|DEBUFF
-Break Defense|5|DEBUFF
-Attack All|5|DAMAGE
-Heal All|10|BUFF
-Sneak Behind|5|DEBUFF

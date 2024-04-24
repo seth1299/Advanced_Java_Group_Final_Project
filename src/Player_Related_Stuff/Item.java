@@ -20,18 +20,26 @@ public class Item implements Comparable<Item> {
      */
     private String name, description;
     private ItemType type;
-    private int amount;
+    @SuppressWarnings("unused")
+	private int amount, armorValue, weaponDamage;
+    
+    // Constructor without armor value and weapon damage
+    public Item(String name, String description, ItemType type) {
+        this(name, description, type, 0, 0);
+    }
 
     /**
      * @param name The item's name.
      * @param description The item's description.
      * @param type What type of item it is. This is an enum value that must be ItemType.POTION, ItemType.WEAPON, etc.
      */
-    public Item(String name, String description, ItemType type) {
+    public Item(String name, String description, ItemType type, int armorValue, int weaponDamage) {
         this.name = name;
         this.description = description;
         this.type = type;
         this.amount = 1;
+        this.armorValue = armorValue;
+        this.weaponDamage = weaponDamage;
     }
     
     // Implementing Comparable interface
