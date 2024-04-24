@@ -2,20 +2,23 @@ package Other_Stuff;
 
 import java.util.List;
 
-import Dialogues.DialogueLine;
 import Player_Related_Stuff.Player;
 
 public class Enemy extends NPC {
 	
 	private int enemyHealth, enemyDamage;
-    private List<String> dialogue;
-    private String name;
+    private String enemyDialogue;
 	
     public Enemy(String name, int enemyHealth, int enemyDamage) {
 		super(name);
 		this.enemyHealth = enemyHealth;
 		this.enemyDamage = enemyDamage;
 	}
+    
+    public int[] getEnemyStats()
+    {
+    	return new int[] {enemyHealth, enemyDamage};
+    }
     
     public void changeEnemyHealth(int value)
     {
@@ -45,20 +48,18 @@ public class Enemy extends NPC {
 		return false;
 	}
 
-	public List<String> getDialogue() {
-		return dialogue;
+	public String getEnemyDialogue() {
+		return enemyDialogue;
 	}
 
-	public void setDialogue(List<String> dialogue) {
-		this.dialogue = dialogue;
+	public void setEnemyDialogue(String enemyDialogue) {
+		this.enemyDialogue = enemyDialogue;
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	
+	@Override
+	public String toString()
+	{
+		return "Enemy name: " + getName() + "\nEnemy health: " + getEnemyHealth() + "\nEnemy damage: " + getEnemyDamage();
 	}
 
 	public void takeTurn(Player player)

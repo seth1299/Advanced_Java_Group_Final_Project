@@ -21,6 +21,14 @@ public class GameEngine
             System.out.println("Invalid player or enemy list provided.");
             return;
         }
+        
+        for (Enemy enemy : enemies)
+        {
+        	if ( enemy.getEnemyDialogue() != null )
+        	{
+        		System.out.println(enemy.getName() + ": " + enemy.getEnemyDialogue());
+        	}
+        }
 
         // Start the fight
         System.out.println("The battle begins!");
@@ -41,9 +49,7 @@ public class GameEngine
                     enemy.takeTurn(player);
                 }
             }
-
-            // Remove defeated enemies
-            enemies.removeIf(Enemy::getIsDead);
+            
         }
 
         // Check if enemies defeated or player defeated all enemies
@@ -51,5 +57,33 @@ public class GameEngine
             System.out.println("Congratulations! You have defeated all enemies!");
         }
     }
+	
+	public static void startFight(Player player, Enemy enemy)
+	{
+		if ( player == null || enemy == null )
+		{
+			System.out.println("Invalid player or enemy provided.");
+			return;
+		}
+		
+		if ( enemy.getEnemyDialogue() != null )
+		{
+			enemy.createDialogueFromJsonFile(player);
+	    	enemy.printDialogue(player);
+		}
+		
+    	
+    	// Start the fight
+        System.out.println("The battle begins!");
+        
+        while (!player.getIsDead()) 
+        {
+            // Player's turn
+            player.takeTurn(enemy);
+            if ( enemy.getIsDead())
+            	break;
+            enemy.takeTurn(player);
+        }
+	}
 	
 }

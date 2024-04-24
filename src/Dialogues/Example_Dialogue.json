@@ -1,0 +1,9 @@
+[
+    {
+        "line": "This is an example of a line that requires user input. User input is collected during runtime, so trying to use user input inside of these .JSON files is strongly discouraged. Requiring user input will hault the entire program until the user enters something.",
+        "requiresInput": true
+    },
+    {
+        "line": "This is an example of a line that does not require user input."
+    }
+]

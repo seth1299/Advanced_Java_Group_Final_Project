@@ -75,8 +75,8 @@ public class TestPlayer {
 	public void testNPCCreation()
 	{
 		Player player = new Player();
-		NPC npc = new NPC("Test NPC");
-        npc.createDialogueFromJsonFile("src/Dialogues/NPC_dialogue.json", player);
+		NPC npc = new NPC("Test NPC", "src/Dialogues/Tutorial_NPC_dialogue.json");
+        npc.createDialogueFromJsonFile(player);
         npc.printDialogue(player);
 	}
 	

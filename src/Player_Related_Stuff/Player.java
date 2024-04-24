@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -110,7 +111,7 @@ public class Player {
         
         this.setHealth(MAX_HEALTH);
         this.setMana(MAX_MANA);
-        ADD_ALL_SPELLS("spells.json");
+        ADD_ALL_SPELLS("src/Other_Stuff/spells.json");
         addValidSpells();
     }
     
@@ -143,7 +144,8 @@ public class Player {
     }
     
     public void takeTurn(LinkedList<Enemy> enemies) {
-    	Scanner sc = new Scanner(System.in);
+    	@SuppressWarnings("resource")
+		Scanner sc = new Scanner(System.in);
         LinkedList<String> playerMoves = getPlayerMovesList();
         Map<String, Integer> nameCountMap = new HashMap<>(); // Map to store counts of each enemy name
         int playerDamage = getDamage();
@@ -151,7 +153,7 @@ public class Player {
 		// Display available moves
 		System.out.println("\n" + getName() + "'s move! What will you do? (Current health: " + getHealth() + ")");
 		for (String move : playerMoves)
-			System.out.println(move);
+			System.out.println("* " + move);
 
 		// Create enemyNames
 		for (Enemy enemy : enemies) {
@@ -181,7 +183,7 @@ public class Player {
 		} while (!playerMoves.contains(response));
 
 		// Player performs action
-		if (response.equals("ATTACK")) {
+		if (response.equals("ATTACK") || response.equals("A")) {
 			do {
 				System.out.println("\nWho would you like to attack?");
 				response = sc.nextLine().trim().toLowerCase(); // Convert player's input to lowercase for comparison
@@ -189,25 +191,78 @@ public class Player {
 					.contains(response)); // Convert each key in the map to lowercase before comparison
 
 			System.out.println("You attack the " + response + " for " + playerDamage + " damage!\n");
-
+			
+			
 			// Inflict damage on the enemy
-			for (Enemy currentEnemy : enemies) {
-				if (currentEnemy.getName().equalsIgnoreCase(response)) {
-					currentEnemy.changeEnemyHealth(-playerDamage);
-					if (currentEnemy.getEnemyHealth() <= 0)
-					{
-						System.out.println("You have slain the " + response + "!");
-						enemies.remove(currentEnemy);
-					}
-						
-				}
-
-			}
+		    Iterator<Enemy> iterator = enemies.iterator();
+		    while (iterator.hasNext()) {
+		        Enemy currentEnemy = iterator.next();
+		        if (currentEnemy.getName().equalsIgnoreCase(response)) {
+		            currentEnemy.changeEnemyHealth(-playerDamage);
+		            if (currentEnemy.getEnemyHealth() <= 0) {
+		                System.out.println("You have slain the " + response + "!");
+		                iterator.remove(); // Remove the current enemy using the iterator
+		                break;
+		            }
+		            System.out.println("The " + response + " now has " + currentEnemy.getEnemyHealth() + " health!");
+		            break;
+		        }
+		    }
 		} else {
 			System.out.println(response + " IS NOT IMPLEMENTED YET.");
 		}
         
     }
+    
+	public void takeTurn(Enemy enemy) {
+		if ( isDead )
+			return;
+		
+		@SuppressWarnings("resource")
+		Scanner sc = new Scanner(System.in);
+		LinkedList<String> playerMoves = getPlayerMovesList();
+		int playerDamage = getDamage();
+		String enemyName = enemy.getName();
+
+		System.out.println("\n" + getName() + "'s move! What will you do? (Current health: " + getHealth() + ")");
+		
+		for (String move : playerMoves)
+			System.out.println(move);
+
+		System.out.println("\nEnemy: \n* " + enemyName);
+
+		// Player chooses action
+		String response = "";
+		do {
+			System.out.println("\nWhat would you like to do?");
+			response = sc.nextLine().toUpperCase().trim();
+		} while (!playerMoves.contains(response));
+
+		// Player performs action
+		if (response.equals("ATTACK") || response.equals("A")) 
+		{
+
+			System.out.println("You attack the " + enemyName + " for " + playerDamage + " damage!\n");
+			
+			enemy.changeEnemyHealth(-playerDamage);
+			
+			if (enemy.getEnemyHealth() <= 0) 
+			{
+				System.out.println("You have slain the " + enemyName + "!");
+				return;
+			}
+
+		} 
+		else
+		{
+			System.out.println(response + " IS NOT IMPLEMENTED YET. RESTARTING PLAYER TURN.");
+			takeTurn(enemy);
+		}
+			
+
+	}
+
+ 
     
     /**
      * The player's class, either mage, rogue, or warrior.
@@ -474,7 +529,7 @@ public class Player {
      */
     public void die()
     {
-    	System.out.println("The hero" + (gender.equals("M") ? "" : "ine") + " falls dead, succumbing to their wounds as the world fades to black around them...");
+    	System.out.println("The hero" + (gender.equals("M") || gender.equals("NB") ? "" : "ine") + " falls dead, succumbing to their wounds as the world fades to black around them...");
 		System.out.println("GAME OVER...");
 		isDead = true;
     }
