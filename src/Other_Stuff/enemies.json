@@ -1,0 +1,13 @@
+[
+    {
+        "name": "Bandit",
+        "enemyHealth": 9,
+        "enemyDamage": 3,
+        "enemyDialogue": "Never should've come here..."
+    },
+    {
+        "name": "Bat",
+        "enemyHealth": 6,
+        "enemyDamage": 2
+    }
+]

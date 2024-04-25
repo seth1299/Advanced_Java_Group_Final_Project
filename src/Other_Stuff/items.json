@@ -1,0 +1,91 @@
+[
+    {
+        "name": "Banana cake",
+        "description": "A delicious banana cake.",
+        "type": "FOOD",
+        "amount": 1
+    },
+    {
+        "name": "Health Potion",
+        "description": "A healing potion typical of high fantasy worlds, capable of healing wounds instantly.",
+        "type": "POTION",
+        "amount": 1
+    },
+    {
+        "name": "Felix Felicis",
+        "description": "A vial of liquid luck, drinking this will make your attacks hit more often in combat. Any resemblance to potions real or fictional is purely coincidential.",
+        "type": "POTION",
+        "amount": 1
+    },
+    {
+        "name": "Wooden Sword",
+        "description": "A short wooden sword, capable of cutting even the mightiest of small bushes.",
+        "type": "WEAPON",
+        "amount": 1,
+        "damage": 5
+    },
+    {
+        "name": "Rounded Buckler",
+        "description": "A small round buckler, capable of protecting one from fatal blows from anything ranging from small house cats to medium-sized domesticated dogs.",
+        "type": "ARMOR",
+        "amount": 1,
+        "armorValue": 3
+    },
+    {
+        "name": "Leather Armor",
+        "description": "A classic set of leather armor, complete with gauntlets and boots. Stylish, yet functional.",
+        "type": "ARMOR",
+        "amount": 1,
+        "armorValue": 5
+    },
+    {
+        "name": "Front Door Key",
+        "description": "The key to the front door of your house. Can't leave home without it. Or I guess you could, if you want your house to be robbed.",
+        "type": "KEY",
+        "amount": 1
+    },
+    {
+        "name": "Odd Key",
+        "description": "What is this key for? You have no idea where you got it from, but you refuse to part with it because it could come in handy some day.",
+        "type": "KEY",
+        "amount": 1
+    },
+    {
+        "name": "Macguffin",
+        "description": "This item will defeat the boss of the game and make you rich, but only after finishing your quest. Why? Because I said so.",
+        "type": "QUEST_ITEM",
+        "amount": 1
+    },
+    {
+        "name": "Iron Armor",
+        "description": "Armor made from iron, stronger than leather but weaker than steel.",
+        "type": "ARMOR",
+        "amount": 1,
+        "armorValue": 7
+    },
+    {
+        "name": "Apple",
+        "description": "A delicious red apple, free from any sort of sophoric poisons as far as you know.",
+        "type": "FOOD",
+        "amount": 1
+    },
+    {
+        "name": "Wine",
+        "description": "A fine aged wine. You can't wait for the day to end so you can drink it.",
+        "type": "FOOD",
+        "amount": 1
+    },
+    {
+        "name": "Banana",
+        "description": "A plain banana. It seems to be getting overly ripe more quickly than you would expect.",
+        "type": "FOOD",
+        "amount": 1
+    },
+    {
+        "name": "Iron sword",
+        "description": "An iron sword, stronger than a wooden sword but weaker than a steel sword.",
+        "type": "WEAPON",
+        "amount": 1,
+        "damage": 8
+    }
+]
