@@ -1,7 +1,5 @@
 package Other_Stuff;
 
-import java.util.List;
-
 import Player_Related_Stuff.Player;
 
 public class Enemy extends NPC {

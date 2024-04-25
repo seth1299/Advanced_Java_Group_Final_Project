@@ -1,5 +1,7 @@
 package Player_Related_Stuff;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -10,8 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.io.FileReader;
-import java.io.IOException;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -143,7 +144,7 @@ public class Player {
     	sc.close();
     }
     
-    public void takeTurn(LinkedList<Enemy> enemies) {
+    public void takeTurn(List<Enemy> enemies) {
     	@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
         LinkedList<String> playerMoves = getPlayerMovesList();

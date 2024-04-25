@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 public class GameEngine 
 {
 	
-	public static void startFight(Player player, LinkedList<Enemy> enemies) {
+	public static void startFight(Player player, List<Enemy> enemies) {
         // Check if the player or enemies are null
         if (player == null || enemies == null || enemies.isEmpty()) {
             System.out.println("Invalid player or enemy list provided.");

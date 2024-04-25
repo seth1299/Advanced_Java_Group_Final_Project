@@ -6,19 +6,15 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
 import Player_Related_Stuff.Player;
-import Other_Stuff.GameEngine;
 
 public class World {
 	
@@ -26,7 +22,6 @@ public class World {
 	
 	public static List<Enemy> loadEnemies(String filename) throws IOException {
         Gson gson = new GsonBuilder().create();
-        Type enemyListType = new TypeToken<List<Enemy>>(){}.getType();
 
         try (Reader reader = new FileReader(filename)) {
             JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
@@ -142,9 +137,9 @@ public class World {
 		
 		Player player = new Player(name, gender, playerClass);
 		Enemy bandit = getEnemyByName(enemies, "Bandit");
-		Enemy bat1 = getEnemyByName(enemies, "Bat"), bat2 = getEnemyByName(enemies, "Bat");
+		Enemy bat1 = getEnemyByName(enemies, "Bat");
 		
-		LinkedList<Enemy> enemies = new LinkedList<>();
+		//inkedList<Enemy> enemies = new LinkedList<>();
 	    enemies.add(bat1);
 	    enemies.add(bandit);
 		
