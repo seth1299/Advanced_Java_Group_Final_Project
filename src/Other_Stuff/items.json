@@ -1,7 +1,49 @@
 [
     {
-        "name": "Banana cake",
+        "name": "Banana Cake",
         "description": "A delicious banana cake.",
+        "type": "FOOD",
+        "amount": 1
+    },
+    {
+        "name": "Apple",
+        "description": "A delicious red apple, free from any sort of sophoric poisons as far as you know.",
+        "type": "FOOD",
+        "amount": 1
+    },
+    {
+        "name": "Cheap Wine",
+        "description": "A fine aged wine. You can't wait for the day to end so you can drink it.",
+        "type": "FOOD",
+        "amount": 1
+    },
+    {
+        "name": "Banana",
+        "description": "A plain banana. It seems to be getting overly ripe more quickly than you would expect.",
+        "type": "FOOD",
+        "amount": 1
+    },
+    {
+        "name": "Beef Jerky",
+        "description": "Standard soldier food, they don't even bother with an expiration date.",
+        "type": "FOOD",
+        "amount": 1
+    },
+    {
+        "name": "Bread Loaf",
+        "description": "A boring loaf of bread. It's not even sliced.",
+        "type": "FOOD",
+        "amount": 1
+    },
+    {
+        "name": "Round of Cheese",
+        "description": "Yes, a whole round of cheese. Where the heck are you keeping all this stuff?",
+        "type": "FOOD",
+        "amount": 1
+    },
+    {
+        "name": "Meat Pie",
+        "description": "Piping hot and delicious, yet can be stuffed in your pocket and come out pristine.",
         "type": "FOOD",
         "amount": 1
     },
@@ -12,8 +54,14 @@
         "amount": 1
     },
     {
+        "name": "Mana Potion",
+        "description": "A potion that refills your magical reserves.",
+        "type": "POTION",
+        "amount": 1
+    },
+    {
         "name": "Felix Felicis",
-        "description": "A vial of liquid luck, drinking this will make your attacks hit more often in combat. Any resemblance to potions real or fictional is purely coincidential.",
+        "description": "A vial of liquid luck, drinking this will make your attacks hit more often in combat. Any resemblance to potions real or fictional is purely coincidental.",
         "type": "POTION",
         "amount": 1
     },
@@ -25,11 +73,60 @@
         "damage": 5
     },
     {
-        "name": "Rounded Buckler",
-        "description": "A small round buckler, capable of protecting one from fatal blows from anything ranging from small house cats to medium-sized domesticated dogs.",
-        "type": "ARMOR",
+        "name": "Wooden Dagger",
+        "description": "A small wooden dagger, it's a real stretch to call this a weapon.",
+        "type": "WEAPON",
         "amount": 1,
-        "armorValue": 3
+        "damage": 3
+    },
+    {
+        "name": "Wand Shaped Twig",
+        "description": "If you squint your eyes and turn your head just right, it looks like a wand",
+        "type": "WEAPON",
+        "amount": 1,
+        "damage": 6
+    },
+    {
+        "name": "Iron Sword",
+        "description": "An iron sword, stronger than a wooden sword but weaker than a steel sword.",
+        "type": "WEAPON",
+        "amount": 1,
+        "damage": 8
+    },
+    {
+        "name": "Iron Dagger",
+        "description": "An iron dagger, stronger than a wooden dagger but weaker than a steel dagger.",
+        "type": "WEAPON",
+        "amount": 1,
+        "damage": 7
+    },
+    {
+        "name": "Training Wand",
+        "description": "Hey, this one is an actual wand!",
+        "type": "WEAPON",
+        "amount": 1,
+        "damage": 9
+    },
+    {
+        "name": "Steel Sword",
+        "description": "A mighty weapon once wielded by a local tyrant.",
+        "type": "WEAPON",
+        "amount": 1,
+        "damage": 11
+    },
+    {
+        "name": "Steel Dagger",
+        "description": "This dagger is incredibly sharp. Like seriously, be careful.",
+        "type": "WEAPON",
+        "amount": 1,
+        "damage": 10
+    },
+    {
+        "name": "Mage's Wand",
+        "description": "The wand of a strange mage. It has been imbued with great magic.",
+        "type": "WEAPON",
+        "amount": 1,
+        "damage": 12
     },
     {
         "name": "Leather Armor",
@@ -39,8 +136,86 @@
         "armorValue": 5
     },
     {
-        "name": "Front Door Key",
-        "description": "The key to the front door of your house. Can't leave home without it. Or I guess you could, if you want your house to be robbed.",
+        "name": "Hardened Leather Armor",
+        "description": "This leather armor is protective but lets you move freely. It has been dyed black to blend with shadows.",
+        "type": "ARMOR",
+        "amount": 1,
+        "armorValue": 7
+    },
+    {
+        "name": "Iron Armor",
+        "description": "Armor made from iron, stronger than leather but weaker than steel.",
+        "type": "ARMOR",
+        "amount": 1,
+        "armorValue": 7
+    },
+    {
+        "name": "Steel Armor",
+        "description": "Armor made from steel, proof against all but the strongest of attacks.",
+        "type": "ARMOR",
+        "amount": 1,
+        "armorValue": 10
+    },
+    {
+        "name": "Dark Black Cloak",
+        "description": "A dark black cloak that makes you feel super mysterious.",
+        "type": "ARMOR",
+        "amount": 1,
+        "armorValue": 3
+    },
+    {
+        "name": "Mage's Cloak",
+        "description": "A purple cloak that fairly crackles with magical energy.",
+        "type": "ARMOR",
+        "amount": 1,
+        "armorValue": 5
+    },
+    {
+        "name": "Cell Key",
+        "description": "The key to open the dungeon cells.",
+        "keyNum": 1,
+        "type": "KEY",
+        "amount": 1
+    },
+    {
+        "name": "Officer's Key",
+        "description": "The key to open the castle's armory and weaponry.",
+        "keyNum": 2,
+        "type": "KEY",
+        "amount": 1
+    },
+    {
+        "name": "Advisor's Office Key",
+        "description": "The key to open the castle advisor's office.",
+        "keyNum": 3,
+        "type": "KEY",
+        "amount": 1
+    },
+    {
+        "name": "Mage's Office Key",
+        "description": "The key to open the mage's office.",
+        "keyNum": 4,
+        "type": "KEY",
+        "amount": 1
+    },
+    {
+        "name": "Lord's Guard Key",
+        "description": "The key to open the nobles' quarters.",
+        "keyNum": 5,
+        "type": "KEY",
+        "amount": 1
+    },
+    {
+        "name": "Keep Storage Key",
+        "description": "The key to open the castle's keep.",
+        "keyNum": 6,
+        "type": "KEY",
+        "amount": 1
+    },
+    {
+        "name": "Gate Key",
+        "description": "The key to getting out of this hell hole.",
+        "keyNum": 7,
         "type": "KEY",
         "amount": 1
     },
@@ -57,35 +232,15 @@
         "amount": 1
     },
     {
-        "name": "Iron Armor",
-        "description": "Armor made from iron, stronger than leather but weaker than steel.",
-        "type": "ARMOR",
-        "amount": 1,
-        "armorValue": 7
-    },
-    {
-        "name": "Apple",
-        "description": "A delicious red apple, free from any sort of sophoric poisons as far as you know.",
-        "type": "FOOD",
+        "name": "Chekhov's Bow",
+        "description": "According the the rules of storytelling, this Bow will be important later. Probably.",
+        "type": "QUEST_ITEM",
         "amount": 1
     },
     {
-        "name": "Wine",
-        "description": "A fine aged wine. You can't wait for the day to end so you can drink it.",
-        "type": "FOOD",
+        "name": "Portrait of Sue Hannum, Giver of Good Grades",
+        "description": "A beautiful portrait of the patron saint of the Advanced Java class.",
+        "type": "QUEST_ITEM",
         "amount": 1
-    },
-    {
-        "name": "Banana",
-        "description": "A plain banana. It seems to be getting overly ripe more quickly than you would expect.",
-        "type": "FOOD",
-        "amount": 1
-    },
-    {
-        "name": "Iron sword",
-        "description": "An iron sword, stronger than a wooden sword but weaker than a steel sword.",
-        "type": "WEAPON",
-        "amount": 1,
-        "damage": 8
     }
 ]
