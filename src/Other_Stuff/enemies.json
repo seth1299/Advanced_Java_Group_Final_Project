@@ -1,13 +1,32 @@
 [
     {
-        "name": "Bandit",
+        "name": "Bat",
+        "enemyHealth": 6,
+        "enemyDamage": 2,
+        "enemyDialogue": "Meep!"
+    },
+    {
+        "name": "Goblin Looter",
         "enemyHealth": 9,
         "enemyDamage": 3,
+        "enemyDialogue": "No! It's all mine!"
+    },
+    {
+        "name": "Goblin Warrior",
+        "enemyHealth": 12,
+        "enemyDamage": 5,
         "enemyDialogue": "Never should've come here..."
     },
     {
-        "name": "Bat",
-        "enemyHealth": 6,
-        "enemyDamage": 2
+        "name": "Massive Troll",
+        "enemyHealth": 15,
+        "enemyDamage": 7,
+        "enemyDialogue": "Ha! Missed one! Come here puny human!"
+    },
+    {
+        "name": "Troll Chief",
+        "enemyHealth": 18,
+        "enemyDamage": 9,
+        "enemyDialogue": "How did you make it this far? You'll not take my treasure!"
     }
 ]

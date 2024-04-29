@@ -148,23 +148,24 @@ public class World {
 	}
 
 	public static List<Room> loadRooms(String filename) throws IOException {
-		
+
 		// TODO: Figure out how to load rooms
 		
 		/*
+
 		Gson gson = new GsonBuilder().create();
 
 		try (Reader reader = new FileReader(filename)) {
 			JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
-			List<Room> rooms = new ArrayList<>();
-			
-			
-			
+			List<Room> rooms = new ArrayList<>();			
 			
 			for (JsonElement element : jsonArray) {
 				JsonObject jsonObject = element.getAsJsonObject();
 				Room room = gson.fromJson(jsonObject, Room.class);
-				
+
+			for (JsonElement element : jsonArray) {
+				JsonObject jsonObject = element.getAsJsonObject();
+				Room room = gson.fromJson(jsonObject, Room.class);
 				room.setRoomName(jsonObject.get("name").getAsString());
 				room.setRoomNum(jsonObject.get("roomNum"));
 				room.setExitN(jsonObject.get("exit n"));
@@ -187,12 +188,11 @@ public class World {
 				room.setRoomDescription(jsonObject.get("description").getAsString());
 				rooms.add(room);
 			}
-			
+
 		}
 		 	*/
 			return rooms;
 		}
-	
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -255,7 +255,7 @@ public class World {
 		response = "";
 		
 		player = new Player(name, gender);
-
+    
 		// TODO: Figure out how to use the player's current room
 		//int playerRoom = 1;
 
@@ -268,11 +268,10 @@ public class World {
 				"You immediately burst out of the cell, look both ways down the hall, and decide to hide in the storage room until the noise dies down.");
 		
 		// TODO: Figure out how to display the player's current room.
-		
+
 		//playerRoom.display();
 		response ="";
 		response = sc.nextLine().trim().toUpperCase();
-		
 		sc.close();
 	}
 
