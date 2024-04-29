@@ -71,7 +71,7 @@ public class GameEngine
 			enemy.createDialogueFromJsonFile(player);
 	    	enemy.printDialogue(player);
 		}
-		
+		 
     	
     	// Start the fight
         System.out.println("The battle begins!");

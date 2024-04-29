@@ -455,7 +455,24 @@ public class Player {
     		return null;
     	for (Item currentItem : inventory) {
             if (currentItem.getName().equals(item.getName()) && currentItem.getType() == item.getType()) {
-                // If the item already exists, increment its quantity and return
+                return currentItem;
+            }
+        }
+    	
+    	return null;
+    }
+    
+    /**
+     * Finds and returns an item from the player's inventory, or null if there is no item with that name.
+     * @param name The name of the item to find. This is just a String.
+     * @return The item from the player's inventory, or null if the player does not have that item.
+     */
+    public Item getItemFromInventoryByName(String name)
+    {
+    	if ( name.isEmpty() )
+    		return null;
+    	for (Item currentItem : inventory) {
+            if (currentItem.getName().equals(name)) {
                 return currentItem;
             }
         }
