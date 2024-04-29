@@ -194,6 +194,7 @@
     "exit dn": 8,
     "locked": false,
     "requiredKey": "",
+    "roomItemsFilepath": "",
     "enemyFilepath": "",
     "description:": "Stairs Down to the Dungeon or Up to the Ground Level."
 },

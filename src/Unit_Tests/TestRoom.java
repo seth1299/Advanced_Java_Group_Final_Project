@@ -25,7 +25,7 @@ public class TestRoom
 		Room room_default = new Room();
 		assertNotNull(room_default);
 		System.out.println(room_default);
-		Room room_1 = new Room(player_default, 0, "Test room", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, false, null, null, null, "An empty room.");
+		Room room_1 = new Room(0, "Test room", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, false, null, null, null, "An empty room.");
 		assertNotNull(room_1);
 		System.out.println(room_1);
 	}
