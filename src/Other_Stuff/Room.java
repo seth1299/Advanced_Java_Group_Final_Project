@@ -73,7 +73,7 @@ public class Room {
 	 * @param enemy The enemy that is in the room, if any.
 	 * @param roomDescription The description of the room.
 	 */
-	public Room(Player player, int roomNum, String roomName, int exitN, int exitNW, int exitNE, int exitW, int exitE, int exitSW, int exitS, int exitSE, int exitUP, int exitDN, boolean locked, Item requiredKey, String roomItemsFilepath, Enemy enemy, String roomDescription) {
+	public Room(Player player, int roomNum, String roomName, int exitN, int exitNW, int exitNE, int exitW, int exitE, int exitSW, int exitS, int exitSE, int exitUP, int exitDN, boolean locked, String requiredKey, String roomItemsFilepath, String enemyFilepath, String roomDescription) {
 		this.player = player;
 		this.roomNum = roomNum;
 		this.roomName = roomName;
@@ -89,32 +89,15 @@ public class Room {
 		this.exitDN = exitDN;
 		this.locked = locked;
 		addItemsToRoomFromJsonFile(roomItemsFilepath);
-		this.setRequiredKey(requiredKey);
-		this.enemy = enemy;
-		this.roomDescription = roomDescription;
-	}
-	
-	/**
-	 * This is identical to the other constructor, but it takes a List of enemies instead of a single enemy.
-	 */
-	public Room(Player player, int roomNum, String roomName, int exitN, int exitNW, int exitNE, int exitW, int exitE, int exitSW, int exitS, int exitSE, int exitUP, int exitDN, boolean locked, Item requiredKey, String roomItemsFilepath, List<Enemy> enemies, String roomDescription) {
-		this.player = player;
-		this.roomNum = roomNum;
-		this.roomName = roomName;
-		this.exitN = exitN;
-		this.exitNW = exitNW;
-		this.exitNE = exitNE;
-		this.exitW = exitW;
-		this.exitE = exitE;
-		this.exitSW = exitSW;
-		this.exitS = exitS;
-		this.exitSE = exitSE;
-		this.exitUP = exitUP;
-		this.exitDN = exitDN;
-		this.locked = locked;
-		addItemsToRoomFromJsonFile(roomItemsFilepath);
-		this.setRequiredKey(requiredKey);
-		this.enemies = enemies;
+		this.setRequiredKey(player.getItemFromInventoryByName(requiredKey));
+		if ( !enemyFilepath.isEmpty() )
+		{
+			try {
+				enemies = World.loadEnemies(enemyFilepath);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		this.roomDescription = roomDescription;
 	}
 
@@ -210,6 +193,9 @@ public class Room {
 	}
 	
 	public void addItemsToRoomFromJsonFile(String filepath) {
+		if ( filepath.isEmpty() )
+			return;
+		
         try (FileReader reader = new FileReader(filepath)) {
             JsonArray itemsArray = JsonParser.parseReader(reader).getAsJsonArray();
             

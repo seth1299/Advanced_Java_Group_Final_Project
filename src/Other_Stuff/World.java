@@ -18,7 +18,7 @@ import Player_Related_Stuff.Player;
 
 public class World {
 	
-	private static List<Enemy> enemies;
+	private static List<Enemy> allEnemiesInTheGame;
 	private static Player player;
 	private static List<Room> rooms;
 	
@@ -65,12 +65,12 @@ public class World {
 		return null; // Room not found
 	}
 
-	public static List<Enemy> getEnemies() {
-		return enemies;
+	public static List<Enemy> getAllEnemiesInTheGame() {
+		return allEnemiesInTheGame;
 	}
 
-	public static void setEnemies(List<Enemy> enemies) {
-		World.enemies = enemies;
+	public static void setAllEnemiesInTheGame(List<Enemy> enemies) {
+		allEnemiesInTheGame = enemies;
 	}
 
 	public static Room playerMovement(List<Room> rooms, int playerRoom, String response) {
@@ -197,7 +197,7 @@ public class World {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		try {
-            setEnemies(loadEnemies("src/Other_Stuff/enemies.json"));
+            setAllEnemiesInTheGame(loadEnemies("src/Other_Stuff/enemies.json"));
         } catch (IOException e) {
             e.printStackTrace();
         }
