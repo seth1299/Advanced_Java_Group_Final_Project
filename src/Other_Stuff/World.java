@@ -23,6 +23,10 @@ public class World {
 	private static List<Room> rooms;
 	
 	public static List<Enemy> loadEnemies(String filename) throws IOException {
+		
+		if ( filename == null || filename.isEmpty() )
+			return null;
+		
         Gson gson = new GsonBuilder().create();
 
         try (Reader reader = new FileReader(filename)) {
@@ -43,6 +47,10 @@ public class World {
     }
 	
 	public static Enemy getEnemyByName(List<Enemy> enemies, String name) {
+		
+		if ( enemies == null || name == null )
+			return null;
+		
         for (Enemy enemy : enemies) {
             if (enemy.getName().equals(name)) {
                 return enemy;
@@ -52,6 +60,9 @@ public class World {
     }
 
 	public static Room getRoomByNum(List<Room> rooms, int roomNumber) {
+		
+		if ( rooms == null )
+			return null;
 		
 		// TODO: Figure out how to get the room by number.
 		
@@ -74,6 +85,9 @@ public class World {
 	}
 
 	public static Room playerMovement(List<Room> rooms, int playerRoom, String response) {
+		
+		if ( rooms == null || response == null )
+			return null;
 		
 		// TODO: Figure out how to move the player.
 		
@@ -148,6 +162,9 @@ public class World {
 	}
 
 	public static List<Room> loadRooms(String filename) throws IOException {
+		
+		if ( filename == null || filename.isBlank() )
+			return null;
 
 		// TODO: Figure out how to load rooms
 		

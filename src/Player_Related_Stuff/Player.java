@@ -59,6 +59,8 @@ public class Player {
      * @param gender The player's gender.
      */
     public Player(String name, String gender) {
+    	if ( name == null || gender == null )
+    		System.exit(-1);
         this.name = name;
         this.gender = gender;
         inventory = new LinkedList<>();
@@ -76,6 +78,10 @@ public class Player {
     }
     
     public void takeTurn(List<Enemy> enemies) {
+    	
+    	if ( enemies == null )
+    		return;
+    	
     	@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
         LinkedList<String> playerMoves = getPlayerMovesList();
@@ -147,7 +153,7 @@ public class Player {
     }
     
 	public void takeTurn(Enemy enemy) {
-		if ( isDead )
+		if ( isDead || enemy == null )
 			return;
 		
 		@SuppressWarnings("resource")
@@ -381,6 +387,10 @@ public class Player {
     }
     
     public void addItemsToInventoryFromJsonFile(String filepath) {
+    	
+    	if ( filepath == null || filepath.isEmpty() )
+    		return;
+    	
         try (FileReader reader = new FileReader(filepath)) {
             JsonArray itemsArray = JsonParser.parseReader(reader).getAsJsonArray();
             
@@ -431,7 +441,7 @@ public class Player {
      * @param amount The number of items to remove. This number is automatically made negative in the method, so do not put a negative number in the function call.
      */
     public void removeItemFromInventory(Item item, int amount) {
-    	if ( item == null )
+    	if ( item == null || amount <= 0 )
     		return;
     	for (Item currentItem : inventory) {
             if (currentItem.getName().equals(item.getName()) && currentItem.getType() == item.getType()) {
@@ -469,6 +479,9 @@ public class Player {
      */
     public Item getItemFromInventoryByName(String name)
     {
+    	if ( name == null )
+    		return null;
+    		
     	if ( name.isEmpty() )
     		return null;
     	for (Item currentItem : inventory) {
