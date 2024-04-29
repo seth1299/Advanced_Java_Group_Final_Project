@@ -19,6 +19,8 @@ import Player_Related_Stuff.Player;
 public class World {
 	
 	private static List<Enemy> enemies;
+	private static Player player;
+	private static List<Room> rooms;
 	
 	public static List<Enemy> loadEnemies(String filename) throws IOException {
         Gson gson = new GsonBuilder().create();
@@ -50,75 +52,84 @@ public class World {
     }
 
 	public static Room getRoomByNum(List<Room> rooms, int roomNumber) {
+		
+		// TODO: Figure out how to get the room by number.
+		
+		/*
 		for (Room room : rooms) {
-			if (room.getRoomNum().equals(name)) {
-				return room;
-			}
+			//if (room.getRoomNum().equals(name)) {
+				//return room;
+			//}
 		}
+		*/
 		return null; // Room not found
 	}
 
-	public static boolean checkLocked(room) {
-		if(room.getLocked>0) {
-			return true;
-		}
-		else {
-			return false;
-		}
+	public static List<Enemy> getEnemies() {
+		return enemies;
 	}
 
-	public static Room playerMovement(List<Room> rooms, int playerRoom, string response) {
-		boolean locked;
+	public static void setEnemies(List<Enemy> enemies) {
+		World.enemies = enemies;
+	}
+
+	public static Room playerMovement(List<Room> rooms, int playerRoom, String response) {
+		
+		// TODO: Figure out how to move the player.
+		
+		//boolean locked = false;
+		
 		Room playRoom = getRoomByNum(rooms, playerRoom);
-		int destinationRoomNum;
+		int destinationRoomNum = 0;
 		switch(response) {
-			case(response.equals("NW")):
-			case(response.equals("NORTHWEST")):
-				destinationRoom = playRoom.getExitNW();
+			case("NW"):
+			case("NORTHWEST"):
+				destinationRoomNum = playRoom.getExitNW();
 				break;
-			case(response.equals("N")):
-			case(response.equals("NORTH")):
+			case("N"):
+			case("NORTH"):
 				destinationRoomNum = playRoom.getExitN();
 				break;
-			case(response.equals("NE")):
-			case(response.equals("NORTHEAST")):
+			case("NE"):
+			case("NORTHEAST"):
 				destinationRoomNum = playRoom.getExitNE();
 				break;
-			case(response.equals("W")):
-			case(response.equals("WEST")):
+			case("W"):
+			case("WEST"):
 				destinationRoomNum = playRoom.getExitW();
 				break;
-			case(response.equals("E")):
-			case(response.equals("EAST")):
+			case("E"):
+			case("EAST"):
 				destinationRoomNum = playRoom.getExitE();
 				break;
-			case(response.equals("SW")):
-			case(response.equals("SOUTHWEST")):
+			case("SW"):
+			case("SOUTHWEST"):
 				destinationRoomNum = playRoom.getExitSW();
 				break;
-			case(response.equals("S")):
-			case(response.equals("SOUTH")):
+			case("S"):
+			case("SOUTH"):
 				destinationRoomNum = playRoom.getExitS();
 				break;
-			case(response.equals("SE")):
-			case(response.equals("SOUTHEAST")):
+			case("SE"):
+			case("SOUTHEAST"):
 				destinationRoomNum = playRoom.getExitSE();
 				break;
-			case(response.equals("UP")):
+			case("UP"):
 				destinationRoomNum = playRoom.getExitUP();
 				break;
-			case(response.equals("DN")):
-			case(response.equals("DOWN")):
+			case("DN"):
+			case("DOWN"):
 				destinationRoomNum = playRoom.getExitDN();
 				break;
 
 		}
+		
 		if(destinationRoomNum>0) {
-			Room destinationRoom = getRoomByNum(destinationRoomNum);
-			boolean isLocked = checkLocked(destinationRoom);
+			Room destinationRoom = getRoomByNum(rooms, destinationRoomNum);
+			boolean isLocked = destinationRoom.getLocked();
 			if (isLocked) {
-				//need to add inventory check for key here
-				if () {
+				// TODO: Check if this actually works.
+				if (player.getItemFromInventory(destinationRoom.getRequiredKey()) != null) {
 					destinationRoom.display();
 					return destinationRoom;
 				} else {
@@ -137,11 +148,20 @@ public class World {
 	}
 
 	public static List<Room> loadRooms(String filename) throws IOException {
+
+		// TODO: Figure out how to load rooms
+		
+		/*
+
 		Gson gson = new GsonBuilder().create();
 
 		try (Reader reader = new FileReader(filename)) {
 			JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
-			List<Room> rooms = new ArrayList<>();
+			List<Room> rooms = new ArrayList<>();			
+			
+			for (JsonElement element : jsonArray) {
+				JsonObject jsonObject = element.getAsJsonObject();
+				Room room = gson.fromJson(jsonObject, Room.class);
 
 			for (JsonElement element : jsonArray) {
 				JsonObject jsonObject = element.getAsJsonObject();
@@ -169,20 +189,21 @@ public class World {
 				rooms.add(room);
 			}
 
+		}
+		 	*/
 			return rooms;
 		}
-	}
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		try {
-            enemies = loadEnemies("src/Other_Stuff/enemies.json");
+            setEnemies(loadEnemies("src/Other_Stuff/enemies.json"));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 		try {
-			rooms = loadRooms("src/Other_Stuff/rooms.json");
+			setRooms(loadRooms("src/Other_Stuff/rooms.json"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -232,42 +253,11 @@ public class World {
 		} while(!response.trim().equalsIgnoreCase("Y") && !response.trim().equalsIgnoreCase("YES"));
 		
 		response = "";
-		Player.PlayerClass playerClass = Player.PlayerClass.NULL;
 		
-		do
-		{
-			System.out.println("And are you a (M)age, (R)ogue, or (W)arrior?");
-			response = sc.nextLine().trim().toUpperCase();
-			
-			switch(response)
-			{
-				case "M":
-			    case "MAGE":
-			        System.out.println("So you're a mage? (Y/N)");
-			        playerClass = Player.PlayerClass.MAGE;
-			        break;
-			    case "R":
-			    case "ROGUE":
-			        System.out.println("So you're a rogue? (Y/N)");
-			        playerClass = Player.PlayerClass.ROGUE;
-			        break;
-			    case "W":
-			    case "WARRIOR":
-			        System.out.println("So you're a warrior? (Y/N)");
-			        playerClass = Player.PlayerClass.WARRIOR;
-			        break;
-			    default:
-			        System.out.println("Sorry, I didn't recognize that. Please enter 'M', 'R', or 'W'.");
-			        continue;
-			}
-			
-			response = sc.nextLine().trim().toUpperCase();
-
-		} while(!response.trim().equalsIgnoreCase("Y") && !response.trim().equalsIgnoreCase("YES"));
-		
-		Player player = new Player(name, gender, playerClass);
-
-		int playerRoom = 1;
+		player = new Player(name, gender);
+    
+		// TODO: Figure out how to use the player's current room
+		//int playerRoom = 1;
 
 		//Game Begins Here
 		System.out.println("You aren't sure how long you've been in this cell.\nYou're pretty sure that it's more than a week, less than a month.\n" +
@@ -276,25 +266,21 @@ public class World {
 				"The door pops open, and you're sure you've gone mad until you see the gaping hole in the helmet\n" +
 				"No, if you'd gone mad the last thing that you would have imagined was being freed from your cell into a castle under attack.\n" +
 				"You immediately burst out of the cell, look both ways down the hall, and decide to hide in the storage room until the noise dies down.");
+		
+		// TODO: Figure out how to display the player's current room.
 
-		playerRoom.display();
+		//playerRoom.display();
 		response ="";
 		response = sc.nextLine().trim().toUpperCase();
-	/*
-		Enemy bandit = getEnemyByName(enemies, "Bandit");
-		Enemy bat1 = getEnemyByName(enemies, "Bat");
-		
-		//inkedList<Enemy> enemies = new LinkedList<>();
-	    enemies.add(bat1);
-	    enemies.add(bandit);
-		
-		//Other_Stuff.GameEngine.startFight(player, enemies);
-		//Other_Stuff.GameEngine.startFight(player, bat2);
-	    
-	    NPC steve = new NPC("Steve", "src/Dialogues/Tutorial_NPC_dialogue.json");
-	    steve.speakToPlayer(player);
-	*/
 		sc.close();
+	}
+
+	public static List<Room> getRooms() {
+		return rooms;
+	}
+
+	public static void setRooms(List<Room> rooms) {
+		World.rooms = rooms;
 	}
 
 }

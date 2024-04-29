@@ -9,7 +9,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import Player_Related_Stuff.Player;
-import Player_Related_Stuff.Player.PlayerClass;
 import Other_Stuff.Enemy;
 import Other_Stuff.GameEngine;
 import Other_Stuff.NPC;
@@ -34,7 +33,7 @@ public class TestPlayer {
 	public void testPlayerCreation()
 	{
 		Player player_default = new Player();
-		assertEquals("Name: John Doe" + "\n" + "Gender: M" + "\n" + "Player class: Warrior" + "\n" + "Health: " + 100, player_default.toString());		
+		assertEquals("Name: John Doe" + "\n" + "Gender: M" + "\n" + "Health: " + 100, player_default.toString());		
 	}
 
 	
@@ -45,11 +44,11 @@ public class TestPlayer {
 	@Ignore
 	public void testPlayerMethods()
 	{
-		Player the_Thing = new Player("Ben Grim", "F", PlayerClass.WARRIOR);
+		Player the_Thing = new Player("Ben Grim", "F");
 		the_Thing.setGender("M");
 		the_Thing.setHealth(20);
 		the_Thing.setName("Ben Grimm");
-		assertEquals("Name: Ben Grimm" + "\n" + "Gender: M" + "\n" + "Player class: Warrior" + "\n" + "Health: " + 20, the_Thing.toString());
+		assertEquals("Name: Ben Grimm" + "\n" + "Gender: M" + "\n" + "Health: " + 20, the_Thing.toString());
 	}
 	
 	/**
@@ -60,26 +59,10 @@ public class TestPlayer {
 	@Ignore
 	public void testPlayerInventory()
 	{
-		Player Sally_McKnight = new Player("Sally McKnight", "F", PlayerClass.MAGE);
+		Player Sally_McKnight = new Player("Sally McKnight", "F");
 		Sally_McKnight.addItemsToInventoryFromJsonFile("items.json");
 		Sally_McKnight.printInventory();
 	}
-	
-	
-	/**
-	 * Specifically tests the player's spell list.
-	 */
-	@Test
-	@Ignore
-	public void testPlayerSpells()
-	{
-		Player Merlin = new Player("Merlin", "M", PlayerClass.MAGE);
-		Merlin.displaySpellList();
-		Player Arthur = new Player("Arthur", "M", PlayerClass.WARRIOR);
-		Arthur.displaySpellList(); // Should not display anything
-	}
-	
-	
 	
 	@Test
 	@Ignore
@@ -96,7 +79,7 @@ public class TestPlayer {
 	@Ignore
 	public void testPlayerFight()
 	{
-		Player Fighter_McFighterson = new Player("Fighty McFighterson", "M", PlayerClass.WARRIOR);
+		Player Fighter_McFighterson = new Player("Fighty McFighterson", "M");
 		try {
             enemies = World.loadEnemies("src/Other_Stuff/enemies.json");
         } catch (IOException e) {

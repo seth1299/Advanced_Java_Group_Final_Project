@@ -13,12 +13,9 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
-
 import Other_Stuff.Enemy;
 
 public class Player {
@@ -27,93 +24,55 @@ public class Player {
 	 * Global variable declarations
 	 */
     private int health, mana, damage;
-    private final int MAX_HEALTH, MAX_MANA;
+    private final int MAX_HEALTH;
     private boolean isDead;
     private String name, gender;
     private LinkedList<Item> inventory;
-    private LinkedList<Spell> spells;
     private LinkedList<String> playerMovesList = new LinkedList<>();
     private Map<EquipmentSlot, Item> equipment;
-    private final LinkedList<Spell> ALL_POSSIBLE_SPELLS = new LinkedList<>();
-    private PlayerClass player_class;
     
     /**
 	 * Default Player constructor, all values are automatically assigned to garbage values.
 	 */
     public Player() {
-        health = 10;
+        health = 100;
         name = "UNINSTANTIATED";
         gender = "UNINSTANTIATED";
         isDead = false;
         inventory = new LinkedList<>();
-        spells = new LinkedList<>();
-        player_class = PlayerClass.NULL;
         damage = 2;
         playerMovesList.add("ATTACK");
         playerMovesList.add("DEFEND");
         playerMovesList.add("FLEE");
         playerMovesList.add("ITEM");
-        playerMovesList.add("MAGIC");
         equipment = new HashMap<>();
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             equipment.put(slot, null);
         }
         this.MAX_HEALTH = 100;
-        this.MAX_MANA = 0;
         this.setHealth(MAX_HEALTH);
-        this.setMana(MAX_MANA);
-        ALL_POSSIBLE_SPELLS.clear();
     }
 
     /**
      * Full constructor for the Player class.
      * @param name The player's name.
      * @param gender The player's gender.
-     * @param player_class The player's character class.
      */
-    public Player(String name, String gender, PlayerClass player_class) {
+    public Player(String name, String gender) {
         this.name = name;
         this.gender = gender;
         inventory = new LinkedList<>();
-        spells = new LinkedList<>();
-        this.player_class = player_class;
         playerMovesList.add("ATTACK");
         playerMovesList.add("DEFEND");
         playerMovesList.add("FLEE");
         playerMovesList.add("ITEM");
-        playerMovesList.add("MAGIC");
-        isDead = false;
-
-        // Switch statement for assigning health based on player_class enum
-        switch (this.player_class) {
-            case WARRIOR:
-            	this.MAX_HEALTH = 100;
-            	this.MAX_MANA = 0;
-                setDamage(3);
-                ALL_POSSIBLE_SPELLS.clear();
-                break;
-            case ROGUE:
-            	this.MAX_HEALTH = 80;
-            	this.MAX_MANA = 0;
-            	setDamage(2);
-            	ALL_POSSIBLE_SPELLS.clear();
-                break;
-            case MAGE:
-            	this.MAX_HEALTH = 60;
-            	this.MAX_MANA = 10;
-            	setDamage(1);
-                break;
-            default:
-            	this.MAX_HEALTH = 100;
-            	this.MAX_MANA = 0;
-            	setDamage(3);
-                break;
+        equipment = new HashMap<>();
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            equipment.put(slot, null);
         }
-        
+        isDead = false;
+        this.MAX_HEALTH = 100;
         this.setHealth(MAX_HEALTH);
-        this.setMana(MAX_MANA);
-        ADD_ALL_SPELLS("src/Other_Stuff/spells.json");
-        addValidSpells();
     }
     
     public void setNameAndClass()
@@ -342,98 +301,6 @@ public class Player {
         }
         return null;
     }
-    
-    /**
-     * This is the actual method to add items to the player's spell list, not all the spells in the game at once.
-     * @param filepath The file path to read from. This is generally a .txt file, such as "spellsFromChest1.txt"
-     */
-    public void addSpellsFromFile(String filepath) {
-        try (FileReader reader = new FileReader(filepath)) {
-            Gson gson = new Gson();
-            List<Spell> spellList = gson.fromJson(reader, new TypeToken<List<Spell>>() {}.getType());
-
-            // Add each spell from the list to the player's spell list
-            if (spellList != null) {
-                spells.addAll(spellList);
-            }
-        } catch (IOException e) {
-            System.out.println("Error reading spells file: " + filepath + "\n" + e.getMessage());
-        }
-    }
-    
-    /**
-     * This method is only to add all possible spells to the ALL_POSSIBLE_SPELLS final LinkedList<Spell> during the Player class instantiation. It will never be invoked again after the class instantiation.
-     */
-    final public void ADD_ALL_SPELLS(String filepath) {
-        try (FileReader reader = new FileReader(filepath)) {
-            Gson gson = new Gson();
-            List<Spell> spellList = gson.fromJson(reader, new TypeToken<List<Spell>>() {}.getType());
-
-            // Add each spell from the list to the ALL_POSSIBLE_SPELLS list
-            if (spellList != null) {
-                ALL_POSSIBLE_SPELLS.addAll(spellList);
-            }
-        } catch (IOException e) {
-            System.out.println("Error reading spells file: " + filepath + "\n" + e.getMessage());
-        }
-    }
-    
-   
-    
-    /**
-     * @param spell The spell to add to the player's current spell list.
-     */
-    public void addSpell(Spell spell)
-    {
-    	if ( spell != null && spells != null && !spells.contains(spell) )
-    		spells.add(spell);
-    }
-    
-    /**
-     * Adds any spells with a mana cost of less than or equal to the player's maximum mana into the player's possible spells LinkedList.
-     */
-    public void addValidSpells()
-    {
-    	for ( Spell spell : ALL_POSSIBLE_SPELLS )
-    	{
-    		if ( spell != null && spell.getManaCost() <= MAX_MANA )
-    			addSpell(spell);
-    	}
-    }
-    
-    public void displaySpellList() {
-        if (MAX_MANA == 0 || spells == null)
-            return;
-        else {
-        	
-        	System.out.println("SPELLS: \n");
-            // Initialize a map to store spells grouped by type
-            Map<Spell.SpellType, List<Spell>> groupedSpells = new HashMap<>();
-
-            // Group spells by type
-            for (Spell spell : spells) {
-                groupedSpells.computeIfAbsent(spell.getSpellType(), k -> new ArrayList<>()).add(spell);
-            }
-
-            // Iterate through the grouped spells and print them
-            for (Map.Entry<Spell.SpellType, List<Spell>> entry : groupedSpells.entrySet()) {
-                // Print spell type
-                String spellTypeFormatted = entry.getKey().toString().toLowerCase();
-                spellTypeFormatted = spellTypeFormatted.substring(0, 1).toUpperCase() + spellTypeFormatted.substring(1);
-                System.out.println(spellTypeFormatted + ":");
-
-                // Sort spells by name within the type
-                entry.getValue().sort(Comparator.comparing(Spell::getName));
-
-                // Print spells within the type
-                for (Spell spell : entry.getValue()) {
-                    System.out.println("* " + spell.getName() + " (" + spell.getManaCost() + ")");
-                }
-
-                System.out.println();
-            }
-        }
-    }    
 
 	public int getDamage() {
 		return damage;
@@ -477,22 +344,6 @@ public class Player {
      */
     public void setName(String name) {
         this.name = name;
-    }
-    
-    /**
-     * @return The player's class (not to be confused with the .java class of this file).
-     */
-    public PlayerClass getPlayerClass()
-    {
-    	return player_class;
-    }
-    
-    /**
-     * @param player_class The player's new class.
-     */
-    public void setPlayerClass(PlayerClass player_class)
-    {
-    	this.player_class = player_class;
     }
     
     /**
@@ -541,37 +392,6 @@ public class Player {
     public int getMana() {
 		return mana;
 	}
-    
-    /**
-     * @param mana The amount of mana to set the player's current mana to. If this would increase their mana above their maximum mana, then it will get clamped to their maximum mana.
-     */
-	public void setMana(int mana) {
-		this.mana = mana;
-		if ( mana > MAX_MANA )
-			mana = MAX_MANA;
-		if ( mana < 0 )
-			mana = 0;
-	}
-	
-	/**
-	 * @param value The amount of mana to change the player's current mana by. If this would increase their mana above their maximum mana, then it will get clamped to their maximum mana.
-	 */
-	public void changeMana(int value)
-	{
-		mana += value;
-		if ( mana > MAX_MANA )
-			mana = MAX_MANA;
-		if ( mana < 0 )
-			mana = 0;
-	}
-	
-	/**
-	 * @return The player's maximum amount of mana.
-	 */
-	public int getMaxMana()
-	{
-		return MAX_MANA;
-	}
 	
 	/**
 	 * @return If the player is currently dead or not.
@@ -598,15 +418,7 @@ public class Player {
      */
     @Override
     public String toString() {
-        String playerClassFormatted = player_class.toString().toLowerCase();
-        playerClassFormatted = playerClassFormatted.substring(0, 1).toUpperCase() + playerClassFormatted.substring(1);
-        if ( playerClassFormatted.equals("Mage"))
-        {
-        	displaySpellList();
-        	return "Name: " + name + "\nGender: " + gender + "\nPlayer class: " + playerClassFormatted + "\nHealth: " + health + "\nMana: " + mana;
-        }
-        else
-        	return "Name: " + name + "\nGender: " + gender + "\nPlayer class: " + playerClassFormatted + "\nHealth: " + health;
+        	return "Name: " + name + "\nGender: " + gender + "\nHealth: " + health;
     }
     
     public void addItemsToInventoryFromJsonFile(String filepath) {
@@ -651,7 +463,6 @@ public class Player {
         // If the item doesn't exist, add it to the inventory
         item.setAmount(amount);
         inventory.add(item);
-       
     }
 
 
