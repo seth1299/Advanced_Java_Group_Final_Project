@@ -75,34 +75,6 @@ public class Player {
         this.setHealth(MAX_HEALTH);
     }
     
-    public void setNameAndClass()
-    {
-    	Scanner sc = new Scanner(System.in);
-    	String response = "", name = "";
-    	
-    	do
-    	{
-    		System.out.println("What is your name?");
-    		name = sc.nextLine();
-    		
-    		System.out.println("Your name is " + name + "? (Y/N)");
-    		response  = sc.nextLine();
-    	}while(!response.trim().equalsIgnoreCase("Y"));
-    	
-    	do
-    	{
-    		System.out.println("What class would you like?");
-    		name = sc.nextLine();
-    		
-    		System.out.println("Your name is " + name + "? (Y/N)");
-    		response  = sc.nextLine();
-    	}while(!response.trim().equalsIgnoreCase("Y"));
-    	
-    	
-    	
-    	sc.close();
-    }
-    
     public void takeTurn(List<Enemy> enemies) {
     	@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
@@ -221,18 +193,6 @@ public class Player {
 			
 
 	}
-
- 
-    
-    /**
-     * The player's class, either mage, rogue, or warrior.
-     */
-    public enum PlayerClass {
-        MAGE,
-        ROGUE,
-        WARRIOR,
-        NULL
-    }
     
     /**
      * The possible moves that the player can take during combat.
@@ -253,7 +213,6 @@ public class Player {
         FEET,
         WEAPON,
         OFF_HAND
-        // Add more equipment slots as needed
     }
     
 	/**
