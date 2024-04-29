@@ -26,7 +26,6 @@ public class Room {
 	private int exitUP;
 	private int exitDN;
 	private boolean locked;
-	private Enemy enemy;
 	private List<Enemy> enemies;
 	private String roomDescription;
 	private Item requiredKey;
@@ -49,7 +48,6 @@ public class Room {
 		this.exitDN = 0;
 		this.locked = false;
 		this.setRequiredKey(null);
-		this.enemy = null;
 		this.roomDescription = "";
 	}
 	
@@ -90,7 +88,7 @@ public class Room {
 		this.locked = locked;
 		addItemsToRoomFromJsonFile(roomItemsFilepath);
 		this.setRequiredKey(player.getItemFromInventoryByName(requiredKey));
-		if ( !enemyFilepath.isEmpty() )
+		if ( enemyFilepath != null && !enemyFilepath.isEmpty() )
 		{
 			try {
 				enemies = World.loadEnemies(enemyFilepath);
@@ -106,32 +104,106 @@ public class Room {
 		StringBuilder items = new StringBuilder();
 		int i = 0;
 		
-		for ( Item item : roomItems )
+		if ( roomItems != null && !roomItems.isEmpty() && enemies != null && !enemies.isEmpty() )
 		{
-			if ( i++ != roomItems.size())
-				items.append(item.getName() + ", ");
-			else
-				items.append(item.getName());
+			for ( Item item : roomItems )
+			{
+				if ( i++ != roomItems.size())
+					items.append(item.getName() + ", ");
+				else
+					items.append(item.getName());
+			}
+			
+			return "Room{" +
+			"roomNum=" + roomNum +
+			", roomName='" + roomName + '\'' +
+			", exitN=" + exitN +
+			", exitNW=" + exitNW +
+			", exitNE=" + exitNE +
+			", exitW=" + exitW +
+			", exitE=" + exitE +
+			", exitSW=" + exitSW +
+			", exitS=" + exitS +
+			", exitSE=" + exitSE +
+			", exitUP=" + exitUP +
+			", exitDN=" + exitDN +
+			", locked=" + locked +
+			", " + items + '\'' +
+			", " + enemies + '\'' +
+			", roomDescription='" + roomDescription + '\'' +
+			'}';
 		}
 		
-		return "Room{" +
-				"roomNum=" + roomNum +
-				", roomName='" + roomName + '\'' +
-				", exitN=" + exitN +
-				", exitNW=" + exitNW +
-				", exitNE=" + exitNE +
-				", exitW=" + exitW +
-				", exitE=" + exitE +
-				", exitSW=" + exitSW +
-				", exitS=" + exitS +
-				", exitSE=" + exitSE +
-				", exitUP=" + exitUP +
-				", exitDN=" + exitDN +
-				", locked=" + locked +
-				", " + items + '\'' +
-				", enemy='" + enemy + '\'' +
-				", roomDescription='" + roomDescription + '\'' +
-				'}';
+		else if (roomItems != null && !roomItems.isEmpty() && enemies == null)
+		{
+			for ( Item item : roomItems )
+			{
+				if ( i++ != roomItems.size())
+					items.append(item.getName() + ", ");
+				else
+					items.append(item.getName());
+			}
+			
+			return "Room{" +
+			"roomNum=" + roomNum +
+			", roomName='" + roomName + '\'' +
+			", exitN=" + exitN +
+			", exitNW=" + exitNW +
+			", exitNE=" + exitNE +
+			", exitW=" + exitW +
+			", exitE=" + exitE +
+			", exitSW=" + exitSW +
+			", exitS=" + exitS +
+			", exitSE=" + exitSE +
+			", exitUP=" + exitUP +
+			", exitDN=" + exitDN +
+			", locked=" + locked +
+			", " + items + '\'' +
+			", roomDescription='" + roomDescription + '\'' +
+			'}';
+		}
+		
+		else if ( roomItems == null && enemies != null )
+		{
+			return "Room{" +
+					"roomNum=" + roomNum +
+					", roomName='" + roomName + '\'' +
+					", exitN=" + exitN +
+					", exitNW=" + exitNW +
+					", exitNE=" + exitNE +
+					", exitW=" + exitW +
+					", exitE=" + exitE +
+					", exitSW=" + exitSW +
+					", exitS=" + exitS +
+					", exitSE=" + exitSE +
+					", exitUP=" + exitUP +
+					", exitDN=" + exitDN +
+					", locked=" + locked +
+					", " + enemies + '\'' +
+					", roomDescription='" + roomDescription + '\'' +
+					'}';
+		}
+		
+		else
+		{
+			return "Room{" +
+					"roomNum=" + roomNum +
+					", roomName='" + roomName + '\'' +
+					", exitN=" + exitN +
+					", exitNW=" + exitNW +
+					", exitNE=" + exitNE +
+					", exitW=" + exitW +
+					", exitE=" + exitE +
+					", exitSW=" + exitSW +
+					", exitS=" + exitS +
+					", exitSE=" + exitSE +
+					", exitUP=" + exitUP +
+					", exitDN=" + exitDN +
+					", locked=" + locked +
+					", roomDescription='" + roomDescription + '\'' +
+					'}';
+		}
+		
 	}
 
 	//Displays the room to the player
@@ -180,11 +252,6 @@ public class Room {
 			}
 		}
 		
-		if ( enemy != null )
-		{
-			GameEngine.startFight(player, enemy);
-		}
-		
 		if ( enemies != null )
 		{
 			GameEngine.startFight(player, enemies);
@@ -193,7 +260,7 @@ public class Room {
 	}
 	
 	public void addItemsToRoomFromJsonFile(String filepath) {
-		if ( filepath.isEmpty() )
+		if ( filepath == null || filepath.isEmpty() )
 			return;
 		
         try (FileReader reader = new FileReader(filepath)) {
@@ -342,14 +409,6 @@ public class Room {
 
 	public void setLocked(boolean locked, Item requiredKey) {
 		this.locked = locked;
-	}
-
-	public Enemy getEnemy() {
-		return enemy;
-	}
-
-	public void setEnemy(Enemy enemy) {
-		this.enemy = enemy;
 	}
 	
 	public List<Enemy> getEnemies() {

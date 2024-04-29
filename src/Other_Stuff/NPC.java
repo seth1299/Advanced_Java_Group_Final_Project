@@ -28,12 +28,16 @@ public class NPC {
     
     public NPC(String name) 
     {
+    	if ( name == null )
+    		System.exit(-1);
         this.name = name;
         this.filepath = "UNINSTANTIATED FILEPATH";
     }
     
     public NPC(String name, String filepath)
     {
+    	if ( name == null || filepath == null )
+    		System.exit(-1);
     	this.name = name;
     	this.filepath = filepath;
     }
@@ -48,6 +52,9 @@ public class NPC {
 	
 	public void speakToPlayer(Player player)
 	{
+		if ( player == null )
+			return;
+		
 		createDialogueFromJsonFile(player);
 	}
 	
@@ -56,7 +63,7 @@ public class NPC {
 	 */
 	@SuppressWarnings("deprecation")
 	public void createDialogueFromJsonFile(Player player) {
-		if ( player.equals(null) )
+		if ( player == null )
 			return;
 		
 	    try (FileReader reader = new FileReader(filepath)) {
@@ -84,6 +91,10 @@ public class NPC {
 
 
     public void printDialogue(Player player) {
+    	
+    	if ( player == null )
+    		return;
+    	
         if (dialogue != null && !dialogue.isEmpty()) {
             for (DialogueLine line : dialogue) {
                 System.out.println(name + ": " + line.getLine());
@@ -96,6 +107,10 @@ public class NPC {
     }
 
     private String waitForPlayerInput(Player player) {
+    	
+    	if ( player == null )
+    		return "";
+    	
         @SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
         // I am aware that the scanner is not closed, however if it is closed then it for some reason can't be opened

@@ -24,8 +24,9 @@ public class Item implements Comparable<Item> {
 	private int amount, armorValue, weaponDamage;
     
     // Constructor without armor value and weapon damage
-    public Item(String name, String description, ItemType type) {
-        this(name, description, type, 0, 0);
+    public Item(String name, String description, ItemType type) 
+    {
+    		this(name, description, type, 0, 0);
     }
 
     /**
