@@ -234,7 +234,6 @@ public class World {
 
 		public static void main (String[] args) {
 			Scanner sc = new Scanner(System.in);
-			//TODO is there a reason this isn't just List<Enemy> enemies = loadEnemies(filename);?
 			try {
 				setAllEnemiesInTheGame(loadEnemies("src/Other_Stuff/enemies.json"));
 			} catch (IOException e) {
