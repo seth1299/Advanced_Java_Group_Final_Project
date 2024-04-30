@@ -7,7 +7,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/sethg/Downloads/json-20230618.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/sethg/Downloads/gson-2.10.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sethg/OneDrive/Desktop/Main Folder/BRCC/Advanced Java/GSON AND JSON FUCKING SHIT/gson-2.10.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sethg/OneDrive/Desktop/Main Folder/BRCC/Advanced Java/GSON AND JSON FUCKING SHIT/json-20240303.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
