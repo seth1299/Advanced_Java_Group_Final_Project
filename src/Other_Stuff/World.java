@@ -66,8 +66,6 @@ public class World {
 		if (rooms == null)
 			return null;
 
-		// TODO: Figure out how to get the room by number.
-
         for (Room room : rooms) {
             if (room.getRoomNum() == roomNumber) {
                 return room;
@@ -89,8 +87,6 @@ public class World {
 
 		if (rooms == null || response == null)
 			return null;
-
-		// TODO: Figure out how to move the player.
 
 		//boolean locked = false;
 
@@ -291,7 +287,6 @@ public class World {
 
 			player = new Player(name, gender);
 
-			// TODO: Updated, need to confirm that this works once loading functions run
 			Room playerRoom = getRoomByNum(rooms, 1);
 
 			//Game Begins Here
