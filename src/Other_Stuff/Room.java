@@ -242,8 +242,8 @@ public class Room {
 		if(exitDN>0){
 			System.out.print("DN");
 		}
-		
-		if ( roomItems.size() > 0 )
+		System.out.println();
+		if (roomItems!=null && roomItems.size() > 0 )
 		{
 			System.out.print("The room contains these items: ");
 			for ( Item item : roomItems )

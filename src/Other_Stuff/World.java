@@ -217,7 +217,7 @@ public class World {
 						//set room enemies here
 						continue;
 					}
-					if(jsonObject2.get("description")==null) {
+					if(jsonObject2.get("description").getAsString().isEmpty()) {
 						room2.setRoomDescription(null);
 					}
 					else {
@@ -236,13 +236,13 @@ public class World {
 			Scanner sc = new Scanner(System.in);
 			//TODO is there a reason this isn't just List<Enemy> enemies = loadEnemies(filename);?
 			try {
-				setAllEnemiesInTheGame(loadEnemies("/home/ewitch/Documents/Group Project/Advanced_Java_Group_Final_Project/src/Other_Stuff/enemies.json"));
+				setAllEnemiesInTheGame(loadEnemies("src/Other_Stuff/enemies.json"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
 			try {
-				setRooms(loadRooms("/home/ewitch/Documents/Group Project/Advanced_Java_Group_Final_Project/src/Other_Stuff/rooms.json"));
+				setRooms(loadRooms("src/Other_Stuff/rooms.json"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -303,7 +303,6 @@ public class World {
 					"No, if you'd gone mad the last thing that you would have imagined was being freed from your cell into a castle under attack.\n" +
 					"You immediately burst out of the cell, look both ways down the hall, and decide to hide in the storage room until the noise dies down.");
 
-			// TODO: Need to confirm this works once loading functions run.
 			playerRoom.display();
 			response = "";
 			response = sc.nextLine().trim().toUpperCase();
