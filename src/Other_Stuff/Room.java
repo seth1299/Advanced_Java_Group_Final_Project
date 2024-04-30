@@ -28,7 +28,7 @@ public class Room {
 	private boolean locked;
 	private List<Enemy> enemies;
 	private String roomDescription;
-	private Item requiredKey;
+	private String requiredKey;
 	private List<Item> roomItems;
 	private Player player;
 
@@ -52,7 +52,7 @@ public class Room {
 	}
 	
 	/**
-	 * @param player The player of the game.
+	 * @param //player The player of the game.
 	 * @param roomNum The numerical value of the room, which is used to quickly identify the room and set exits.
 	 * @param roomName The name of the room.
 	 * @param exitN 
@@ -68,11 +68,11 @@ public class Room {
 	 * @param locked If the room is locked or not.
 	 * @param requiredKey The Item that is required to unlock the room (which should be a "Key" type)
 	 * @param roomItemsFilepath The filepath to the items that are in the room, if any.
-	 * @param enemy The enemy that is in the room, if any.
+	 * @param// enemy The enemy that is in the room, if any.
 	 * @param roomDescription The description of the room.
 	 */
-	public Room(Player player, int roomNum, String roomName, int exitN, int exitNW, int exitNE, int exitW, int exitE, int exitSW, int exitS, int exitSE, int exitUP, int exitDN, boolean locked, String requiredKey, String roomItemsFilepath, String enemyFilepath, String roomDescription) {
-		this.player = player;
+	public Room(/*Player player,*/ int roomNum, String roomName, int exitN, int exitNW, int exitNE, int exitW, int exitE, int exitSW, int exitS, int exitSE, int exitUP, int exitDN, boolean locked, String requiredKey, String roomItemsFilepath, String enemyFilepath, String roomDescription) {
+		//this.player = player;
 		this.roomNum = roomNum;
 		this.roomName = roomName;
 		this.exitN = exitN;
@@ -87,7 +87,7 @@ public class Room {
 		this.exitDN = exitDN;
 		this.locked = locked;
 		addItemsToRoomFromJsonFile(roomItemsFilepath);
-		this.setRequiredKey(player.getItemFromInventoryByName(requiredKey));
+		this.requiredKey = requiredKey;
 		if ( enemyFilepath != null && !enemyFilepath.isEmpty() )
 		{
 			try {
@@ -242,8 +242,8 @@ public class Room {
 		if(exitDN>0){
 			System.out.print("DN");
 		}
-		
-		if ( roomItems.size() > 0 )
+		System.out.println();
+		if (roomItems!=null && roomItems.size() > 0 )
 		{
 			System.out.print("The room contains these items: ");
 			for ( Item item : roomItems )
@@ -427,11 +427,11 @@ public class Room {
 		this.roomDescription = roomDescription;
 	}
 
-	public Item getRequiredKey() {
+	public String getRequiredKey() {
 		return requiredKey;
 	}
 
-	public void setRequiredKey(Item requiredKey) {
+	public void setRequiredKey(String requiredKey) {
 		this.requiredKey = requiredKey;
 	}
 
