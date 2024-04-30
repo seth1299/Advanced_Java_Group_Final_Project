@@ -3,55 +3,64 @@
         "name": "Banana Cake",
         "description": "A delicious banana cake.",
         "type": "FOOD",
-        "amount": 1
+        "amount": 1,
+        "healingAmount": 25
     },
     {
         "name": "Apple",
         "description": "A delicious red apple, free from any sort of sophoric poisons as far as you know.",
         "type": "FOOD",
-        "amount": 1
+        "amount": 1,
+        "healingAmount": 10
     },
     {
         "name": "Cheap Wine",
         "description": "A fine aged wine. You can't wait for the day to end so you can drink it.",
         "type": "FOOD",
-        "amount": 1
+        "amount": 1,
+        "healingAmount": 15
     },
     {
         "name": "Banana",
         "description": "A plain banana. It seems to be getting overly ripe more quickly than you would expect.",
         "type": "FOOD",
-        "amount": 1
+        "amount": 1,
+        "healingAmount": 15
     },
     {
         "name": "Beef Jerky",
         "description": "Standard soldier food, they don't even bother with an expiration date.",
         "type": "FOOD",
-        "amount": 1
+        "amount": 1,
+        "healingAmount": 20
     },
     {
         "name": "Bread Loaf",
         "description": "A boring loaf of bread. It's not even sliced.",
         "type": "FOOD",
-        "amount": 1
+        "amount": 1,
+        "healingAmount":20
     },
     {
         "name": "Round of Cheese",
         "description": "Yes, a whole round of cheese. Where the heck are you keeping all this stuff?",
         "type": "FOOD",
-        "amount": 1
+        "amount": 1,
+        "healingAmount": 25
     },
     {
         "name": "Meat Pie",
         "description": "Piping hot and delicious, yet can be stuffed in your pocket and come out pristine.",
         "type": "FOOD",
-        "amount": 1
+        "amount": 1,
+        "healingAmount":20
     },
     {
         "name": "Health Potion",
         "description": "A healing potion typical of high fantasy worlds, capable of healing wounds instantly.",
         "type": "POTION",
-        "amount": 1
+        "amount": 1,
+        "healingAmount": 35
     },
     {
         "name": "Mana Potion",
