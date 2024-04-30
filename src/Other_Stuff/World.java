@@ -144,6 +144,7 @@ public class World {
 			boolean isLocked = destinationRoom.getLocked();
 			if (isLocked) {
 				// TODO: Check if this actually works.
+				/*
 				if (player.getItemFromInventory(destinationRoom.getRequiredKey()) != null) {
 					destinationRoom.display();
 					return destinationRoom;
@@ -151,6 +152,9 @@ public class World {
 					System.out.println("You need to find the key to enter that room!");
 					return playRoom;
 				}
+
+				 */
+				return playRoom;
 			} else {
 				destinationRoom.display();
 				return destinationRoom;
@@ -191,27 +195,36 @@ public class World {
 					room2.setExitSE(jsonObject2.get("exit se").getAsInt());
 					room2.setExitUP(jsonObject2.get("exit up").getAsInt());
 					room2.setExitDN(jsonObject2.get("exit dn").getAsInt());
-					//TODO The Constructor requires key to be an item prior to running, not currently functional
-					/*
-					if(!jsonObject2.get("requiredKey").getAsString().isEmpty()) {
-						//this doesn't work, needs to be a key on set rather than a string
-						room2.setRequiredKey(jsonObject2.get("requiredKey"));
-					}
-					else {
+					if(jsonObject2.get("requiredKey").getAsString().isEmpty()) {
 						room2.setRequiredKey(null);
 					}
-					if(!jsonObject2.get("roomItemsFilepath").getAsString().isEmpty()) {
+					else {
+						room2.setRequiredKey(jsonObject2.get("requiredKey").getAsString());
+					}
+
+					if(jsonObject2.get("roomItemsFilepath").getAsString().isEmpty()) {
+						room2.setRoomItems(null);
+
+					}
+					else {
 						//set room items here
 						continue;
 					}
-					if(!jsonObject2.get("enemyFilepath").getAsString().isEmpty()) {
+					if(jsonObject2.get("enemyFilepath").getAsString().isEmpty()) {
+						room2.setEnemies(null);
+					}
+					else {
 						//set room enemies here
 						continue;
 					}
-					room2.setRoomDescription(jsonObject2.get("description").getAsString());
+					if(jsonObject2.get("description")==null) {
+						room2.setRoomDescription(null);
+					}
+					else {
+						room2.setRoomDescription(jsonObject2.get("description").getAsString());
+					}
 					rooms.add(room2);
 
-					 */
 				}
 
 			}
@@ -223,13 +236,13 @@ public class World {
 			Scanner sc = new Scanner(System.in);
 			//TODO is there a reason this isn't just List<Enemy> enemies = loadEnemies(filename);?
 			try {
-				setAllEnemiesInTheGame(loadEnemies("src/Other_Stuff/enemies.json"));
+				setAllEnemiesInTheGame(loadEnemies("/home/ewitch/Documents/Group Project/Advanced_Java_Group_Final_Project/src/Other_Stuff/enemies.json"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
 			try {
-				setRooms(loadRooms("src/Other_Stuff/rooms.json"));
+				setRooms(loadRooms("/home/ewitch/Documents/Group Project/Advanced_Java_Group_Final_Project/src/Other_Stuff/rooms.json"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

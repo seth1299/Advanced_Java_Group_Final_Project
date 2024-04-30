@@ -1121,26 +1121,6 @@
   },
 
   {
-    "name": "Secret Stairs",
-    "roomNum": 55,
-    "exit n": 0,
-    "exit nw": 0,
-    "exit ne": 0,
-    "exit w": 0,
-    "exit e": 53,
-    "exit sw": 0,
-    "exit s": 0,
-    "exit se": 0,
-    "exit up": 56,
-    "exit dn": 0,
-    "locked": false,
-    "requiredKey": "",
-    "roomItemsFilepath": "",
-    "enemyFilepath": "",
-    "description:": "Secret Stairs! Where could they lead?"
-  },
-
-  {
     "name": "Upper Secret Stairs",
     "roomNum": 56,
     "exit n": 0,

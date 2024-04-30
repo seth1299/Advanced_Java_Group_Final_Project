@@ -28,7 +28,7 @@ public class Room {
 	private boolean locked;
 	private List<Enemy> enemies;
 	private String roomDescription;
-	private Item requiredKey;
+	private String requiredKey;
 	private List<Item> roomItems;
 	private Player player;
 
@@ -87,7 +87,7 @@ public class Room {
 		this.exitDN = exitDN;
 		this.locked = locked;
 		addItemsToRoomFromJsonFile(roomItemsFilepath);
-		this.setRequiredKey(player.getItemFromInventoryByName(requiredKey));
+		this.requiredKey = requiredKey;
 		if ( enemyFilepath != null && !enemyFilepath.isEmpty() )
 		{
 			try {
@@ -427,11 +427,11 @@ public class Room {
 		this.roomDescription = roomDescription;
 	}
 
-	public Item getRequiredKey() {
+	public String getRequiredKey() {
 		return requiredKey;
 	}
 
-	public void setRequiredKey(Item requiredKey) {
+	public void setRequiredKey(String requiredKey) {
 		this.requiredKey = requiredKey;
 	}
 
