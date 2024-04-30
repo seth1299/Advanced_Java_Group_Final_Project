@@ -291,11 +291,11 @@ public class World {
 
 			//Game Begins Here
 			System.out.println("You aren't sure how long you've been in this cell.\nYou're pretty sure that it's more than a week, less than a month.\n" +
-					"When you hear a ruckus start somewhere above you, you're pretty sure the chaos you hear is actually in your head until the dungeon guards run up the stairs\n" +
+					"When you hear a ruckus start somewhere above you,\nyou're pretty sure the chaos you hear is actually in your head\nuntil the dungeon guards run up the stairs\n" +
 					"A guards helmet comes flying down the stairs, skips off the opposite wall, and slams into your cell door.\n" +
 					"The door pops open, and you're sure you've gone mad until you see the gaping hole in the helmet\n" +
-					"No, if you'd gone mad the last thing that you would have imagined was being freed from your cell into a castle under attack.\n" +
-					"You immediately burst out of the cell, look both ways down the hall, and decide to hide in the storage room until the noise dies down.");
+					"No, if you'd gone mad the last thing that you would have imagined\nwas being freed from your cell into a castle under attack.\n" +
+					"You immediately burst out of the cell, look both ways down the hall,\nand decide to hide in the storage room until the noise dies down.");
 
 			playerRoom.display();
 			response = sc.nextLine().trim().toUpperCase();

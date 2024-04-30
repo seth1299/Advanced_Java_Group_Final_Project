@@ -1,6 +1,6 @@
 [
 {
-  "name": "Dungeon Storage",
+  "name": "DUNGEON STORAGE",
   "roomNum": 1,
   "exit n": 9,
   "exit nw": 0,
@@ -16,11 +16,11 @@
   "requiredKey": "",
   "roomItemsFilepath": "",
   "enemyFilepath": "",
-  "description": "A long forgotten storage room, it looks like it was originally for storing training materials."
+  "description": "A long forgotten storage room,\nit looks like it was originally for storing training materials."
 },
 
   {
-    "name": "Dungeon Hallway",
+    "name": "DUNGEON HALLWAY",
     "roomNum": 9,
     "exit n": 8,
     "exit nw": 7,
@@ -36,11 +36,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "A long stone hallway lined with regularly spaced torches, heavy with the suffering of those who have suffered in the cells that run along it’s sides."
+    "description": "A long stone hallway lined with regularly spaced torches,\nheavy with the suffering of those who have resided\nin the cells that run along it’s sides."
   },
 
   {
-    "name": "West Cell",
+    "name": "WEST CELL",
     "roomNum": 6,
     "exit n": 0,
     "exit nw": 0,
@@ -56,11 +56,11 @@
     "requiredKey": "Cell Key",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "A dank and dreary cell, it’s been your only home for several weeks."
+    "description": "A dank and dreary cell,\nit’s been your only home for several weeks."
   },
 
   {
-    "name": "Southwest Cell",
+    "name": "SOUTHWEST CELL",
     "roomNum": 3,
     "exit n": 0,
     "exit nw": 0,
@@ -76,11 +76,11 @@
     "requiredKey": "Cell Key",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "A dank and dreary cell, it’s only decorations are a chamber bucket in one corner and a bed of old hay in the other."
+    "description": "A dank and dreary cell, it’s only decorations are\na chamber bucket in one corner and a bed of old hay in the other."
   },
 
   {
-    "name": "Southeast Cell",
+    "name": "SOUTHEAST CELL",
     "roomNum": 2,
     "exit n": 0,
     "exit nw": 0,
@@ -96,7 +96,7 @@
     "requiredKey": "Cell Key",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "A dank and dreary cell, it’s only decorations are a chamber bucket in one corner and a bed of old hay in the other."
+    "description": "A dank and dreary cell, it’s only decorations are\na chamber bucket in one corner and a bed of old hay in the other."
   },
 
   {
@@ -116,11 +116,11 @@
     "requiredKey": "Cell Key",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "A dank and dreary cell, it’s only decorations are a chamber bucket in one corner and a bed of old hay in the other."
+    "description": "A dank and dreary cell, it’s only decorations are\na chamber bucket in one corner and a bed of old hay in the other."
   },
 
   {
-    "name": "Northeast Cell",
+    "name": "NORTHEAST CELL",
     "roomNum": 5,
     "exit n": 0,
     "exit nw": 0,
@@ -136,11 +136,11 @@
     "requiredKey": "Cell Key",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "A dank and dreary cell, it’s only decorations are a chamber bucket in one corner and a bed of old hay in the other."
+    "description": "A dank and dreary cell, it’s only decorations are\na chamber bucket in one corner and a bed of old hay in the other."
   },
 
   {
-    "name": "Dungeon Guard Room",
+    "name": "DUNGEON GUARD ROOM",
     "roomNum": 7,
     "exit n": 0,
     "exit nw": 0,
@@ -156,11 +156,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "The guard room has clearly been looted. Based on the fetid air and the claustrophobic conditions, this doesn’t seem to have been a popular posting."
+    "description": "The guard room has clearly been looted.\nBased on the fetid air and the claustrophobic conditions,\nthis doesn’t seem to have been a popular posting."
   },
 
   {
-    "name": "Dungeon Stairs",
+    "name": "DUNGEON STAIRS",
     "roomNum": 8,
     "exit n": 0,
     "exit nw": 0,
@@ -180,7 +180,7 @@
   },
 
   {
-    "name": "Basement Stairs",
+    "name": "BASEMENT STAIRS",
     "roomNum": 10,
     "exit n": 0,
     "exit nw": 0,
@@ -200,7 +200,7 @@
 },
 
   {
-    "name": "Basement Entryway",
+    "name": "BASEMENT ENTRYWAY",
     "roomNum": 11,
     "exit n": 10,
     "exit nw": 0,
@@ -216,11 +216,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "The entryway to the Basement Level. A sign on the wall says, “Mage’s Offices-West. Advisor’s Offices-East. Barracks and Armories-South.” The air here is less fetid and oppressive, but you are definitely still underground."
+    "description": "The entryway to the Basement Level.\nA sign on the wall says,\n“Mage’s Offices-West.\nAdvisor’s Offices-East.\nBarracks and Armories-South.”\nThe air here is less fetid and oppressive,\nbut you are definitely still underground."
   },
 
   {
-    "name": "Advisor's Office",
+    "name": "ADVISOR'S OFFICE",
     "roomNum": 20,
     "exit n": 19,
     "exit nw": 0,
@@ -236,11 +236,11 @@
     "requiredKey": "Advisor's Office Key",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "You walk into a very strange room, the walls are lined with maps and cabinets full of papers. You briefly glance at the papers and they appear to detail the movements of a young knight who had made complaints against the Lord of Mistdark. The room has obviously been quickly looted."
+    "description": "You walk into a very strange room,\nthe walls are lined with maps and cabinets full of papers.\nYou briefly glance at the papers and they appear to detail\nthe movements of a young knight who had made complaints\nagainst the Lord of Mistdark.\nThe room has obviously been quickly looted."
   },
 
   {
-    "name": "Questioning Room",
+    "name": "QUESTIONING ROOM",
     "roomNum": 19,
     "exit n": 0,
     "exit nw": 0,
@@ -256,11 +256,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "What kind of advisor is this? There is a table covered in bloodstains with restraints in each corner. A set of shelves runs across one wall with a torturer’s tools lining them, laid out with perfect precision."
+    "description": "What kind of advisor is this?\nThere is a table covered in bloodstains with restraints in each corner.\nA set of shelves runs across one wall with a torturer’s tools lining them,\nlaid out with perfect precision."
   },
 
   {
-    "name": "Armory",
+    "name": "ARMORY",
     "roomNum": 21,
     "exit n": 20,
     "exit nw": 0,
@@ -276,11 +276,11 @@
     "requiredKey": "Officers' Key",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "This room is full of armor trees. Only the best armors appear to have been looted."
+    "description": "This room is full of armor trees.\nOnly the best armors appear to have been looted."
   },
 
   {
-    "name": "Weapons Room",
+    "name": "WEAPONS ROOM",
     "roomNum": 12,
     "exit n": 11,
     "exit nw": 0,
@@ -296,11 +296,11 @@
     "requiredKey": "Officers' Key",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "This room is full of weapons stands to accommodate a variety of swords, spears, and daggers."
+    "description": "This room is full of weapons stands\nto accommodate a variety of swords, spears, and daggers."
   },
 
   {
-    "name": "Officers' Barracks",
+    "name": "OFFICER'S BARRACKS",
     "roomNum": 13,
     "exit n": 21,
     "exit nw": 0,
@@ -316,12 +316,12 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "This room has one bed in each corner. The Northeast corner is covered in unicorns, in sharp contrast to the Northwest corner’s posters for a some band called Bards of Darkness."
+    "description": "This room has one bed in each corner.\nThe Northeast corner is covered in unicorns,\nin sharp contrast to the Northwest corner’s posters\nfor a some band called Bards of Darkness."
   },
 
 
   {
-    "name": "Key Room",
+    "name": "KEY ROOM",
     "roomNum": 14,
     "exit n": 0,
     "exit nw": 0,
@@ -337,11 +337,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "This room has a desk with a notebook to sign the Officer’s Key in and out. There is also a note on the desk that says, 'Dave’s key is in the drawer, he locks himself out a lot.'"
+    "description": "This room has a desk with a notebook to sign the Officer’s Key in and out.\nThere is also a note on the desk that says,\n'Dave’s key is in the drawer, he locks himself out a lot.'"
   },
 
   {
-    "name": "Upper Barracks",
+    "name": "UPPER BARRACKS",
     "roomNum": 16,
     "exit n": 17,
     "exit nw": 0,
@@ -357,11 +357,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "This is a large room with bunk beds along the walls. A footlocker sits at the base of each bunk bed. Whoever looted this room seems to have picked through each footlocker."
+    "description": "This is a large room with bunk beds along the walls.\nA footlocker sits at the base of each bunk bed.\nWhoever looted this room seems to have picked through each footlocker."
   },
 
   {
-    "name": "Lower Barracks",
+    "name": "LOWER BARRACKS",
     "roomNum": 15,
     "exit n": 16,
     "exit nw": 0,
@@ -377,11 +377,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "This is another barracks room full of bunk beds and footlockers. It hasn’t been completely looted. An odd light shines behind one bunk, hinting at a hidden passage."
+    "description": "This is another barracks room full of bunk beds and footlockers.\nIt hasn’t been completely looted.\nAn odd light shines behind one bunk,\nhinting at a hidden passage."
   },
 
   {
-    "name": "Mage's Office",
+    "name": "MAGE'S OFFICE",
     "roomNum": 17,
     "exit n": 18,
     "exit nw": 0,
@@ -397,11 +397,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "The Mage’s Office hasn’t been looted yet. The entire room smells like an angry skunk. There is a massive portal against the wall, with a notebook on a side table. The notebook has a series of dates scrawled on the pages, impossibly far in the future."
+    "description": "The Mage’s Office hasn’t been looted yet.\nThe entire room smells like an angry skunk.\nThere is a massive portal against the wall,\nwith a notebook on a side table.\nThe notebook has a series of dates scrawled on the pages,\nimpossibly far in the future."
   },
 
   {
-    "name": "Mage's Potion Room",
+    "name": "MAGE'S POTION ROOM",
     "roomNum": 18,
     "exit n": 0,
     "exit nw": 0,
@@ -417,11 +417,11 @@
     "requiredKey": "Mage's Office Key",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "This room hasn’t been looted yet. It it full of very complicated equipment, some potions, and several small packages of a clear flexible material full of herbs. The bags seem to be the source of the skunk smell."
+    "description": "This room hasn’t been looted yet.\nIt it full of very complicated equipment, some potions,\nand several small packages of a clear flexible material full of herbs.\nThe bags seem to be the source of the skunk smell."
   },
 
   {
-    "name": "Ground Level Stairs",
+    "name": "GROUND LEVEL STAIRS",
     "roomNum": 33,
     "exit n": 34,
     "exit nw": 0,
@@ -437,11 +437,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "The stairs down to the Basement Level and up to the 2nd Level. You are finally above ground! You fill your lungs with your first breath of clean air in ages."
+    "description": "The stairs down to the Basement Level and up to the 2nd Level.\nYou are finally above ground!\nYou fill your lungs with your first breath of clean air in ages."
   },
 
   {
-    "name": "Central Hallway",
+    "name": "CENTRAL HALLWAY",
     "roomNum": 32,
     "exit n": 33,
     "exit nw": 0,
@@ -457,11 +457,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "A shorter hallway running from West to East. There is a sign on the wall that says, 'North to Courtyard and Gate, South to Dining Hall and the Nobles Quarters.'"
+    "description": "A shorter hallway running from West to East.\nThere is a sign on the wall that says,\n'North to Courtyard and Gate,\nSouth to Dining Hall and the Nobles Quarters.'"
   },
 
   {
-    "name": "Southeast Hallway",
+    "name": "SOUTHEAST HALLWAY",
     "roomNum": 23,
     "exit n": 22,
     "exit nw": 32,
@@ -477,11 +477,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "A long hallway running from North to South, it is fastidiously clean."
+    "description": "A long hallway running from North to South,\nit is fastidiously clean."
   },
 
   {
-    "name": "South Hallway",
+    "name": "SOUTH HALLWAY",
     "roomNum": 25,
     "exit n": 31,
     "exit nw": 30,
@@ -497,11 +497,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "A long hallway running from East to West. It is decorated with beautiful paintings and several sets of obviously ceremonial weapons. The decor is in stark contrast to the four dead guards surrounded by a ring of goblin corpses."
+    "description": "A long hallway running from East to West.\nIt is decorated with beautiful paintings and several sets\nof obviously ceremonial weapons.\nThe decor is in stark contrast to the four\ndead guards surrounded by a ring of goblin corpses."
   },
 
   {
-    "name": "Advisor's Quarters",
+    "name": "ADVISOR'S QUARTERS",
     "roomNum": 24,
     "exit n": 0,
     "exit nw": 0,
@@ -517,11 +517,11 @@
     "requiredKey": "Lord's Guard Key",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "These appear to be the Advisor’s room. A shudder runs through you as you remember the torture room in the basement. The room is so clean that you can hardly believe it has ever been used."
+    "description": "These appear to be the Advisor’s room.\nA shudder runs through you as you remember the torture room in the basement.\nThe room is so clean that you can hardly believe it has ever been used."
   },
 
   {
-    "name": "Lady's Quarters",
+    "name": "LADY'S QUARTERS",
     "roomNum": 26,
     "exit n": 25,
     "exit nw": 0,
@@ -537,11 +537,11 @@
     "requiredKey": "Lord's Guard Key",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "These are obviously the rooms of the lady of the castle. Beautiful tapestries ring the room and there is still the scent of perfume in the room. There is a discrete door to the Lord's Quarters on the West Wall."
+    "description": "These are obviously the rooms of the lady of the castle.\nBeautiful tapestries ring the room and there\nis still the scent of perfume in the room.\nThere is a discrete door to the Lord's Quarters on the West Wall."
   },
 
   {
-    "name": "Lord's Quarters",
+    "name": "LORD'S QUARTERS",
     "roomNum": 27,
     "exit n": 25,
     "exit nw": 0,
@@ -557,11 +557,11 @@
     "requiredKey": "Lord's Guard Key",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "These are the rooms of the Lord of Mistdark Castle. It is well cared for and the entire room is ringed in trophies from various battles and hunts. Many of them seem to have been victories against peasant uprisings. There are small doors on either side of the room accessing the Lady's Rooms and the Guard's Quarters."
+    "description": "These are the rooms of the Lord of Mistdark Castle.\nIt is well cared for and the entire room is ringed in trophies\nfrom various battles and hunts.\nMany of them seem to have been victories against peasant uprisings.\nThere are small doors on either side of the room\naccessing the Lady's Rooms and the Guard's Quarters."
   },
 
   {
-    "name": "Lord's Guard Quarters",
+    "name": "LORD'S GUARD QUARTERS",
     "roomNum": 28,
     "exit n": 25,
     "exit nw": 0,
@@ -577,11 +577,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "A sparse room with two beds on opposite sides of the room. There is a cabinet off to one side that seems to be for a key that they use, and an armor tree in the corner. "
+    "description": "A sparse room with two beds on opposite sides of the room.\nThere is a cabinet off to one side that seems to be for a key that they use,\nand an armor tree in the corner. "
   },
 
   {
-    "name": "Mage's Quarters",
+    "name": "MAGE'S QUARTERS",
     "roomNum": 29,
     "exit n": 0,
     "exit nw": 0,
@@ -597,11 +597,11 @@
     "requiredKey": "Lord's Guard Key",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "This would appear to be the room of the Mage Dave. There is a wardrobe off to one side and a bed in the corner. You initially thought that the room had been looted but it looks like Dave is just a messy Mage."
+    "description": "This would appear to be the room of the Mage Dave.\nThere is a wardrobe off to one side and a bed in the corner.\nYou initially thought that the room had been looted\nbut it looks like Dave is just a messy Mage."
   },
 
   {
-    "name": "Dining Hall",
+    "name": "DINING HALL",
     "roomNum": 31,
     "exit n": 32,
     "exit nw": 0,
@@ -617,11 +617,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "It looks like the tail end of the battle took place here. The entire room smells like a nauseating mix of a recent meal and a battlefield."
+    "description": "It looks like the tail end of the battle took place here.\nThe entire room smells like a nauseating mix of\na recent meal and a battlefield."
   },
 
   {
-    "name": "Southwest Hallway",
+    "name": "SOUTHWEST HALLWAY",
     "roomNum": 30,
     "exit n": 35,
     "exit nw": 0,
@@ -637,11 +637,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "A long hallway running from North to South. It is eerily silent, and you can here the echoes of your footsteps as your walk."
+    "description": "A long hallway running from North to South.\nIt is eerily silent, and you can here the echoes\nof your footsteps as your walk."
   },
 
   {
-    "name": "Northwest Hallway",
+    "name": "NORTHWEST HALLWAY",
     "roomNum": 35,
     "exit n": 0,
     "exit nw": 0,
@@ -657,11 +657,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "A long hallway running from North to South. It appears that this hallway doubled as a storage room, barrels and boxes line the West side."
+    "description": "A long hallway running from North to South.\nIt appears that this hallway doubled as a storage room,\nbarrels and boxes line the West side."
   },
 
   {
-    "name": "Westgate Guard Room",
+    "name": "WESTGATE GUARD ROOM",
     "roomNum": 36,
     "exit n": 0,
     "exit nw": 0,
@@ -677,11 +677,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "This seems to be a ready room for guards to get warm or cool off in between shifts on the ramparts. There is a set of bunk beds on one side."
+    "description": "This seems to be a ready room for guards\nto get warm or cool off in between shifts on the ramparts.\nThere is a set of bunk beds on one side."
   },
 
   {
-    "name": "The Gate",
+    "name": "THE GATE",
     "roomNum": 37,
     "exit n": 0,
     "exit nw": 0,
@@ -697,11 +697,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "The way out of this debacle. Of course it is locked."
+    "description": "The way out of this debacle.\nOf course it is locked."
   },
 
   {
-    "name": "The Outside World",
+    "name": "THE OUTSIDE WORLD",
     "roomNum": 100,
     "exit n": 0,
     "exit nw": 0,
@@ -717,11 +717,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "You made it! You've become the unlikely lone survivor of the devastating attack on Castle Mistdark. What will you do next? Figure out what the Chekhov's Bow does? Get Macguffin level rich? Give the devs high praise and higher grades? The world is your oyster! Enjoy!"
+    "description": "You made it! You've become the unlikely lone survivor\nof the devastating attack on Castle Mistdark.\nWhat will you do next? Figure out what the Chekhov's Bow does?\nGet Macguffin level rich?\nGive the devs high praise and higher grades?\nThe world is your oyster! Enjoy!"
   },
 
   {
-    "name": "Eastgate Guard Room",
+    "name": "EASTGATE GUARD ROOM",
     "roomNum": 38,
     "exit n": 0,
     "exit nw": 0,
@@ -737,11 +737,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "This seems to be a ready room for guards to rest in between shifts on the walls above. There is a table ringed by chairs in the center of the room. Playing cards are scattered all over the floor."
+    "description": "This seems to be a ready room for guards\nto rest in between shifts on the walls above.\nThere is a table ringed by chairs in the center of the room.\nPlaying cards are scattered all over the floor."
   },
 
   {
-    "name": "The Courtyard",
+    "name": "THE COURTYARD",
     "roomNum": 34,
     "exit n": 37,
     "exit nw": 36,
@@ -757,11 +757,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "This is where the battle took place. The bodies of both the guards and goblins cover the ground like a carpet, and a thick layer of blood has begun to dry on the cobblestones."
+    "description": "This is where the battle took place.\nThe bodies of both the guards and goblins cover the ground like a carpet,\nand a thick layer of blood has begun to dry on the cobblestones."
   },
 
   {
-    "name": "Northeast Hallway",
+    "name": "NORTHEAST HALLWAY",
     "roomNum": 22,
     "exit n": 0,
     "exit nw": 38,
@@ -777,11 +777,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "A long hallway running from North to South. It appears that this hallway doubled as a storage room, barrels and boxes line the East side."
+    "description": "A long hallway running from North to South.\nIt appears that this hallway doubled as a storage room,\nbarrels and boxes line the East side."
   },
 
   {
-    "name": "2nd Level Stairs",
+    "name": "2ND LEVEL STAIRS",
     "roomNum": 49,
     "exit n": 0,
     "exit nw": 0,
@@ -801,7 +801,7 @@
   },
 
   {
-    "name": "Inner Ramparts",
+    "name": "INNER RAMPARTS",
     "roomNum": 50,
     "exit n": 49,
     "exit nw": 0,
@@ -817,11 +817,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "The inner ramparts of the courtyard, they run from West to East. The wind blows through your hair from the West. This seems to be a secondary defensive position that they never got to use. There is a sign beside the entrance to the 2nd Level Stairs that says, 'North to Walls, South to Keep.'"
+    "description": "The inner ramparts of the courtyard, they run from West to East.\nThe wind blows through your hair from the West.\nThis seems to be a secondary defensive position that they never got to use.\nThere is a sign beside the entrance to the 2nd Level Stairs that says,\n'North to Walls, South to Keep.'"
   },
 
   {
-    "name": "Southwest Ramparts",
+    "name": "SOUTHWEST RAMPARTS",
     "roomNum": 40,
     "exit n": 39,
     "exit nw": 0,
@@ -837,11 +837,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "A long section of the walls running from North to South. The walkway is covered in the evidence of battle, the is a large pool of spilled pitch and half-spent sheaves of arrows mixed in among the bodies."
+    "description": "A long section of the walls running from North to South.\nThe walkway is covered in the evidence of battle,\nthere is a large pool of spilled pitch and half-spent sheaves of\narrows mixed in among the bodies."
   },
 
   {
-    "name": "Northwest Ramparts",
+    "name": "NORTHWEST RAMPARTS",
     "roomNum": 39,
     "exit n": 39,
     "exit nw": 0,
@@ -857,11 +857,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "A long section of the walls running from North to South. This appears to have been where the goblins broke through. There are broken ladders scattered at the foot of the outer wall."
+    "description": "A long section of the walls running from North to South.\nThis appears to have been where the goblins broke through.\nThere are broken ladders scattered at the foot of the outer wall."
   },
 
   {
-    "name": "Westgate Ramparts",
+    "name": "WESTGATE RAMPARTS",
     "roomNum": 48,
     "exit n": 0,
     "exit nw": 0,
@@ -877,11 +877,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "This looks like a guard post to stand watch over the gate. There is a wooden roof built over this section of the walls, with a strongbox against the inner wall."
+    "description": "This looks like a guard post to stand watch over the gate.\nThere is a wooden roof built over this section of the walls,\nwith a strongbox against the inner wall."
   },
 
   {
-    "name": "Gate Ramparts",
+    "name": "GATE RAMPARTS",
     "roomNum": 47,
     "exit n": 0,
     "exit nw": 0,
@@ -901,7 +901,7 @@
   },
 
   {
-    "name": "Eastgate Ramparts",
+    "name": "EASTGATE RAMPARTS",
     "roomNum": 46,
     "exit n": 0,
     "exit nw": 0,
@@ -917,11 +917,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "This looks like a guard post to stand watch over the gate. There is a wooden roof built over this section of the walls."
+    "description": "This looks like a guard post to stand watch over the gate.\nThere is a wooden roof built over this section of the walls."
   },
 
   {
-    "name": "Northeast Ramparts",
+    "name": "NORTHEAST RAMPARTS",
     "roomNum": 45,
     "exit n": 0,
     "exit nw": 46,
@@ -937,11 +937,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "A long section of the walls running from North to South. It looks like this section of the walls was spared from the battle."
+    "description": "A long section of the walls running from North to South.\nIt looks like this section of the walls was spared from the battle."
   },
 
   {
-    "name": "Southeast Ramparts",
+    "name": "SOUTHEAST RAMPARTS",
     "roomNum": 44,
     "exit n": 45,
     "exit nw": 0,
@@ -957,11 +957,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "A long section of the walls running from North to South. It feels like you are so close to freedom. Have to find the key to the Gates…"
+    "description": "A long section of the walls running from North to South.\nIt feels like you are so close to freedom.\nHave to find the key to the Gates…"
   },
 
   {
-    "name": "Keep Hallway",
+    "name": "KEEP HALLWAY",
     "roomNum": 41,
     "exit n": 0,
     "exit nw": 40,
@@ -977,11 +977,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "Back inside the castle. This hallway runs from West to East. The idea is to fall back to the Keep, but no one seems to have made it this far."
+    "description": "Back inside the castle.\nThis hallway runs from West to East.\nThe idea is to fall back to the Keep,\nbut no one seems to have made it this far."
   },
 
   {
-    "name": "Keep Storage",
+    "name": "KEEP STORAGE",
     "roomNum": 42,
     "exit n": 41,
     "exit nw": 0,
@@ -997,11 +997,11 @@
     "requiredKey": "Keep Key",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "The storage room at the base of the Keep. It looks like they could have held out for days, if not weeks. There are also a lot of potions here, and if this game had music I’m sure it would be getting pretty ominous. Why did the devs not make a save game function!?"
+    "description": "The storage room at the base of the Keep.\nIt looks like they could have held out for days, if not weeks.\nThere are also a lot of potions here,\nand if this game had music I’m sure it would be getting pretty ominous.\nWhy did the devs not make a save game function!?"
   },
 
   {
-    "name": "Keep's Base Stairs",
+    "name": "KEEP'S BASE STAIRS",
     "roomNum": 43,
     "exit n": 42,
     "exit nw": 0,
@@ -1021,7 +1021,7 @@
   },
 
   {
-    "name": "Midkeep Stairs",
+    "name": "MIDKEEP STAIRS",
     "roomNum": 52,
     "exit n": 51,
     "exit nw": 0,
@@ -1037,11 +1037,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "The stairs up to the 3rd Level of the Keep and down to the 2nd Level of the Keep."
+    "description": "The stairs up to the 3rd Level of the Keep\nand down to the 2nd Level of the Keep."
   },
 
   {
-    "name": "Keep Barracks",
+    "name": "KEEP BARRACKS",
     "roomNum": 51,
     "exit n": 0,
     "exit nw": 0,
@@ -1057,11 +1057,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "This room is just rows of bunks for people sheltering in the Keep. It is eerily quiet."
+    "description": "This room is just rows of bunks for people sheltering in the Keep.\nIt is eerily quiet."
   },
 
   {
-    "name": "Upper Keep Stairs",
+    "name": "UPPER KEEP STAIRS",
     "roomNum": 54,
     "exit n": 53,
     "exit nw": 0,
@@ -1081,7 +1081,7 @@
   },
 
   {
-    "name": "Keep Armory",
+    "name": "KEEP ARMORY",
     "roomNum": 53,
     "exit n": 0,
     "exit nw": 0,
@@ -1097,11 +1097,11 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "It looks like this was originally where the Keep’s Armory was, but has been turned into a loot room by the Troll Chief. A breeze lifts one of the wall hangings, flashing a view of a secret passage to the West."
+    "description": "It looks like this was originally where the Keep’s Armory was,\nbut has been turned into a loot room by the Troll Chief.\nA breeze lifts one of the wall hangings,\nflashing a view of a secret passage to the West."
   },
 
   {
-    "name": "Secret Stairs",
+    "name": "SECRET STAIRS",
     "roomNum": 55,
     "exit n": 0,
     "exit nw": 0,
@@ -1121,7 +1121,7 @@
   },
 
   {
-    "name": "Upper Secret Stairs",
+    "name": "UPPER SECRET STAIRS",
     "roomNum": 56,
     "exit n": 0,
     "exit nw": 0,
@@ -1141,7 +1141,7 @@
   },
 
   {
-    "name": "Shrine to Sue Hannum",
+    "name": "SHRINE TO SUE HANNUM",
     "roomNum": 57,
     "exit n": 0,
     "exit nw": 0,
@@ -1157,6 +1157,6 @@
     "requiredKey": "",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
-    "description": "This entire room appears to be a shrine to Sue Hannum. According to the portrait in the center of the shrine, she gives good grades."
+    "description": "This entire room appears to be a shrine to Sue Hannum.\nAccording to the portrait in the center of the shrine\nshe gives good grades."
   }
 ]
