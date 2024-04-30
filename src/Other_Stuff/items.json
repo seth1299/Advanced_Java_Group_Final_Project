@@ -80,13 +80,6 @@
         "damage": 3
     },
     {
-        "name": "Wand Shaped Twig",
-        "description": "If you squint your eyes and turn your head just right, it looks like a wand",
-        "type": "WEAPON",
-        "amount": 1,
-        "damage": 6
-    },
-    {
         "name": "Iron Sword",
         "description": "An iron sword, stronger than a wooden sword but weaker than a steel sword.",
         "type": "WEAPON",
@@ -101,13 +94,6 @@
         "damage": 7
     },
     {
-        "name": "Training Wand",
-        "description": "Hey, this one is an actual wand!",
-        "type": "WEAPON",
-        "amount": 1,
-        "damage": 9
-    },
-    {
         "name": "Steel Sword",
         "description": "A mighty weapon once wielded by a local tyrant.",
         "type": "WEAPON",
@@ -120,13 +106,6 @@
         "type": "WEAPON",
         "amount": 1,
         "damage": 10
-    },
-    {
-        "name": "Mage's Wand",
-        "description": "The wand of a strange mage. It has been imbued with great magic.",
-        "type": "WEAPON",
-        "amount": 1,
-        "damage": 12
     },
     {
         "name": "Leather Armor",
@@ -155,20 +134,6 @@
         "type": "ARMOR",
         "amount": 1,
         "armorValue": 10
-    },
-    {
-        "name": "Dark Black Cloak",
-        "description": "A dark black cloak that makes you feel super mysterious.",
-        "type": "ARMOR",
-        "amount": 1,
-        "armorValue": 3
-    },
-    {
-        "name": "Mage's Cloak",
-        "description": "A purple cloak that fairly crackles with magical energy.",
-        "type": "ARMOR",
-        "amount": 1,
-        "armorValue": 5
     },
     {
         "name": "Cell Key",
