@@ -2,6 +2,8 @@ package Other_Stuff;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.google.gson.JsonArray;
@@ -68,7 +70,6 @@ public class Room {
 	 * @param locked If the room is locked or not.
 	 * @param requiredKey The Item that is required to unlock the room (which should be a "Key" type)
 	 * @param roomItemsFilepath The filepath to the items that are in the room, if any.
-	 * @param// enemy The enemy that is in the room, if any.
 	 * @param roomDescription The description of the room.
 	 */
 	public Room(/*Player player,*/ int roomNum, String roomName, int exitN, int exitNW, int exitNE, int exitW, int exitE, int exitSW, int exitS, int exitSE, int exitUP, int exitDN, boolean locked, String requiredKey, String roomItemsFilepath, String enemyFilepath, String roomDescription) {
@@ -87,6 +88,9 @@ public class Room {
 		this.exitDN = exitDN;
 		this.locked = locked;
 		addItemsToRoomFromJsonFile(roomItemsFilepath);
+		roomItems = new LinkedList<>();
+		if ( roomNum == 99 )
+			System.out.println("Set roomItems to empty value!");
 		this.requiredKey = requiredKey;
 		if ( enemyFilepath != null && !enemyFilepath.isEmpty() )
 		{
@@ -245,10 +249,14 @@ public class Room {
 		System.out.println();
 		if (roomItems!=null && roomItems.size() > 0 )
 		{
-			System.out.print("The room contains these items: ");
+			if ( roomItems.size() > 1 )
+				System.out.print("The room contains these items: ");
+			else
+				System.out.println("The room contains this item: ");
+			
 			for ( Item item : roomItems )
 			{
-				System.out.println(item);
+				System.out.println(item.getName());
 			}
 		}
 		
@@ -260,6 +268,7 @@ public class Room {
 	}
 	
 	public void addItemsToRoomFromJsonFile(String filepath) {
+		
 		if ( filepath == null || filepath.isEmpty() )
 			return;
 		
@@ -288,22 +297,31 @@ public class Room {
 	 public void addItemToRoom(Item item, int amount) 
 	    {
 	        if (item == null)
-	            return;
+	        	return;
 
 	        // Check if the item already exists in the room
-	        for (Item currentItem : roomItems) 
+	        if ( roomItems != null )
 	        {
-	            if (currentItem.getName().equals(item.getName()) && currentItem.getType() == item.getType()) 
-	            {
-	                // If the item already exists, increment its quantity and return
-	                currentItem.changeAmount(amount);
-	                return;
-	            }
+	        	for (Item currentItem : roomItems) 
+		        {
+		            if (currentItem.getName().equals(item.getName()) && currentItem.getType() == item.getType()) 
+		            {
+		                // If the item already exists, increment its quantity and return
+		                currentItem.changeAmount(amount);
+		                return;
+		            }
+		        }
+	        }
+	        else
+	        {
+	        	roomItems = new ArrayList<>();
+	        	// If the room items array doesn't exist, instantiate it. For some fucking godforsaken reason, the roomItems arrayList does not
+	        	// instantiate in the constructor like the other variables do, so it must be instantiated at run-time.
+		        item.setAmount(amount);
+		        roomItems.add(item);
 	        }
 
-	        // If the item doesn't exist, add it to the room
-	        item.setAmount(amount);
-	        roomItems.add(item);
+	        
 	    }
 
 	//Getters and Setters
@@ -426,7 +444,10 @@ public class Room {
 	public void setRoomDescription(String roomDescription) {
 		this.roomDescription = roomDescription;
 	}
-
+	
+	/**
+	 * @return The String value of the required key for the room. That is to say, just the name of the key needed to unlock the room as a String.
+	 */
 	public String getRequiredKey() {
 		return requiredKey;
 	}

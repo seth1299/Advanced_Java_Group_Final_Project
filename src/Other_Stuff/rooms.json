@@ -11,13 +11,33 @@
   "exit s": 0,
   "exit se": 0,
   "exit up": 0,
-  "exit dn": 0,
+  "exit dn": 99,
   "locked": false,
   "requiredKey": "",
   "roomItemsFilepath": "",
   "enemyFilepath": "",
   "description": "A long forgotten storage room,\nit looks like it was originally for storing training materials."
 },
+
+  {
+    "name": "TEST UNLOCKED ROOM PLEASE DELETE",
+    "roomNum": 99,
+    "exit n": 0,
+    "exit nw": 0,
+    "exit ne": 0,
+    "exit w": 0,
+    "exit e": 0,
+    "exit sw": 0,
+    "exit s": 0,
+    "exit se": 0,
+    "exit up": 1,
+    "exit dn": 0,
+    "locked": false,
+    "requiredKey": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/test_locked_key.json",
+    "enemyFilepath": "",
+    "description": "A long forgotten storage room,\nit looks like it was originally for storing training materials."
+  },
 
   {
     "name": "DUNGEON HALLWAY",

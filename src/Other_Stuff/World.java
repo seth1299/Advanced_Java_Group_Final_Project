@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 import Player_Related_Stuff.Player;
@@ -22,6 +23,10 @@ public class World {
 	private static List<Enemy> allEnemiesInTheGame;
 	private static Player player;
 	private static List<Room> rooms;
+	private static String[] funnyKeyDiscardQuips = {"You then drop the key in between the cracks in the floor and it is lost forever.", 
+			"After practicing some intense make-believe sword-fighting with the key, you accidentally throw it too far and you can't find it again.",
+			"You decide to donate the key to some hungry orphans, maybe they can sell it for gold and get some food on the table? Either way, you aren't seeing that key again.",
+			"You decide to leave the key under the welcome mat so that the next adventurer has less trouble finding it. You don't think you'll be needing that key again."};
 
 	public static List<Enemy> loadEnemies(String filename) throws IOException {
 
@@ -136,22 +141,42 @@ public class World {
 		}
 
 		if (destinationRoomNum > 0) {
+			
 			Room destinationRoom = getRoomByNum(rooms, destinationRoomNum);
+			if ( destinationRoom == null )
+			{
+				System.out.println("Can't find room #" + destinationRoomNum + "!");
+				return playRoom;
+			}
+				
+			String destinationRoomRequiredKey = destinationRoom.getRequiredKey();
+			Item required_key_as_item = player.getItemFromInventoryByName(destinationRoomRequiredKey);
 			boolean isLocked = destinationRoom.getLocked();
-			if (isLocked) {
+			
+			if (isLocked && destinationRoomRequiredKey != null && !destinationRoomRequiredKey.isEmpty()) 
+			{
+				String required_key_as_String = required_key_as_item.getName();
 				// TODO: Check if this actually works.
-				/*
-				if (player.getItemFromInventory(destinationRoom.getRequiredKey()) != null) {
+				
+				if (required_key_as_String.equals(destinationRoomRequiredKey)) 
+				{
+					Random randomNumber = new Random();
+					int randInt = randomNumber.nextInt(0, funnyKeyDiscardQuips.length);
+					System.out.println("You unlock the door! " + funnyKeyDiscardQuips[randInt]);
+					player.removeItemFromInventory(required_key_as_item, 1);
 					destinationRoom.display();
 					return destinationRoom;
-				} else {
-					System.out.println("You need to find the key to enter that room!");
+				} 
+				
+				else 
+				{
+					System.out.println("The room is locked. You need the " + destinationRoomRequiredKey + " to enter that room.");
 					return playRoom;
 				}
-
-				 */
-				return playRoom;
-			} else {
+				
+			} 
+			else 
+			{
 				destinationRoom.display();
 				return destinationRoom;
 			}
@@ -203,8 +228,9 @@ public class World {
 
 					}
 					else {
+						room2.addItemsToRoomFromJsonFile(jsonObject2.get("roomItemsFilepath").getAsString());
 						//set room items here
-						continue;
+						//continue;
 					}
 					if(jsonObject2.get("enemyFilepath").getAsString().isEmpty()) {
 						room2.setEnemies(null);
