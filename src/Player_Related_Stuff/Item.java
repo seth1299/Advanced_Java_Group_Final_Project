@@ -52,7 +52,7 @@ public class Item implements Comparable<Item> {
     @Override
     public String toString()
     {
-    	return name + ", " + description + ", " + type + ", " + amount;
+    	return name + ", " + description;
     }
 
     /**

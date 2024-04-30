@@ -29,6 +29,7 @@ public class Player {
     private String name, gender;
     private LinkedList<Item> inventory;
     private LinkedList<String> playerMovesList = new LinkedList<>();
+    private LinkedList<String> outOfCombatActions = new LinkedList<>();
     private Map<EquipmentSlot, Item> equipment;
     
     /**
@@ -45,6 +46,13 @@ public class Player {
         playerMovesList.add("DEFEND");
         playerMovesList.add("FLEE");
         playerMovesList.add("ITEM");
+        outOfCombatActions.add("ZORK");
+        outOfCombatActions.add("HELP");
+        outOfCombatActions.add("MOVE");
+        outOfCombatActions.add("SUPERBRIEF");
+        outOfCombatActions.add("VERBOSE");
+        outOfCombatActions.add("NOTHING");
+        outOfCombatActions.add("LOOK");
         equipment = new HashMap<>();
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             equipment.put(slot, null);
@@ -68,6 +76,13 @@ public class Player {
         playerMovesList.add("DEFEND");
         playerMovesList.add("FLEE");
         playerMovesList.add("ITEM");
+        outOfCombatActions.add("ZORK");
+        outOfCombatActions.add("HELP");
+        outOfCombatActions.add("MOVE");
+        outOfCombatActions.add("SUPERBRIEF");
+        outOfCombatActions.add("VERBOSE");
+        outOfCombatActions.add("NOTHING");
+        outOfCombatActions.add("LOOK");
         equipment = new HashMap<>();
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             equipment.put(slot, null);
@@ -75,6 +90,25 @@ public class Player {
         isDead = false;
         this.MAX_HEALTH = 100;
         this.setHealth(MAX_HEALTH);
+    }
+    
+    public void displayHelp()
+    {
+    	System.out.println();
+    	for ( String action : outOfCombatActions)
+    	{
+    		if ( action.equals("HELP"))
+    			System.out.println("HELP - displays this help menu.");
+    		if ( action.equals("MOVE"))
+    			System.out.println("MOVE - allows the player to move from room to room. After typing in move, you must then input an ordinal direction (N, S, E, W, NE, NW, SE, SW). Valid directions will be displayed underneath the current room's description.");
+    		if ( action.equals("SUPERBRIEF"))
+    			System.out.println("SUPERBRIEF - this will skip the description for each room and only display the name of the room and valid directions to go from there.");
+    		if ( action.equals("VERBOSE"))
+    			System.out.println("VERBOSE - this is the opposite of SUPERBRIEF, this will show room descriptions again.");
+    		if ( action.equals("LOOK"))
+    			System.out.println("LOOK - This will repeat the name and description of the current room, as if you had just walked back into the room.");
+    	}
+    	System.out.println();
     }
     
     public void takeTurn(List<Enemy> enemies) {
@@ -378,7 +412,11 @@ public class Player {
     
     
     
-    /**
+    public LinkedList<String> getOutOfCombatActions() {
+		return outOfCombatActions;
+	}
+
+	/**
      * Allows for a much better formatted player object when it is converted into a String, rather than the default garbage a Java class displays as with ToString().
      */
     @Override

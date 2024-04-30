@@ -12,7 +12,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 import Player_Related_Stuff.Player;
@@ -22,7 +24,16 @@ public class World {
 	private static List<Enemy> allEnemiesInTheGame;
 	private static Player player;
 	private static List<Room> rooms;
-
+	private static String[] funnyKeyDiscardQuips = {"You then drop the key in between the cracks in the floor and it is lost forever.", 
+			"After practicing some intense make-believe sword-fighting with the key, you accidentally throw it too far and you can't find it again.",
+			"You decide to donate the key to some hungry orphans, maybe they can sell it for gold and get some food on the table? Either way, you aren't seeing that key again.",
+			"You decide to leave the key under the welcome mat so that the next adventurer has less trouble finding it. You don't think you'll be needing that key again."};
+	private static LinkedList<String> DIRECTIONS; // I cannot make this both final and static for some reason (unbeknowst to me), but please do not change this list.
+	private static int playerRoomNumber = 1;
+	private static Scanner sc = new Scanner (System.in);
+	private static boolean showDescription = true;
+	
+	
 	public static List<Enemy> loadEnemies(String filename) throws IOException {
 
 		if (filename == null || filename.isEmpty())
@@ -83,14 +94,82 @@ public class World {
 		allEnemiesInTheGame = enemies;
 	}
 
-	public static Room playerMovement(List<Room> rooms, int playerRoom, String response) {
+	public static void playerMovement(String response) {
 
-		if (rooms == null || response == null)
-			return null;
+		if (response == null || response.isBlank())
+			return;
+		
+		Random rand = new Random();
+		String[] funnyUnrecognizedCommandResponses = {(response + "? I don't know that one.")};
+		
+		while ( !player.getOutOfCombatActions().contains(response) )
+		{
+			System.out.println(funnyUnrecognizedCommandResponses[rand.nextInt(0, funnyUnrecognizedCommandResponses.length)]);
+			response = sc.nextLine().trim().toUpperCase();
+		}
+		
+		switch ( response )
+		{
+			case "MOVE":
+			case "M":
+				do
+				{					
+					if ( !DIRECTIONS.contains(response) && !response.equals("MOVE") && !response.equals("M"))
+						System.out.println("I don't know where the direction \"" + response + "\" is.");
+						
+					System.out.println("\nMove to where? You can also type \"cancel\" to cancel the movement.");
+					response = sc.nextLine().trim().toUpperCase();
+					
+				} while( !DIRECTIONS.contains(response));
+				
+				moveRooms(response);
+				
+				break;
+				
+			case "HELP":
+			case "H":
+				player.displayHelp();
+				break;
+				
+			case "SUPERBRIEF":
+			case "S":
+				if ( showDescription )
+				{
+					System.out.println("\nRoom descriptions disabled.");
+					showDescription = false;
+				}
+				else
+					System.out.println("\nYou've already disabled the room descriptions, " + player.getName() + ". Did you mean to type VERBOSE?");
+				break;
+				
+			case "VERBOSE":
+			case "V":
+				if ( showDescription )
+				{
+					System.out.println("\nThe room descriptions are already enabled, " + player.getName() + ". Did you mean to type SUPERBRIEF?");
+				}
+				else
+				{
+					System.out.println("\nRoom descriptions enabled.");
+					showDescription = true;
+				}
+				break;
+				
+			case "LOOK":
+			case "L":
+				Room playRoom = getRoomByNum(rooms, playerRoomNumber);
+				playRoom.display(showDescription);
+				break;
+				
+			default:
+				break;
+		}
+		
+	}
 
-		//boolean locked = false;
-
-		Room playRoom = getRoomByNum(rooms, playerRoom);
+	public static void moveRooms(String response)
+	{
+		Room playRoom = getRoomByNum(rooms, playerRoomNumber);
 		int destinationRoomNum = 0;
 		switch (response) {
 			case ("NW"):
@@ -136,31 +215,58 @@ public class World {
 		}
 
 		if (destinationRoomNum > 0) {
+			
 			Room destinationRoom = getRoomByNum(rooms, destinationRoomNum);
-			boolean isLocked = destinationRoom.getLocked();
-			if (isLocked) {
-				// TODO: Check if this actually works.
-				/*
-				if (player.getItemFromInventory(destinationRoom.getRequiredKey()) != null) {
-					destinationRoom.display();
-					return destinationRoom;
-				} else {
-					System.out.println("You need to find the key to enter that room!");
-					return playRoom;
-				}
-
-				 */
-				return playRoom;
-			} else {
-				destinationRoom.display();
-				return destinationRoom;
+			if ( destinationRoom == null )
+			{
+				System.out.println("Can't find room #" + destinationRoomNum + "!");
+				return;
+				//return playRoom;
 			}
-		} else {
+				
+			String destinationRoomRequiredKey = destinationRoom.getRequiredKey();
+			Item required_key_as_item = player.getItemFromInventoryByName(destinationRoomRequiredKey);
+			boolean isLocked = destinationRoom.getLocked();
+			
+			if (isLocked && destinationRoomRequiredKey != null && !destinationRoomRequiredKey.isEmpty()) 
+			{
+				String required_key_as_String = required_key_as_item.getName();
+				// TODO: Check if this actually works.
+				
+				if (required_key_as_String.equals(destinationRoomRequiredKey)) 
+				{
+					Random randomNumber = new Random();
+					int randInt = randomNumber.nextInt(0, funnyKeyDiscardQuips.length);
+					System.out.println("You unlock the door! " + funnyKeyDiscardQuips[randInt]);
+					player.removeItemFromInventory(required_key_as_item, 1);
+					destinationRoom.display(showDescription);
+					//return destinationRoom;
+				} 
+				
+				else 
+				{
+					System.out.println("The room is locked. You need the " + destinationRoomRequiredKey + " to enter that room.");
+					//return playRoom;
+				}
+				
+			} 
+			else 
+			{
+				destinationRoom.display(showDescription);
+				//return destinationRoom;
+			}
+		}
+		else if ( response.equals("CANCEL") || response.equals("C"))
+		{
+			System.out.println("Movement cancelled.");
+		}
+		else 
+		{
 			System.out.println("There are no exits in that direction.");
-			return playRoom;
+			//return playRoom;
 		}
 	}
-
+	
 	public static List<Room> loadRooms(String filename) throws IOException {
 
 		if (filename == null || filename.isBlank())
@@ -203,8 +309,9 @@ public class World {
 
 					}
 					else {
+						room2.addItemsToRoomFromJsonFile(jsonObject2.get("roomItemsFilepath").getAsString());
 						//set room items here
-						continue;
+						//continue;
 					}
 					if(jsonObject2.get("enemyFilepath").getAsString().isEmpty()) {
 						room2.setEnemies(null);
@@ -229,7 +336,33 @@ public class World {
 	}
 
 		public static void main (String[] args) {
-			Scanner sc = new Scanner(System.in);
+			
+			DIRECTIONS = new LinkedList<>();
+			
+			DIRECTIONS.add("N");
+			DIRECTIONS.add("NORTH");
+			DIRECTIONS.add("NW");
+			DIRECTIONS.add("NORTHWEST");
+			DIRECTIONS.add("NE");
+			DIRECTIONS.add("NORTHEAST");
+			DIRECTIONS.add("W");
+			DIRECTIONS.add("WEST");
+			DIRECTIONS.add("E");
+			DIRECTIONS.add("EAST");
+			DIRECTIONS.add("S");
+			DIRECTIONS.add("SOUTH");
+			DIRECTIONS.add("SW");
+			DIRECTIONS.add("SOUTHWEST");
+			DIRECTIONS.add("SE");
+			DIRECTIONS.add("SOUTHEAST");
+			DIRECTIONS.add("U");
+			DIRECTIONS.add("UP");
+			DIRECTIONS.add("DN");
+			DIRECTIONS.add("DOWN");
+			DIRECTIONS.add("C");
+			DIRECTIONS.add("CANCEL");
+			
+			
 			try {
 				setAllEnemiesInTheGame(loadEnemies("src/Other_Stuff/enemies.json"));
 			} catch (IOException e) {
@@ -242,13 +375,23 @@ public class World {
 				e.printStackTrace();
 			}
 
-			String response = "", name = "", gender = "";
+			String response = "", nameString = "", gender = "";
 
 			do {
+				StringBuilder name = new StringBuilder("");
 				System.out.println("Hello! What is your name?");
-				name = sc.nextLine();
+				response = sc.nextLine();
+				
+				if ( response.isBlank() )
+				{
+					System.out.println("Your name cannot be blank.");
+					continue;
+				}
+				
+				name.append(response.charAt(0));
+				nameString = name.toString().toUpperCase() + response.substring(1).toLowerCase();
 
-				System.out.println("Your name is " + name + "? ('Y' for yes, 'N' for no)");
+				System.out.println("Your name is " + nameString + "? ('Y' for yes, 'N' for no)");
 				response = sc.nextLine();
 			} while (!response.trim().equalsIgnoreCase("Y") && !response.trim().equalsIgnoreCase("YES"));
 
@@ -285,24 +428,25 @@ public class World {
 
 			response = "";
 
-			player = new Player(name, gender);
+			player = new Player(nameString, gender);
 
-			Room playerRoom = getRoomByNum(rooms, 1);
+			Room playerRoom = getRoomByNum(rooms, playerRoomNumber);
 
 			//Game Begins Here
-			System.out.println("You aren't sure how long you've been in this cell.\nYou're pretty sure that it's more than a week, less than a month.\n" +
-					"When you hear a ruckus start somewhere above you,\nyou're pretty sure the chaos you hear is actually in your head\nuntil the dungeon guards run up the stairs\n" +
-					"A guards helmet comes flying down the stairs, skips off the opposite wall, and slams into your cell door.\n" +
+			System.out.println("\nYou aren't sure how long you've been in this cell.\nYou're pretty sure that it's more than a week, less than a month.\n" +
+					"When you hear a ruckus start somewhere above you, you're pretty sure the chaos you hear is actually in your head, until the dungeon guards run up the stairs.\n" +
+					"A guard's helmet comes flying down the stairs, skips off the opposite wall, and slams into your cell door.\n" +
 					"The door pops open, and you're sure you've gone mad until you see the gaping hole in the helmet\n" +
-					"No, if you'd gone mad the last thing that you would have imagined\nwas being freed from your cell into a castle under attack.\n" +
-					"You immediately burst out of the cell, look both ways down the hall,\nand decide to hide in the storage room until the noise dies down.");
+					"No, if you'd gone mad the last thing that you would have imagined was being freed from your cell into a castle under attack.\n" +
+					"You immediately burst out of the cell, look both ways down the hall, and decide to hide in the storage room until the noise dies down.\n");
 
-			playerRoom.display();
-			response = sc.nextLine().trim().toUpperCase();
-			while(player.getIsDead()==false && playerRoom.getRoomNum()!=100) {
-				playerRoom = playerMovement(rooms,playerRoom.getRoomNum(),response);
+			playerRoom.display(showDescription);
+			
+			while(player.getIsDead()==false && playerRoom.getRoomNum()!=100) 
+			{
+				System.out.println("\nWhat would you like to do? Type \"help\" for a list of available commands.");
 				response = sc.nextLine().trim().toUpperCase();
-
+				playerMovement(response);
 			}
 			sc.close();
 		}
