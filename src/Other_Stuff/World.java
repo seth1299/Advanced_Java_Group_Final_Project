@@ -100,11 +100,15 @@ public class World {
 			return;
 		
 		Random rand = new Random();
-		String[] funnyUnrecognizedCommandResponses = {(response + "? I don't know that one.")};
+		String[] funnyUnrecognizedCommandResponses = {(response + "? I don't know that one."), (response + "? I hardly know her!"), 
+				(response + "? " + response + "?????? You kids and your made up lexicon...")};
 		
 		while ( !player.getOutOfCombatActions().contains(response) )
 		{
-			System.out.println(funnyUnrecognizedCommandResponses[rand.nextInt(0, funnyUnrecognizedCommandResponses.length)]);
+			System.out.println("\n" + funnyUnrecognizedCommandResponses[rand.nextInt(0, funnyUnrecognizedCommandResponses.length)]);
+			
+			System.out.println("\nWhat would you like to do? Type \"help\" for a list of available commands.");
+			
 			response = sc.nextLine().trim().toUpperCase();
 		}
 		
@@ -159,6 +163,38 @@ public class World {
 			case "L":
 				Room playRoom = getRoomByNum(rooms, playerRoomNumber);
 				playRoom.display(showDescription);
+				break;
+				
+			case "INVENTORY":
+			case "I":
+				player.printInventory();
+				break;
+				
+			case "USE":
+				player.useItem();
+				break;
+				
+			case "DONTREMINDME":
+			case "D":
+				if ( player.getRemindMe() )
+				{
+					System.out.println("Inventory display when using items turned off.");
+					player.remindMe(false);
+				}
+				else
+					System.out.println("I'm already not reminding you about your inventory when using items, " + player.getName() + ".");
+				break;
+				
+			case "REMINDME":
+			case "R":
+				if ( player.getRemindMe() )
+					System.out.println("I'm already reminding you about your inventory when using items, " + player.getName() + ".");
+				else
+				{
+					System.out.println("Inventory display when using items turned on.");
+					player.remindMe(true);
+				}
+					
 				break;
 				
 			default:
@@ -429,6 +465,7 @@ public class World {
 			response = "";
 
 			player = new Player(nameString, gender);
+			player.addItemsToInventoryFromJsonFile("src/Other_Stuff/Individual_Item_Shit/starting_inventory.json");
 
 			Room playerRoom = getRoomByNum(rooms, playerRoomNumber);
 

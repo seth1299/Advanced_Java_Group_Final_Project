@@ -89,8 +89,6 @@ public class Room {
 		this.locked = locked;
 		addItemsToRoomFromJsonFile(roomItemsFilepath);
 		roomItems = new LinkedList<>();
-		if ( roomNum == 99 )
-			System.out.println("Set roomItems to empty value!");
 		this.requiredKey = requiredKey;
 		if ( enemyFilepath != null && !enemyFilepath.isEmpty() )
 		{
@@ -275,10 +273,7 @@ public class Room {
 			numberOfPossibleExits++;
 		}
 			
-		//possibleExits.delete(possibleExits.length()-1, possibleExits.length());
 		String[] possibleExitsArray = possibleExits.toString().split(",");
-				
-				//( numberOfPossibleExits > 1 ) ? possibleExits.toString().split(",") : {""};
 		
 		//Only lists an exit if it is valid
 		if ( numberOfPossibleExits == 1 )
@@ -287,11 +282,8 @@ public class Room {
 		{
 			System.out.println("\nThe possible room exits are: ");
 			for ( String exit : possibleExitsArray )
-			{
 				System.out.println("* " + exit);
-			}
 		}
-			//System.out.println("\nThe room's exits are to the: " + possibleExits);
 	}
 
 	//Displays the room to the player
@@ -309,10 +301,27 @@ public class Room {
 			else
 				System.out.println("\nThe room contains this item: ");
 			
+			System.out.print("Put the ");
+			int index = 0;
 			for ( Item item : roomItems )
 			{
-				System.out.println(item.getName());
+				if ( roomItems.size() == 1 )
+				{
+					System.out.print(item.getName() + " in your inventory.");
+					player.addItemToInventory(item, item.getAmount());
+					break;
+				}
+				
+				if ( ++index == roomItems.size())
+					System.out.print("and " + item.getName() + " in your inventory.");
+				else
+					System.out.print(item.getName() + ", ");
+				player.addItemToInventory(item, item.getAmount());
 			}
+			
+			System.out.println("");
+			
+			roomItems.clear();
 		}
 		
 		if ( enemies != null )

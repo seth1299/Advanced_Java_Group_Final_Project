@@ -78,7 +78,8 @@ public class Item implements Comparable<Item> {
     }
     
     /**
-     * @return How many of this item the player has in their inventory.
+     * @return How many of this item there are. For example, if the player has 3 health potions, then there will just be one Item object that has name = "Health Potion" 
+     * and amount = 3.
      */
     public int getAmount()
     {

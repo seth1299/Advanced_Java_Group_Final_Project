@@ -1,0 +1,25 @@
+[
+    {
+        "name": "Odd Key",
+        "description": "What is this key for? You have no idea where you got it from, but you refuse to part with it because it could come in handy some day.",
+        "type": "KEY",
+        "amount": 1
+    },
+    {
+        "name": "Dirty Clothes",
+        "description": "The clothes that you have been wearing for the past however long. They smell pretty bad. You should probably go take a bath and change clothes.",
+        "type": "ARMOR",
+        "amount": 1,
+        "armorValue": 0
+    },
+    {
+        "name": "Coffee",
+        "description": "Delicious magical coffee that will never go cold or spoil. However, you can't bring yourself to drink it. What if you need something warm to drink later?",
+        "type": "FOOD",
+        "amount": 1
+    }
+
+
+
+
+]

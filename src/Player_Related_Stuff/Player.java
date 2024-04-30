@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -25,17 +26,19 @@ public class Player {
 	 */
     private int health, mana, damage;
     private final int MAX_HEALTH;
-    private boolean isDead;
+    private boolean isDead, remindMe = true;
     private String name, gender;
     private LinkedList<Item> inventory;
     private LinkedList<String> playerMovesList = new LinkedList<>();
     private LinkedList<String> outOfCombatActions = new LinkedList<>();
     private Map<EquipmentSlot, Item> equipment;
+    private static Scanner sc;
     
     /**
 	 * Default Player constructor, all values are automatically assigned to garbage values.
 	 */
     public Player() {
+    	sc = new Scanner (System.in);
         health = 100;
         name = "UNINSTANTIATED";
         gender = "UNINSTANTIATED";
@@ -53,6 +56,10 @@ public class Player {
         outOfCombatActions.add("VERBOSE");
         outOfCombatActions.add("NOTHING");
         outOfCombatActions.add("LOOK");
+        outOfCombatActions.add("INVENTORY");
+        outOfCombatActions.add("USE");
+        outOfCombatActions.add("DONTREMINDME");
+        outOfCombatActions.add("REMINDME");
         equipment = new HashMap<>();
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             equipment.put(slot, null);
@@ -69,6 +76,7 @@ public class Player {
     public Player(String name, String gender) {
     	if ( name == null || gender == null )
     		System.exit(-1);
+    	sc = new Scanner (System.in);
         this.name = name;
         this.gender = gender;
         inventory = new LinkedList<>();
@@ -83,6 +91,10 @@ public class Player {
         outOfCombatActions.add("VERBOSE");
         outOfCombatActions.add("NOTHING");
         outOfCombatActions.add("LOOK");
+        outOfCombatActions.add("INVENTORY");
+        outOfCombatActions.add("USE");
+        outOfCombatActions.add("DONTREMINDME");
+        outOfCombatActions.add("REMINDME");
         equipment = new HashMap<>();
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             equipment.put(slot, null);
@@ -98,17 +110,83 @@ public class Player {
     	for ( String action : outOfCombatActions)
     	{
     		if ( action.equals("HELP"))
-    			System.out.println("HELP - displays this help menu.");
+    			System.out.println("* HELP - displays this help menu.");
     		if ( action.equals("MOVE"))
-    			System.out.println("MOVE - allows the player to move from room to room. After typing in move, you must then input an ordinal direction (N, S, E, W, NE, NW, SE, SW). Valid directions will be displayed underneath the current room's description.");
+    			System.out.println("* MOVE - allows the player to move from room to room. After typing in move, you must then input an ordinal direction (N, S, E, W, NE, NW, SE, SW). Valid directions will be displayed underneath the current room's description.");
     		if ( action.equals("SUPERBRIEF"))
-    			System.out.println("SUPERBRIEF - this will skip the description for each room and only display the name of the room and valid directions to go from there.");
+    			System.out.println("* SUPERBRIEF - this will skip the description for each room and only display the name of the room and valid directions to go from there.");
     		if ( action.equals("VERBOSE"))
-    			System.out.println("VERBOSE - this is the opposite of SUPERBRIEF, this will show room descriptions again.");
+    			System.out.println("* VERBOSE - this is the opposite of SUPERBRIEF, this will show room descriptions again (default).");
     		if ( action.equals("LOOK"))
-    			System.out.println("LOOK - This will repeat the name and description of the current room, as if you had just walked back into the room.");
+    			System.out.println("* LOOK - This will repeat the name and description of the current room, as if you had just walked back into the room.");
+    		if ( action.equals("INVENTORY"))
+    			System.out.println("* INVENTORY - Displays your current inventory, along with a description of each item.");
+    		if ( action.equals("USE"))
+    			System.out.println("* USE - Allows you to use an item from your inventory. You must specify which item after you type in USE, or say CANCEL.");
+    		if ( action.equals("DONTREMINDME"))
+    			System.out.println("* DONTREMINDME - Prevents the entire inventory from being displayed every time that you use an item.");
+    		if ( action.equals("REMINDME"))
+    			System.out.println("* REMINDME - Displays the entire inventory every time that you use an item (default).");
     	}
-    	System.out.println();
+    }
+    
+    public boolean getRemindMe()
+    {
+    	return remindMe;
+    }
+    
+    public void remindMe(boolean remindMe)
+    {
+    	this.remindMe = remindMe;
+    }
+    
+    public void useItem()
+    {
+    	String nameOfItem = "";
+    	
+    	if ( remindMe )
+    	{
+    		printInventory();
+    		System.out.println("\n---------------------\n");
+    	}
+    	
+		System.out.println("Use what item?");
+		nameOfItem = sc.nextLine().trim();
+    	
+    	String[] funnyCoffeeResponses = {"The coffee does look delicious, but you're saving it for later.", "You shouldn't drink the coffee now, what if someone sneaks up behind you?",
+    			"Hmm, it just doesn't feel like the right time to drink the coffee. Maybe later.", "You should save the coffee for once you get outside!"};
+    	
+    	String[] funnyGenericResponses = {("Hmm, use a " + nameOfItem + "? I don't think so."), ("Maybe you can use the " + nameOfItem + " later, but I'm not sure how it would help now."),
+    			("Alright, now you're just messing with me. Who would even try to use a " + nameOfItem + " in this situation?")};
+    	
+    	if ( nameOfItem == null || nameOfItem.isBlank())
+    		return;
+    	
+    	if ( nameOfItem.equals("Coffee"))
+    	{
+    		Random rand = new Random();
+    		int randNum = rand.nextInt(0, funnyCoffeeResponses.length);
+    		System.out.println(funnyCoffeeResponses[randNum]);
+    	}
+    	
+    	else
+    	{
+    		Item item = getItemFromInventoryByName(nameOfItem);
+    		
+    		if ( item == null )
+    		{
+    			System.out.println("You don't have a " + nameOfItem + " in your inventory.");
+    			return;
+    		}
+    		
+    		else
+    		{
+    			Random rand = new Random();
+        		int randNum = rand.nextInt(0, funnyGenericResponses.length);
+        		System.out.println(funnyGenericResponses[randNum]);
+    		}
+    	}
+    		
     }
     
     public void takeTurn(List<Enemy> enemies) {
@@ -116,8 +194,6 @@ public class Player {
     	if ( enemies == null )
     		return;
     	
-    	@SuppressWarnings("resource")
-		Scanner sc = new Scanner(System.in);
         LinkedList<String> playerMoves = getPlayerMovesList();
         Map<String, Integer> nameCountMap = new HashMap<>(); // Map to store counts of each enemy name
         int playerDamage = getDamage();
@@ -190,8 +266,6 @@ public class Player {
 		if ( isDead || enemy == null )
 			return;
 		
-		@SuppressWarnings("resource")
-		Scanner sc = new Scanner(System.in);
 		LinkedList<String> playerMoves = getPlayerMovesList();
 		int playerDamage = getDamage();
 		String enemyName = enemy.getName();
@@ -383,6 +457,7 @@ public class Player {
     	System.out.println("The hero" + (gender.equals("M") || gender.equals("NB") ? "" : "ine") + " falls dead, succumbing to their wounds as the world fades to black around them...");
 		System.out.println("GAME OVER...");
 		isDead = true;
+		sc.close();
     }
     
     /**
@@ -523,7 +598,7 @@ public class Player {
     	if ( name.isEmpty() )
     		return null;
     	for (Item currentItem : inventory) {
-            if (currentItem.getName().equals(name)) {
+            if (currentItem.getName().equalsIgnoreCase(name)) {
                 return currentItem;
             }
         }
@@ -538,7 +613,7 @@ public class Player {
     public void printInventory() {
     	if ( inventory.size() == 0 )
     	{
-    		System.out.println(name + "'s inventory is empty.\n");
+    		System.out.println("Your inventory is empty.\n");
     		return;
     	}
     		
@@ -581,6 +656,5 @@ public class Player {
                     System.out.println("* " + currentItem.getName() + ". " + currentItem.getDescription());
             }
         }
-        System.out.println();
     }
 }
