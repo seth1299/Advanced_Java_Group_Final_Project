@@ -304,8 +304,12 @@ public class World {
 					"You immediately burst out of the cell, look both ways down the hall, and decide to hide in the storage room until the noise dies down.");
 
 			playerRoom.display();
-			response = "";
 			response = sc.nextLine().trim().toUpperCase();
+			while(player.getIsDead()==false && playerRoom.getRoomNum()!=100) {
+				playerRoom = playerMovement(rooms,playerRoom.getRoomNum(),response);
+				response = sc.nextLine().trim().toUpperCase();
+
+			}
 			sc.close();
 		}
 
