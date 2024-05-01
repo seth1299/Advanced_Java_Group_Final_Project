@@ -1,0 +1,29 @@
+[
+    {
+        "name": "Lord's Guard Key",
+        "description": "The key to open the nobles' quarters.",
+        "keyNum": 5,
+        "type": "KEY",
+        "amount": 1
+    },
+    {
+        "name": "Steel Armor",
+        "description": "Armor made from steel, proof against all but the strongest of attacks.",
+        "type": "ARMOR",
+        "amount": 1,
+        "armorValue": 10
+    },
+    {
+        "name": "Health Potion",
+        "description": "A healing potion typical of high fantasy worlds, capable of healing wounds instantly.",
+        "type": "POTION",
+        "amount": 1,
+        "healingAmount": 35
+    },
+    {
+        "name": "Chekhov's Bow",
+        "description": "According the the rules of storytelling, this Bow will be important later. Probably.",
+        "type": "QUEST_ITEM",
+        "amount": 1
+    }
+]

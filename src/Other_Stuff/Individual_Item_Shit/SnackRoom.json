@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Apple",
+        "description": "A delicious red apple, free from any sort of sophoric poisons as far as you know.",
+        "type": "FOOD",
+        "amount": 1,
+        "healingAmount": 10
+    },
+    {
+        "name": "Beef Jerky",
+        "description": "Standard soldier food, they don't even bother with an expiration date.",
+        "type": "FOOD",
+        "amount": 1,
+        "healingAmount": 20
+    }
+]

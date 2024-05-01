@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import Player_Related_Stuff.Player;
 
@@ -339,8 +340,6 @@ public class World {
 					}
 					else {
 						room2.addItemsToRoomFromJsonFile(jsonObject2.get("roomItemsFilepath").getAsString());
-						//set room items here
-						//continue;
 					}
 					if(jsonObject2.get("enemyFilepath").getAsString().isEmpty()) {
 						room2.setEnemies(null);
@@ -364,7 +363,26 @@ public class World {
 		}
 	}
 
-		public static void main (String[] args) {
+	public static void clearScreen() {
+		for(int i=0;i<100;i++) {
+			System.out.println("\b");
+		}
+	}
+
+	public static void titlePrint() throws InterruptedException {
+		TimeUnit.SECONDS.sleep(2);
+		clearScreen();
+		System.out.println(" _____           _   _       ___  ____     _      _            _    ");
+		System.out.println("/  __ \\         | | | |      |  \\/  (_)   | |    | |          | |   ");
+		System.out.println("| /  \\/ __ _ ___| |_| | ___  | .  . |_ ___| |_ __| | __ _ _ __| | __");
+		System.out.println("| |    / _` / __| __| |/ _ \\ | |\\/| | / __| __/ _` |/ _` | '__| |/ /");
+		System.out.println("| \\__/\\ (_| \\__ \\ |_| |  __/ | |  | | \\__ \\ || (_| | (_| | |  |   < ");
+		System.out.println(" \\____/\\__,_|___/\\__|_|\\___| \\_|  |_/_|___/\\__\\__,_|\\__,_|_|  |_|\\_\\");
+		TimeUnit.SECONDS.sleep(4);
+		clearScreen();
+	}
+
+		public static void main (String[] args) throws InterruptedException {
 			
 			DIRECTIONS = new LinkedList<>();
 			
@@ -461,6 +479,8 @@ public class World {
 			player.addItemsToInventoryFromJsonFile("src/Other_Stuff/Individual_Item_Shit/starting_inventory.json");
 
 			Room playerRoom = getRoomByNum(rooms, playerRoomNumber);
+
+			titlePrint();
 
 			//Game Begins Here
 			System.out.println("\nYou aren't sure how long you've been in this cell.\nYou're pretty sure that it's more than a week, less than a month.\n" +

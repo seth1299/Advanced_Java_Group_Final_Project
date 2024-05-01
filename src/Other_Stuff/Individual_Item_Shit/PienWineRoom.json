@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Meat Pie",
+        "description": "Piping hot and delicious, yet can be stuffed in your pocket and come out pristine.",
+        "type": "FOOD",
+        "amount": 1,
+        "healingAmount":20
+    },
+    {
+        "name": "Cheap Wine",
+        "description": "A fine aged wine. You can't wait for the day to end so you can drink it.",
+        "type": "FOOD",
+        "amount": 1,
+        "healingAmount": 15
+    }
+]

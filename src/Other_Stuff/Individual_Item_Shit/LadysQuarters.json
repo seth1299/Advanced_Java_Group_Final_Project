@@ -1,0 +1,9 @@
+[
+    {
+        "name": "Steel Dagger",
+        "description": "This dagger is incredibly sharp. Like seriously, be careful.",
+        "type": "WEAPON",
+        "amount": 1,
+        "damage": 10
+    }
+]

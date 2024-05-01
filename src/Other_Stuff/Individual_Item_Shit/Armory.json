@@ -1,0 +1,9 @@
+[
+    {
+        "name": "Iron Armor",
+        "description": "Armor made from iron, stronger than leather but weaker than steel.",
+        "type": "ARMOR",
+        "amount": 1,
+        "armorValue": 7
+    }
+]

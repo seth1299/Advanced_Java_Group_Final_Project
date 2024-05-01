@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Cell Key",
+        "description": "The key to open the dungeon cells.",
+        "keyNum": 1,
+        "type": "KEY",
+        "amount": 1
+    },
+    {
+        "name": "Health Potion",
+        "description": "A healing potion typical of high fantasy worlds, capable of healing wounds instantly.",
+        "type": "POTION",
+        "amount": 1,
+        "healingAmount": 35
+    },
+    {
+        "name": "Apple",
+        "description": "A delicious red apple, free from any sort of sophoric poisons as far as you know.",
+        "type": "FOOD",
+        "amount": 1,
+        "healingAmount": 10
+    }
+]
