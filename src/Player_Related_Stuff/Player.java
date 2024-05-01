@@ -52,15 +52,30 @@ public class Player {
         playerMovesList.add("ITEM");
         outOfCombatActions.add("ZORK");
         outOfCombatActions.add("HELP");
+        outOfCombatActions.add("H");
         outOfCombatActions.add("MOVE");
+        outOfCombatActions.add("M");
         outOfCombatActions.add("SUPERBRIEF");
+        outOfCombatActions.add("S");
         outOfCombatActions.add("VERBOSE");
+        outOfCombatActions.add("V");
         outOfCombatActions.add("NOTHING");
         outOfCombatActions.add("LOOK");
+        outOfCombatActions.add("L");
         outOfCombatActions.add("INVENTORY");
+        outOfCombatActions.add("I");
         outOfCombatActions.add("USE");
+        outOfCombatActions.add("U");
         outOfCombatActions.add("DONTREMINDME");
+        outOfCombatActions.add("D");
         outOfCombatActions.add("REMINDME");
+        outOfCombatActions.add("R");
+        outOfCombatActions.add("CLEAR");
+        outOfCombatActions.add("CLS");
+        outOfCombatActions.add("JOKE");
+        outOfCombatActions.add("J");
+        outOfCombatActions.add("TIME");
+        outOfCombatActions.add("T");
         equipment = new HashMap<>();
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             equipment.put(slot, null);
@@ -87,15 +102,30 @@ public class Player {
         playerMovesList.add("ITEM");
         outOfCombatActions.add("ZORK");
         outOfCombatActions.add("HELP");
+        outOfCombatActions.add("H");
         outOfCombatActions.add("MOVE");
+        outOfCombatActions.add("M");
         outOfCombatActions.add("SUPERBRIEF");
+        outOfCombatActions.add("S");
         outOfCombatActions.add("VERBOSE");
+        outOfCombatActions.add("V");
         outOfCombatActions.add("NOTHING");
         outOfCombatActions.add("LOOK");
+        outOfCombatActions.add("L");
         outOfCombatActions.add("INVENTORY");
+        outOfCombatActions.add("I");
         outOfCombatActions.add("USE");
+        outOfCombatActions.add("U");
         outOfCombatActions.add("DONTREMINDME");
+        outOfCombatActions.add("D");
         outOfCombatActions.add("REMINDME");
+        outOfCombatActions.add("R");
+        outOfCombatActions.add("CLEAR");
+        outOfCombatActions.add("CLS");
+        outOfCombatActions.add("JOKE");
+        outOfCombatActions.add("J");
+        outOfCombatActions.add("TIME");
+        outOfCombatActions.add("T");
         equipment = new HashMap<>();
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             equipment.put(slot, null);
@@ -128,7 +158,13 @@ public class Player {
     			System.out.println("* DONTREMINDME - Prevents the entire inventory from being displayed every time that you use an item.");
     		if ( action.equals("REMINDME"))
     			System.out.println("* REMINDME - Displays the entire inventory every time that you use an item (default).");
+    		if ( action.equals("TIME"))
+    			System.out.println("* TIME - Displays how long you've been playing for (in seconds).");
+    		
     	}
+    	System.out.println("\nAny command can be entered by only putting in the first letter of the command as well.");
+    	// The "magic number" here is the amount of commands shown in the Help screen, minus the "NOTHING" command which does nothing. I suppose it technically counts?
+    	System.out.println("There are also " + ( outOfCombatActions.size() - 22 ) + " secret commands, see if you can find them all! ;)");
     }
     
     public boolean getRemindMe()
@@ -527,7 +563,7 @@ public class Player {
                 }
                 else if (type.equals(Item.ItemType.WEAPON))
                 {
-                	weaponDamage = itemElement.getAsJsonObject().get("weaponDamage").getAsInt();
+                	weaponDamage = itemElement.getAsJsonObject().get("damage").getAsInt();
                 	newItem = new Item(name, description, type, weaponDamage);
                 }
                 else if (type.equals(Item.ItemType.FOOD) || type.equals(Item.ItemType.POTION))

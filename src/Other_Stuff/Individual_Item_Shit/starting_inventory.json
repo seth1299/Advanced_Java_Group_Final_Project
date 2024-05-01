@@ -24,7 +24,7 @@
         "description": "A cool rock you found on the ground.",
         "type": "WEAPON",
         "amount": 1,
-        "weaponDamage": 1
+        "damage": 1
     }
 
 

@@ -11,6 +11,8 @@ import com.google.gson.JsonParser;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,10 +31,21 @@ public class World {
 			"After practicing some intense make-believe sword-fighting with the key, you accidentally throw it too far and you can't find it again.",
 			"You decide to donate the key to some hungry orphans, maybe they can sell it for gold and get some food on the table? Either way, you aren't seeing that key again.",
 			"You decide to leave the key under the welcome mat so that the next adventurer has less trouble finding it. You don't think you'll be needing that key again."};
+	private static String[] jokes = {"Why did the programmer always confuse Halloween and Christmas? Because OCT 31 == DEC 25.", 
+	"A SQL query goes into a bar, walks up to two tables and asks, \"Can I join you?\"", "What’s the object-oriented way to become wealthy? Inheritence.",
+	"ASCII stupid question, get a stupid ANSI.", "A programmer is sent to the grocery store with instructions to “Buy butter and see whether they have "
+	+ "eggs, and if they do, then buy 10. Returning with 10 butters, the programmer says \"They had eggs.\"", "Why did the programmer quit his job? Because "
+	+ "he didn't get arrays.", "UNIX is user friendly. It’s just very particular about who its friends are.", "There are 2 types of people in the world. "
+	+ "Those who can extrapolate from incomplete data...", "3 Errors walk into a bar. The barman says, \"Normally I’d Throw you all out, but tonight "
+	+ "I’ll make an Exception.\"", "What's the best thing about UDP jokes? I don't care if you get them.", "What's the best part about TCP jokes? I get to keep telling them"
+	+ " until you get them.", "Hardware (noun): the part of a computer that you can kick.", "What's a programmer's favorite drinking establishment? Foo Bar."};
 	private static LinkedList<String> DIRECTIONS; // I cannot make this both final and static for some reason (unbeknowst to me), but please do not change this list.
+	private static LinkedList<Integer> alreadyVisitedRooms = new LinkedList<>();
 	private static int playerRoomNumber = 1;
 	private static Scanner sc = new Scanner (System.in);
 	private static boolean showDescription = true;
+	private static Instant startTime, stopTime;
+	final World thisWorld = this;
 	
 	
 	public static List<Enemy> loadEnemies(String filename) throws IOException {
@@ -108,7 +121,8 @@ public class World {
 		{
 			System.out.println("\n" + funnyUnrecognizedCommandResponses[rand.nextInt(0, funnyUnrecognizedCommandResponses.length)]);
 			
-			System.out.println("\nWhat would you like to do? Type \"help\" for a list of available commands.");
+			System.out.println("\n> What would you like to do? Type \"help\" for a list of available commands.");
+			System.out.print("> ");
 			
 			response = sc.nextLine().trim().toUpperCase();
 		}
@@ -140,22 +154,22 @@ public class World {
 			case "S":
 				if ( showDescription )
 				{
-					System.out.println("\nRoom descriptions disabled.");
+					System.out.println("Room descriptions disabled.");
 					showDescription = false;
 				}
 				else
-					System.out.println("\nYou've already disabled the room descriptions, " + player.getName() + ". Did you mean to type VERBOSE?");
+					System.out.println("You've already disabled the room descriptions, " + player.getName() + ". Did you mean to type VERBOSE?");
 				break;
 				
 			case "VERBOSE":
 			case "V":
 				if ( showDescription )
 				{
-					System.out.println("\nThe room descriptions are already enabled, " + player.getName() + ". Did you mean to type SUPERBRIEF?");
+					System.out.println("The room descriptions are already enabled, " + player.getName() + ". Did you mean to type SUPERBRIEF?");
 				}
 				else
 				{
-					System.out.println("\nRoom descriptions enabled.");
+					System.out.println("Room descriptions enabled.");
 					showDescription = true;
 				}
 				break;
@@ -171,7 +185,14 @@ public class World {
 				player.printInventory();
 				break;
 				
+			case "JOKE":
+			case "J":
+				int randInt = rand.nextInt(0, jokes.length);
+				System.out.println(jokes[randInt]);
+				break;
+				
 			case "USE":
+			case "U":
 				player.useItem();
 				break;
 				
@@ -198,6 +219,35 @@ public class World {
 					
 				break;
 				
+			case "CLEAR":
+			case "CLS":
+				System.out.println("Yeah, you and me both want to clear the screen, pal. But Eclipse decided to be a piece of shit and only have the \"clear\" button"
+						+ " work if you right click inside of the terminal.");
+				break;
+				
+			case "TIME":
+			case "T":
+				Instant now = Instant.now();
+				long numSeconds = Duration.between(startTime, now).getSeconds();
+				long numMinutes = 0l, numSecondsClone = numSeconds, numHours = 0l;
+				System.out.println("You've been playing for " + numSeconds + " seconds!");
+				while ( numSecondsClone >= 60 )
+				{
+					numMinutes++;
+					numSecondsClone -= 60;
+				}
+				long numMinutesClone = numMinutes;
+				while ( numMinutesClone >= 60 )
+				{
+					numHours++;
+					numMinutesClone -= 60;
+				}
+				if ( numMinutes > 0 && numHours == 0 )
+					System.out.println("That's " + numMinutes + " minutes and " + numSecondsClone + " seconds!");
+				else if ( numHours > 0 )
+					System.out.println("That's " + numHours + " hours, " + numMinutesClone + " minutes, and " + numSecondsClone + " seconds!");
+				break;
+				
 			case "ZORK":
 				System.out.println("At your service!");
 				break;
@@ -210,7 +260,17 @@ public class World {
 
 	public static void moveRooms(String response)
 	{
+		if ( !alreadyVisitedRooms.contains(playerRoomNumber))
+			alreadyVisitedRooms.add(playerRoomNumber);
+		
 		Room playRoom = getRoomByNum(rooms, playerRoomNumber);
+		if ( playRoom == null )
+		{
+			System.out.println("Can't find room #" + playerRoomNumber + "!");
+			return;
+		}
+		
+		
 		int destinationRoomNum = 0;
 		switch (response) {
 			case ("NW"):
@@ -246,12 +306,16 @@ public class World {
 				destinationRoomNum = playRoom.getExitSE();
 				break;
 			case ("UP"):
+			case("U"):
 				destinationRoomNum = playRoom.getExitUP();
 				break;
 			case ("DN"):
 			case ("DOWN"):
 				destinationRoomNum = playRoom.getExitDN();
 				break;
+			case("CANCEL"):
+			case("C"):
+				return;
 
 		}
 
@@ -268,7 +332,7 @@ public class World {
 			Item required_key_as_item = player.getItemFromInventoryByName(destinationRoomRequiredKey);
 			boolean isLocked = destinationRoom.getLocked();
 			
-			if (isLocked && destinationRoomRequiredKey != null && !destinationRoomRequiredKey.isEmpty()) 
+			if (isLocked && destinationRoomRequiredKey != null && !destinationRoomRequiredKey.isEmpty() && required_key_as_item != null) 
 			{
 				String required_key_as_String = required_key_as_item.getName();
 				
@@ -279,14 +343,31 @@ public class World {
 					System.out.println("You unlock the door! " + funnyKeyDiscardQuips[randInt]);
 					player.removeItemFromInventory(required_key_as_item, 1);
 					destinationRoom.display(showDescription);
+					playerRoomNumber = destinationRoomNum;
 				} 
 				
 				else 
 					System.out.println("The room is locked. You need the " + destinationRoomRequiredKey + " to enter that room.");
 				
-			} 
+			}
+			else if ( isLocked && destinationRoomRequiredKey == null )
+			{
+				System.out.println("Target room is locked, but the 'destinationRoomRequiredKey' variable is null. Returning to previous room... (Target room: " + destinationRoom + ")");
+			}
+			else if ( isLocked && destinationRoomRequiredKey.isBlank() )
+			{
+				System.out.println("Target room is locked, but the 'destinationRoomRequiredKey' variable is blank/empty. Returning to previous room... (Target room: " + destinationRoom + ")");
+			}
+			else if ( isLocked && required_key_as_item == null )
+			{
+				System.out.println("That room is locked, but you don't have the key. You need the " + destinationRoomRequiredKey + " to unlock this door.");
+			}
 			else 
+			{
+				playerRoomNumber = destinationRoomNum;
 				destinationRoom.display(showDescription);
+			}
+				
 		}
 		
 		else if ( response.equals("CANCEL") || response.equals("C"))
@@ -294,9 +375,12 @@ public class World {
 		
 		else 
 			System.out.println("There are no exits in that direction.");
+		
+		
+		
 	}
 	
-	@SuppressWarnings("unused")
+	//@SuppressWarnings("unused")
 	public static List<Room> loadRooms(String filename) throws IOException {
 
 		if (filename == null || filename.isBlank())
@@ -308,57 +392,58 @@ public class World {
 			JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
 			List<Room> rooms = new ArrayList<>();
 
-			for (JsonElement element : jsonArray) {
-				JsonObject jsonObject = element.getAsJsonObject();
-				Room room = gson.fromJson(jsonObject, Room.class);
+			//for (JsonElement element : jsonArray) {
+				//JsonObject jsonObject = element.getAsJsonObject();
+				//Room room = gson.fromJson(jsonObject, Room.class);
 
-				for (JsonElement element2 : jsonArray) {
-					JsonObject jsonObject2 = element.getAsJsonObject();
-					Room room2 = gson.fromJson(jsonObject, Room.class);
-					room2.setRoomName(jsonObject2.get("name").getAsString());
-					room2.setRoomNum(jsonObject2.get("roomNum").getAsInt());
-					room2.setExitN(jsonObject2.get("exit n").getAsInt());
-					room2.setExitNW(jsonObject2.get("exit nw").getAsInt());
-					room2.setExitNE(jsonObject2.get("exit ne").getAsInt());
-					room2.setExitW(jsonObject2.get("exit w").getAsInt());
-					room2.setExitE(jsonObject2.get("exit e").getAsInt());
-					room2.setExitSW(jsonObject2.get("exit sw").getAsInt());
-					room2.setExitS(jsonObject2.get("exit s").getAsInt());
-					room2.setExitSE(jsonObject2.get("exit se").getAsInt());
-					room2.setExitUP(jsonObject2.get("exit up").getAsInt());
-					room2.setExitDN(jsonObject2.get("exit dn").getAsInt());
-					if(jsonObject2.get("requiredKey").getAsString().isEmpty()) {
-						room2.setRequiredKey(null);
+				for (JsonElement element : jsonArray) {
+					JsonObject jsonObject = element.getAsJsonObject();
+					Room room = gson.fromJson(jsonObject, Room.class);
+					room.setPlayer(player);
+					room.setRoomName(jsonObject.get("name").getAsString());
+					room.setRoomNum(jsonObject.get("roomNum").getAsInt());
+					room.setExitN(jsonObject.get("exit n").getAsInt());
+					room.setExitNW(jsonObject.get("exit nw").getAsInt());
+					room.setExitNE(jsonObject.get("exit ne").getAsInt());
+					room.setExitW(jsonObject.get("exit w").getAsInt());
+					room.setExitE(jsonObject.get("exit e").getAsInt());
+					room.setExitSW(jsonObject.get("exit sw").getAsInt());
+					room.setExitS(jsonObject.get("exit s").getAsInt());
+					room.setExitSE(jsonObject.get("exit se").getAsInt());
+					room.setExitUP(jsonObject.get("exit up").getAsInt());
+					room.setExitDN(jsonObject.get("exit dn").getAsInt());
+					if(jsonObject.get("requiredKey").getAsString().isEmpty()) {
+						room.setRequiredKey(null);
 					}
 					else {
-						room2.setRequiredKey(jsonObject2.get("requiredKey").getAsString());
+						room.setRequiredKey(jsonObject.get("requiredKey").getAsString());
 					}
 
-					if(jsonObject2.get("roomItemsFilepath").getAsString().isEmpty()) {
-						room2.setRoomItems(null);
+					if(jsonObject.get("roomItemsFilepath").getAsString().isEmpty()) {
+						room.setRoomItems(null);
 
 					}
 					else {
-						room2.addItemsToRoomFromJsonFile(jsonObject2.get("roomItemsFilepath").getAsString());
+						room.addItemsToRoomFromJsonFile(jsonObject.get("roomItemsFilepath").getAsString());
 					}
-					if(jsonObject2.get("enemyFilepath").getAsString().isEmpty()) {
-						room2.setEnemies(null);
+					if(jsonObject.get("enemyFilepath").getAsString().isEmpty()) {
+						room.setEnemies(null);
 					}
 					else {
 						//set room enemies here
 						continue;
 					}
-					if(jsonObject2.get("description").getAsString().isEmpty()) {
-						room2.setRoomDescription(null);
+					if(jsonObject.get("description").getAsString().isEmpty()) {
+						room.setRoomDescription(null);
 					}
 					else {
-						room2.setRoomDescription(jsonObject2.get("description").getAsString());
+						room.setRoomDescription(jsonObject.get("description").getAsString());
 					}
-					rooms.add(room2);
+					rooms.add(room);
 
 				}
 
-			}
+			//}
 			return rooms;
 		}
 	}
@@ -408,19 +493,6 @@ public class World {
 			DIRECTIONS.add("DOWN");
 			DIRECTIONS.add("C");
 			DIRECTIONS.add("CANCEL");
-			
-			
-			try {
-				setAllEnemiesInTheGame(loadEnemies("src/Other_Stuff/enemies.json"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			try {
-				setRooms(loadRooms("src/Other_Stuff/rooms.json"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 
 			String response = "", nameString = "", gender = "";
 
@@ -477,8 +549,21 @@ public class World {
 
 			player = new Player(nameString, gender);
 			player.addItemsToInventoryFromJsonFile("src/Other_Stuff/Individual_Item_Shit/starting_inventory.json");
+			
+			try {
+				setAllEnemiesInTheGame(loadEnemies("src/Other_Stuff/enemies.json"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			try {
+				setRooms(loadRooms("src/Other_Stuff/rooms.json"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 
 			Room playerRoom = getRoomByNum(rooms, playerRoomNumber);
+			alreadyVisitedRooms.add(playerRoomNumber);
 
 			titlePrint();
 
@@ -488,16 +573,41 @@ public class World {
 					"A guard's helmet comes flying down the stairs, skips off the opposite wall, and slams into your cell door.\n" +
 					"The door pops open, and you're sure you've gone mad until you see the gaping hole in the helmet\n" +
 					"No, if you'd gone mad the last thing that you would have imagined was being freed from your cell into a castle under attack.\n" +
-					"You immediately burst out of the cell, look both ways down the hall, and decide to hide in the storage room until the noise dies down.\n");
+					"You immediately burst out of the cell, look both ways down the hall, and decide to hide in the storage room until the noise dies down.");
 
 			playerRoom.display(showDescription);
+			//StopWatch watch = new StopWatch();
 			
+			startTime = Instant.now();
 			while(player.getIsDead()==false && playerRoom.getRoomNum()!=100) 
 			{
-				System.out.println("\nWhat would you like to do? Type \"help\" for a list of available commands.");
+				System.out.println("\n> What would you like to do? Type \"help\" for a list of available commands.");
+				System.out.print("> ");
 				response = sc.nextLine().trim().toUpperCase();
 				playerMovement(response);
 			}
+			
+			stopTime = Instant.now();
+			long numSeconds = Duration.between(startTime, stopTime).getSeconds();
+			long numMinutes = 0l, numSecondsClone = numSeconds, numHours = 0l;
+			System.out.println("You played for " + numSeconds + " seconds!");
+			while ( numSecondsClone >= 60 )
+			{
+				numMinutes++;
+				numSecondsClone -= 60;
+			}
+			long numMinutesClone = numMinutes;
+			while ( numMinutesClone >= 60 )
+			{
+				numHours++;
+				numMinutesClone -= 60;
+			}
+			if ( numMinutes > 0 && numHours == 0 )
+				System.out.println("That's " + numMinutes + " minutes and " + numSecondsClone + " seconds!");
+			else if ( numHours > 0 )
+				System.out.println("That's " + numHours + " hours, " + numMinutesClone + " minutes, and " + numSecondsClone + " seconds!");
+			
+			System.out.println("Thanks for playing Castle Mistdark!");
 			sc.close();
 		}
 
@@ -507,6 +617,10 @@ public class World {
 
 	public static void setRooms(List<Room> rooms) {
 		World.rooms = rooms;
+	}
+
+	public static LinkedList<Integer> getAlreadyVisitedRooms() {
+		return alreadyVisitedRooms;
 	}
 
 	}
