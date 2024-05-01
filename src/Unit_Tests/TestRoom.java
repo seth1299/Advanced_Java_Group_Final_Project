@@ -2,18 +2,9 @@ package Unit_Tests;
 
 import static org.junit.Assert.*;
 
-import java.io.IOException;
-import java.util.List;
-
-import org.junit.Ignore;
 import org.junit.Test;
 
-import Player_Related_Stuff.Player;
-import Other_Stuff.Enemy;
-import Other_Stuff.GameEngine;
-import Other_Stuff.NPC;
 import Other_Stuff.Room;
-import Other_Stuff.World;
 
 public class TestRoom 
 {
@@ -21,7 +12,6 @@ public class TestRoom
 	@Test
 	public void testRoomCreation()
 	{
-		Player player_default = new Player();
 		Room room_default = new Room();
 		assertNotNull(room_default);
 		System.out.println(room_default);
