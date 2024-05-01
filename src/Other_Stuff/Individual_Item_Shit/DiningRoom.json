@@ -9,7 +9,7 @@
     {
         "name": "Cheap Wine",
         "description": "A fine aged wine. You can't wait for the day to end so you can drink it.",
-        "type": "FOOD",
+        "type": "POTION",
         "amount": 1,
         "healingAmount": 15
     }

@@ -71,7 +71,7 @@ public class Item implements Comparable<Item> {
     		case FOOD:
     			return name + ", " + description + " (Heals for " + healingAmount + " health)";
     		case WEAPON:
-    			return name + ", " + description + " (dooes " + weaponDamage + " damage)";
+    			return name + ", " + description + " (does " + weaponDamage + " damage)";
     		default:
     			return name + ", " + description;
     	}
@@ -117,7 +117,9 @@ public class Item implements Comparable<Item> {
 	}
 
 	public int getWeaponDamage() {
-		return weaponDamage;
+		// The + 1 is the player's default amount of damage. I don't feel like importing the Player into the Item class as well, so I'm
+		// just hardcoding this 1 in here because I don't think that it will change.
+		return weaponDamage + 1;
 	}
 
 	public void setWeaponDamage(int weaponDamage) {

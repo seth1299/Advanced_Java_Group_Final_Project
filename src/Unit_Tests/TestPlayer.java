@@ -85,8 +85,8 @@ public class TestPlayer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-		Enemy enemy = new Enemy("Giant Rat", 10, 1);
-		Enemy bat = new Enemy("Bat", 5, 5);
+		Enemy enemy = new Enemy("Giant Rat", 10, 1, "I am an enemy!");
+		Enemy bat = new Enemy("Bat", 5, 5, "Screech!");
 		Enemy bandit = World.getEnemyByName(enemies, "Bandit");
 		enemies.add(enemy);
 		enemies.add(bat);

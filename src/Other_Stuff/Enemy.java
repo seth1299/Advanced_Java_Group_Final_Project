@@ -7,7 +7,7 @@ public class Enemy extends NPC {
 	private int enemyHealth, enemyDamage;
     private String enemyDialogue;
 	
-    public Enemy(String name, int enemyHealth, int enemyDamage) {
+    public Enemy(String name, int enemyHealth, int enemyDamage, String enemyDialogue) {
 		super(name);
 		this.enemyHealth = enemyHealth;
 		this.enemyDamage = enemyDamage;
@@ -62,7 +62,11 @@ public class Enemy extends NPC {
 
 	public void takeTurn(Player player)
 	{
-		System.out.println("The " + getName() + " attacks! You take " + enemyDamage + " damage!");
-		player.changeHealth(-enemyDamage);
+		int damage = enemyDamage - player.getDamageReduction();
+		if ( damage <= 0 )
+			damage = 1;
+		
+		System.out.println("The " + getName() + " attacks! You take " + damage + " damage!");
+		player.changeHealth(-damage);
 	}
 }
