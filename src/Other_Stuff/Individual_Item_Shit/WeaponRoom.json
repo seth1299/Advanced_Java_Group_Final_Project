@@ -1,0 +1,9 @@
+[
+    {
+        "name": "Iron Sword",
+        "description": "An iron sword, stronger than a wooden sword but weaker than a steel sword.",
+        "type": "WEAPON",
+        "amount": 1,
+        "damage": 8
+    }
+]

@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Wooden Sword",
+        "description": "A short wooden sword, capable of cutting even the mightiest of small bushes.",
+        "type": "WEAPON",
+        "amount": 1,
+        "damage": 5
+    },
+    {
+        "name": "Wooden Dagger",
+        "description": "A small wooden dagger, it's a real stretch to call this a weapon.",
+        "type": "WEAPON",
+        "amount": 1,
+        "damage": 3
+    },
+    {
+        "name": "Beef Jerky",
+        "description": "Standard soldier food, they don't even bother with an expiration date.",
+        "type": "FOOD",
+        "amount": 1,
+        "healingAmount": 20
+    }
+]

@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Bread Loaf",
+        "description": "A boring loaf of bread. It's not even sliced.",
+        "type": "FOOD",
+        "amount": 1,
+        "healingAmount":20
+    },
+    {
+        "name": "Round of Cheese",
+        "description": "Yes, a whole round of cheese. Where the heck are you keeping all this stuff?",
+        "type": "FOOD",
+        "amount": 1,
+        "healingAmount": 25
+    }
+]

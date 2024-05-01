@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Officers' Key",
+        "description": "The key to open the castle's armory and weaponry.",
+        "keyNum": 2,
+        "type": "KEY",
+        "amount": 1
+    },
+    {
+        "name": "Mage's Office Key",
+        "description": "The key to open the mage's office.",
+        "keyNum": 4,
+        "type": "KEY",
+        "amount": 1
+    }
+]

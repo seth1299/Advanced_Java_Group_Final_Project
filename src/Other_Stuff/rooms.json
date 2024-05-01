@@ -14,7 +14,7 @@
   "exit dn": 0,
   "locked": false,
   "requiredKey": "",
-  "roomItemsFilepath": "",
+  "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/DungeonStorage.json",
   "enemyFilepath": "",
   "description": "A long forgotten storage room, it looks like it was originally for storing training materials."
 },
@@ -74,7 +74,7 @@
     "exit dn": 0,
     "locked": true,
     "requiredKey": "Cell Key",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/SnackRoom.json",
     "enemyFilepath": "",
     "description": "A dank and dreary cell, it’s only decorations are a chamber bucket in one corner and a bed of old hay in the other."
   },
@@ -134,7 +134,7 @@
     "exit dn": 0,
     "locked": true,
     "requiredKey": "Cell Key",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/SnackRoom.json",
     "enemyFilepath": "",
     "description": "A dank and dreary cell, it’s only decorations are a chamber bucket in one corner and a bed of old hay in the other."
   },
@@ -154,7 +154,7 @@
     "exit dn": 0,
     "locked": false,
     "requiredKey": "",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/DungeonGuardRoom.json",
     "enemyFilepath": "",
     "description": "The guard room has clearly been looted. Based on the fetid air and the claustrophobic conditions, this doesn’t seem to have been a popular posting."
   },
@@ -234,7 +234,7 @@
     "exit dn": 0,
     "locked": true,
     "requiredKey": "Advisor's Office Key",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/AdvisorsOffice.json",
     "enemyFilepath": "",
     "description": "You walk into a very strange room, the walls are lined with maps and cabinets full of papers. You briefly glance at the papers and they appear to detail the movements of a young knight who had made complaints against the Lord of Mistdark. The room has obviously been quickly looted."
   },
@@ -254,7 +254,7 @@
     "exit dn": 0,
     "locked": false,
     "requiredKey": "",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/QuestioningRoom.json",
     "enemyFilepath": "",
     "description": "What kind of advisor is this? There is a table covered in bloodstains with restraints in each corner. A set of shelves runs across one wall with a torturer’s tools lining them, laid out with perfect precision."
   },
@@ -274,7 +274,7 @@
     "exit dn": 0,
     "locked": true,
     "requiredKey": "Officers' Key",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/Armory.json",
     "enemyFilepath": "",
     "description": "This room is full of armor trees. Only the best armors appear to have been looted."
   },
@@ -294,7 +294,7 @@
     "exit dn": 0,
     "locked": true,
     "requiredKey": "Officers' Key",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/WeaponRoom.json",
     "enemyFilepath": "",
     "description": "This room is full of weapons stands to accommodate a variety of swords, spears, and daggers."
   },
@@ -314,7 +314,7 @@
     "exit dn": 0,
     "locked": false,
     "requiredKey": "",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/PienWineRoom.json",
     "enemyFilepath": "",
     "description": "This room has one bed in each corner. The Northeast corner is covered in unicorns, in sharp contrast to the Northwest corner’s posters for a some band called Bards of Darkness."
   },
@@ -335,7 +335,7 @@
     "exit dn": 0,
     "locked": false,
     "requiredKey": "",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/KeyRoom.json",
     "enemyFilepath": "",
     "description": "This room has a desk with a notebook to sign the Officer’s Key in and out. There is also a note on the desk that says, 'Dave’s key is in the drawer, he locks himself out a lot.'"
   },
@@ -375,7 +375,7 @@
     "exit dn": 0,
     "locked": false,
     "requiredKey": "",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/SnackRoom.json",
     "enemyFilepath": "",
     "description": "This is another barracks room full of bunk beds and footlockers. It hasn’t been completely looted. An odd light shines behind one bunk, hinting at a hidden passage."
   },
@@ -395,7 +395,7 @@
     "exit dn": 0,
     "locked": false,
     "requiredKey": "",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/MagePotionRoom.json",
     "enemyFilepath": "",
     "description": "The Mage’s Office hasn’t been looted yet. The entire room smells like an angry skunk. There is a massive portal against the wall, with a notebook on a side table. The notebook has a series of dates scrawled on the pages, impossibly far in the future."
   },
@@ -515,7 +515,7 @@
     "exit dn": 0,
     "locked": true,
     "requiredKey": "Lord's Guard Key",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/AdvisorsQuarters.json",
     "enemyFilepath": "",
     "description": "These appear to be the Advisor’s room. A shudder runs through you as you remember the torture room in the basement. The room is so clean that you can hardly believe it has ever been used."
   },
@@ -535,7 +535,7 @@
     "exit dn": 0,
     "locked": true,
     "requiredKey": "Lord's Guard Key",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/LadysQuarters.json",
     "enemyFilepath": "",
     "description": "These are obviously the rooms of the lady of the castle. Beautiful tapestries ring the room and there is still the scent of perfume in the room. There is a discrete door to the Lord's Quarters on the West Wall."
   },
@@ -555,7 +555,7 @@
     "exit dn": 0,
     "locked": true,
     "requiredKey": "Lord's Guard Key",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/LordsQuarters.json",
     "enemyFilepath": "",
     "description": "These are the rooms of the Lord of Mistdark Castle. It is well cared for and the entire room is ringed in trophies from various battles and hunts. Many of them seem to have been victories against peasant uprisings. There are small doors on either side of the room accessing the Lady's Rooms and the Guard's Quarters."
   },
@@ -575,7 +575,7 @@
     "exit dn": 0,
     "locked": false,
     "requiredKey": "",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/LordsGuardRoom.json",
     "enemyFilepath": "",
     "description": "A sparse room with two beds on opposite sides of the room. There is a cabinet off to one side that seems to be for a key that they use, and an armor tree in the corner. "
   },
@@ -595,7 +595,7 @@
     "exit dn": 0,
     "locked": true,
     "requiredKey": "Lord's Guard Key",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/PotionLoot.json",
     "enemyFilepath": "",
     "description": "This would appear to be the room of the Mage Dave. There is a wardrobe off to one side and a bed in the corner. You initially thought that the room had been looted but it looks like Dave is just a messy Mage."
   },
@@ -615,7 +615,7 @@
     "exit dn": 0,
     "locked": false,
     "requiredKey": "",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/DiningRoom.json",
     "enemyFilepath": "",
     "description": "It looks like the tail end of the battle took place here. The entire room smells like a nauseating mix of a recent meal and a battlefield."
   },
@@ -655,7 +655,7 @@
     "exit dn": 0,
     "locked": false,
     "requiredKey": "",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/FruitStoreRoom.json",
     "enemyFilepath": "",
     "description": "A long hallway running from North to South. It appears that this hallway doubled as a storage room, barrels and boxes line the West side."
   },
@@ -675,7 +675,7 @@
     "exit dn": 0,
     "locked": false,
     "requiredKey": "",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/PienWineRoom.json",
     "enemyFilepath": "",
     "description": "This seems to be a ready room for guards to get warm or cool off in between shifts on the ramparts. There is a set of bunk beds on one side."
   },
@@ -713,8 +713,8 @@
     "exit se": 0,
     "exit up": 0,
     "exit dn": 0,
-    "locked": false,
-    "requiredKey": "",
+    "locked": true,
+    "requiredKey": "Gate Key",
     "roomItemsFilepath": "",
     "enemyFilepath": "",
     "description": "You made it! You've become the unlikely lone survivor of the devastating attack on Castle Mistdark. What will you do next? Figure out what the Chekhov's Bow does? Get Macguffin level rich? Give the devs high praise and higher grades? The world is your oyster! Enjoy!"
@@ -735,7 +735,7 @@
     "exit dn": 0,
     "locked": false,
     "requiredKey": "",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/SnackRoom.json",
     "enemyFilepath": "",
     "description": "This seems to be a ready room for guards to rest in between shifts on the walls above. There is a table ringed by chairs in the center of the room. Playing cards are scattered all over the floor."
   },
@@ -775,7 +775,7 @@
     "exit dn": 0,
     "locked": false,
     "requiredKey": "",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/BreadnCheeseRoom.json",
     "enemyFilepath": "",
     "description": "A long hallway running from North to South. It appears that this hallway doubled as a storage room, barrels and boxes line the East side."
   },
@@ -875,7 +875,7 @@
     "exit dn": 0,
     "locked": false,
     "requiredKey": "",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/WestgateRamparts.json",
     "enemyFilepath": "",
     "description": "This looks like a guard post to stand watch over the gate. There is a wooden roof built over this section of the walls, with a strongbox against the inner wall."
   },
@@ -915,7 +915,7 @@
     "exit dn": 0,
     "locked": false,
     "requiredKey": "",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/PienWineRoom.json",
     "enemyFilepath": "",
     "description": "This looks like a guard post to stand watch over the gate. There is a wooden roof built over this section of the walls."
   },
@@ -995,7 +995,7 @@
     "exit dn": 0,
     "locked": true,
     "requiredKey": "Keep Key",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/PotionLoot.json",
     "enemyFilepath": "",
     "description": "The storage room at the base of the Keep. It looks like they could have held out for days, if not weeks. There are also a lot of potions here, and if this game had music I’m sure it would be getting pretty ominous. Why did the devs not make a save game function!?"
   },
@@ -1055,7 +1055,7 @@
     "exit dn": 0,
     "locked": false,
     "requiredKey": "",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/BreadnCheeseRoom.json",
     "enemyFilepath": "",
     "description": "This room is just rows of bunks for people sheltering in the Keep. It is eerily quiet."
   },
@@ -1095,7 +1095,7 @@
     "exit dn": 0,
     "locked": false,
     "requiredKey": "",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/KeepArmory.json",
     "enemyFilepath": "",
     "description": "It looks like this was originally where the Keep’s Armory was, but has been turned into a loot room by the Troll Chief. A breeze lifts one of the wall hangings, flashing a view of a secret passage to the West."
   },
@@ -1155,7 +1155,7 @@
     "exit dn": 0,
     "locked": false,
     "requiredKey": "",
-    "roomItemsFilepath": "",
+    "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/SueShrine.json",
     "enemyFilepath": "",
     "description": "This entire room appears to be a shrine to Sue Hannum. According to the portrait in the center of the shrine she gives good grades."
   }

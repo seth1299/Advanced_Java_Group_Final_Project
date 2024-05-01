@@ -1,0 +1,15 @@
+[
+    {
+        "name": "Gate Key",
+        "description": "The key to getting out of this hell hole.",
+        "keyNum": 7,
+        "type": "KEY",
+        "amount": 1
+    },
+    {
+        "name": "Macguffin",
+        "description": "This item will defeat the boss of the game and make you rich, but only after finishing your quest. Why? Because I said so.",
+        "type": "QUEST_ITEM",
+        "amount": 1
+    }
+]

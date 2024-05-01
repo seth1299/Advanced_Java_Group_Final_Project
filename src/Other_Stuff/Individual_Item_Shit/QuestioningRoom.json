@@ -1,0 +1,9 @@
+[
+    {
+        "name": "Iron Dagger",
+        "description": "An iron dagger, stronger than a wooden dagger but weaker than a steel dagger.",
+        "type": "WEAPON",
+        "amount": 1,
+        "damage": 7
+    }
+]

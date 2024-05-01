@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Health Potion",
+        "description": "A healing potion typical of high fantasy worlds, capable of healing wounds instantly.",
+        "type": "POTION",
+        "amount": 1,
+        "healingAmount": 35
+    },
+    {
+        "name": "Health Potion",
+        "description": "A healing potion typical of high fantasy worlds, capable of healing wounds instantly.",
+        "type": "POTION",
+        "amount": 1,
+        "healingAmount": 35
+    }
+]

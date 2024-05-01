@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Apple",
+        "description": "A delicious red apple, free from any sort of sophoric poisons as far as you know.",
+        "type": "FOOD",
+        "amount": 1,
+        "healingAmount": 10
+    },
+    {
+        "name": "Banana",
+        "description": "A plain banana. It seems to be getting overly ripe more quickly than you would expect.",
+        "type": "FOOD",
+        "amount": 1,
+        "healingAmount": 15
+    }
+]

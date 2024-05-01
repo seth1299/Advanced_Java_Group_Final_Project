@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Advisor's Office Key",
+        "description": "The key to open the castle advisor's office.",
+        "keyNum": 3,
+        "type": "KEY",
+        "amount": 1
+    },
+    {
+        "name": "Health Potion",
+        "description": "A healing potion typical of high fantasy worlds, capable of healing wounds instantly.",
+        "type": "POTION",
+        "amount": 1,
+        "healingAmount": 35
+    },
+    {
+        "name": "Health Potion",
+        "description": "A healing potion typical of high fantasy worlds, capable of healing wounds instantly.",
+        "type": "POTION",
+        "amount": 1,
+        "healingAmount": 35
+    }
+]

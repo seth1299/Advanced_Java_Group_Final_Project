@@ -63,12 +63,6 @@
         "healingAmount": 35
     },
     {
-        "name": "Felix Felicis",
-        "description": "A vial of liquid luck, drinking this will make your attacks hit more often in combat. Any resemblance to potions real or fictional is purely coincidental.",
-        "type": "POTION",
-        "amount": 1
-    },
-    {
         "name": "Wooden Sword",
         "description": "A short wooden sword, capable of cutting even the mightiest of small bushes.",
         "type": "WEAPON",
