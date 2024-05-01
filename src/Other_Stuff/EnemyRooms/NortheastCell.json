@@ -1,0 +1,8 @@
+[
+    {
+        "name": "Bat",
+        "enemyHealth": 6,
+        "enemyDamage": 2,
+        "enemyDialogue": "Meep!"
+    }
+]

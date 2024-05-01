@@ -95,7 +95,7 @@
     "locked": true,
     "requiredKey": "Cell Key",
     "roomItemsFilepath": "",
-    "enemyFilepath": "",
+    "enemyFilepath": "src/Other_Stuff/EnemyRooms/SoutheastCell.json",
     "description": "A dank and dreary cell, it’s only decorations are a chamber bucket in one corner and a bed of old hay in the other."
   },
 
@@ -135,7 +135,7 @@
     "locked": true,
     "requiredKey": "Cell Key",
     "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/SnackRoom.json",
-    "enemyFilepath": "",
+    "enemyFilepath": "src/Other_Stuff/EnemyRooms/NortheastCell.json",
     "description": "A dank and dreary cell, it’s only decorations are a chamber bucket in one corner and a bed of old hay in the other."
   },
 
@@ -215,7 +215,7 @@
     "locked": false,
     "requiredKey": "",
     "roomItemsFilepath": "",
-    "enemyFilepath": "",
+    "enemyFilepath": "src/Other_Stuff/EnemyRooms/BasementEntryway.json",
     "description": "The entryway to the Basement Level. A sign on the wall says, “Mage’s Offices-West. Advisor’s Offices-East. Barracks and Armories-South.” The air here is less fetid and oppressive, but you are definitely still underground."
   },
 
@@ -376,7 +376,7 @@
     "locked": false,
     "requiredKey": "",
     "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/SnackRoom.json",
-    "enemyFilepath": "",
+    "enemyFilepath": "src/Other_Stuff/EnemyRooms/LowerBarracks.json",
     "description": "This is another barracks room full of bunk beds and footlockers. It hasn’t been completely looted. An odd light shines behind one bunk, hinting at a hidden passage."
   },
 
@@ -476,7 +476,7 @@
     "locked": false,
     "requiredKey": "",
     "roomItemsFilepath": "",
-    "enemyFilepath": "",
+    "enemyFilepath": "src/Other_Stuff/EnemyRooms/SoutheastHallway.json",
     "description": "A long hallway running from North to South, it is fastidiously clean."
   },
 
@@ -616,7 +616,7 @@
     "locked": false,
     "requiredKey": "",
     "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/DiningRoom.json",
-    "enemyFilepath": "",
+    "enemyFilepath": "src/Other_Stuff/EnemyRooms/DiningRoom.json",
     "description": "It looks like the tail end of the battle took place here. The entire room smells like a nauseating mix of a recent meal and a battlefield."
   },
 
@@ -656,7 +656,7 @@
     "locked": false,
     "requiredKey": "",
     "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/FruitStoreRoom.json",
-    "enemyFilepath": "",
+    "enemyFilepath": "src/Other_Stuff/EnemyRooms/NorthwestHallway.json",
     "description": "A long hallway running from North to South. It appears that this hallway doubled as a storage room, barrels and boxes line the West side."
   },
 
@@ -816,7 +816,7 @@
     "locked": false,
     "requiredKey": "",
     "roomItemsFilepath": "",
-    "enemyFilepath": "",
+    "enemyFilepath": "src/Other_Stuff/EnemyRooms/InnerRamparts.json",
     "description": "The inner ramparts of the courtyard, they run from West to East. The wind blows through your hair from the West. This seems to be a secondary defensive position that they never got to use. There is a sign beside the entrance to the 2nd Level Stairs that says, 'North to Walls, South to Keep.'"
   },
 
@@ -896,7 +896,7 @@
     "locked": false,
     "requiredKey": "",
     "roomItemsFilepath": "",
-    "enemyFilepath": "",
+    "enemyFilepath": "src/Other_Stuff/EnemyRooms/GateRamparts.json",
     "description": "The area of the walls directly above the gates."
   },
 
@@ -1056,7 +1056,7 @@
     "locked": false,
     "requiredKey": "",
     "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/BreadnCheeseRoom.json",
-    "enemyFilepath": "",
+    "enemyFilepath": "src/Other_Stuff/EnemyRooms/KeepBarracks.json",
     "description": "This room is just rows of bunks for people sheltering in the Keep. It is eerily quiet."
   },
 
@@ -1096,7 +1096,7 @@
     "locked": false,
     "requiredKey": "",
     "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/KeepArmory.json",
-    "enemyFilepath": "",
+    "enemyFilepath": "src/Other_Stuff/EnemyRooms/KeepArmory.json",
     "description": "It looks like this was originally where the Keep’s Armory was, but has been turned into a loot room by the Troll Chief. A breeze lifts one of the wall hangings, flashing a view of a secret passage to the West."
   },
 

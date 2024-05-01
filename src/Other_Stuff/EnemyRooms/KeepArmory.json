@@ -1,0 +1,8 @@
+[
+    {
+        "name": "Troll Chief",
+        "enemyHealth": 18,
+        "enemyDamage": 9,
+        "enemyDialogue": "How did you make it this far? You'll not take my treasure!"
+    }
+]
