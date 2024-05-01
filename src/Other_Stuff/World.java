@@ -27,10 +27,6 @@ public class World {
 	private static List<Enemy> allEnemiesInTheGame;
 	private static Player player;
 	private static List<Room> rooms;
-	private static String[] funnyKeyDiscardQuips = {"You then drop the key in between the cracks in the floor and it is lost forever.", 
-			"After practicing some intense make-believe sword-fighting with the key, you accidentally throw it too far and you can't find it again.",
-			"You decide to donate the key to some hungry orphans, maybe they can sell it for gold and get some food on the table? Either way, you aren't seeing that key again.",
-			"You decide to leave the key under the welcome mat so that the next adventurer has less trouble finding it. You don't think you'll be needing that key again."};
 	private static String[] jokes = {"Why did the programmer always confuse Halloween and Christmas? Because OCT 31 == DEC 25.", 
 	"A SQL query goes into a bar, walks up to two tables and asks, \"Can I join you?\"", "What’s the object-oriented way to become wealthy? Inheritence.",
 	"ASCII stupid question, get a stupid ANSI.", "A programmer is sent to the grocery store with instructions to “Buy butter and see whether they have "
@@ -41,7 +37,7 @@ public class World {
 	+ " until you get them.", "Hardware (noun): the part of a computer that you can kick.", "What's a programmer's favorite drinking establishment? Foo Bar."};
 	private static LinkedList<String> DIRECTIONS; // I cannot make this both final and static for some reason (unbeknowst to me), but please do not change this list.
 	private static LinkedList<Integer> alreadyVisitedRooms = new LinkedList<>();
-	private static int playerRoomNumber = 1;
+	private static int playerRoomNumber = 1, lastPlayerRoomNumber = 1;
 	private static Scanner sc = new Scanner (System.in);
 	private static boolean showDescription = true;
 	private static Instant startTime, stopTime;
@@ -136,7 +132,8 @@ public class World {
 					if ( !DIRECTIONS.contains(response) && !response.equals("MOVE") && !response.equals("M"))
 						System.out.println("I don't know where the direction \"" + response + "\" is.");
 						
-					System.out.println("\nMove to where? You can also type \"cancel\" to cancel the movement.");
+					System.out.println("\nMove to where? You can also type \"cancel\" to cancel the movement, or type a number to quickly travel to that floor (provided that you have already visited that location). 0 would be a basement, and 5 would be a roof, for example, with each number in between being the 1st floor, 2nd floor, etc.");
+					System.out.print("> ");
 					response = sc.nextLine().trim().toUpperCase();
 					
 				} while( !DIRECTIONS.contains(response));
@@ -185,6 +182,68 @@ public class World {
 				player.printInventory();
 				break;
 				
+			case "EQUIPMENT":
+				player.printEquipment();
+				break;
+				
+			case "EQUIP":
+			case "E":
+				if ( showDescription )
+					player.printInventory();
+				System.out.println("\n> Equip what item?");
+				System.out.print("> ");
+				response = sc.nextLine().trim();
+				Item item = player.getItemFromInventoryByName(response);
+				if ( item == null )
+				{
+					System.out.println("There isn't a \"" + response + "\" in your inventory.");
+				}
+				else
+				{
+					if ( item.getType().equals(Item.ItemType.ARMOR))
+					{
+						player.equipItem(item, Player.EquipmentSlot.ARMOR);
+					}
+					else if ( item.getType().equals(Item.ItemType.WEAPON))
+					{
+						player.equipItem(item, Player.EquipmentSlot.WEAPON);
+					}
+					else
+					{
+						System.out.println("I don't think you can equip the " + item.getName() + ".");
+					}
+				}
+				break;
+					
+			case "UNEQUIP":
+			case "UN":
+				System.out.println("\n> Unequip what item?");
+				System.out.print("> ");
+				response = sc.nextLine().trim();
+				Item item2 = player.getItemFromInventoryByName(response);
+				
+				if ( item2 == null )
+				{
+					System.out.println("There isn't a \"" + response + "\" in your inventory.");
+				}
+				else
+				{
+					if ( item2.getType().equals(Item.ItemType.ARMOR))
+					{
+						player.unequipItem(Player.EquipmentSlot.ARMOR);
+					}
+					else if ( item2.getType().equals(Item.ItemType.WEAPON))
+					{
+						player.unequipItem(Player.EquipmentSlot.WEAPON);
+					}
+					else
+					{
+						System.out.println("I don't think you can equip the " + item2.getName() + ".");
+					}
+				}
+				
+				break;
+				
 			case "JOKE":
 			case "J":
 				int randInt = rand.nextInt(0, jokes.length);
@@ -196,8 +255,13 @@ public class World {
 				player.useItem();
 				break;
 				
-			case "DONTREMINDME":
+			case "DIAGNOSE":
 			case "D":
+				System.out.println("Current health: " + player.getHealth());
+				break;
+				
+			case "DONTREMINDME":
+			case "DONT":
 				if ( player.getRemindMe() )
 				{
 					System.out.println("Inventory display when using items turned off.");
@@ -257,19 +321,27 @@ public class World {
 		}
 		
 	}
+	
+	public static void moveToRoomNumber(int roomNumber)
+	{
+		Room destinationRoom = getRoomByNum(rooms, roomNumber);
+		playerRoomNumber = roomNumber;
+		destinationRoom.display(showDescription);
+	}
 
 	public static void moveRooms(String response)
 	{
 		if ( !alreadyVisitedRooms.contains(playerRoomNumber))
 			alreadyVisitedRooms.add(playerRoomNumber);
 		
+		lastPlayerRoomNumber = playerRoomNumber;
+		
 		Room playRoom = getRoomByNum(rooms, playerRoomNumber);
 		if ( playRoom == null )
 		{
 			System.out.println("Can't find room #" + playerRoomNumber + "!");
 			return;
-		}
-		
+		}	
 		
 		int destinationRoomNum = 0;
 		switch (response) {
@@ -313,9 +385,55 @@ public class World {
 			case ("DOWN"):
 				destinationRoomNum = playRoom.getExitDN();
 				break;
+			case("0"):
+				if ( alreadyVisitedRooms.contains(10))
+				{
+					System.out.println("You quickly make your way back to the basement stairs.");
+					destinationRoomNum = 10;
+				}
+				else
+					System.out.println("Nice try.");
+				break;
+			case("1"):
+				if ( alreadyVisitedRooms.contains(8))
+				{
+					System.out.println("You quickly make your way back to the dungeon stairs.");
+					destinationRoomNum = 8;
+				}
+				else
+					System.out.println("Nice try.");
+				break;
+			case("2"):
+				if ( alreadyVisitedRooms.contains(33))
+				{
+					System.out.println("You quickly make your way back to the ground level stairs.");
+					destinationRoomNum = 33;
+				}
+				else
+					System.out.println("Nice try.");
+				break;
+			case("3"):
+				if ( alreadyVisitedRooms.contains(54))
+				{
+					System.out.println("You quickly make your way back to the upper keep stairs.");
+					destinationRoomNum = 54;
+				}
+				else
+					System.out.println("Nice try.");
+				break;
+			case("4"):
+				if ( alreadyVisitedRooms.contains(56))
+				{
+					System.out.println("You quickly make your way back to the secret stairs.");
+					destinationRoomNum = 56;
+				}
+				else
+					System.out.println("Nice try.");
+				break;
 			case("CANCEL"):
 			case("C"):
 				return;
+			
 
 		}
 
@@ -338,10 +456,7 @@ public class World {
 				
 				if (required_key_as_String.equals(destinationRoomRequiredKey)) 
 				{
-					Random randomNumber = new Random();
-					int randInt = randomNumber.nextInt(0, funnyKeyDiscardQuips.length);
-					System.out.println("You unlock the door! " + funnyKeyDiscardQuips[randInt]);
-					player.removeItemFromInventory(required_key_as_item, 1);
+					System.out.println("You unlock the door using the " + destinationRoomRequiredKey + "!");
 					destinationRoom.display(showDescription);
 					playerRoomNumber = destinationRoomNum;
 				} 
@@ -373,7 +488,7 @@ public class World {
 		else if ( response.equals("CANCEL") || response.equals("C"))
 			System.out.println("Movement cancelled.");
 		
-		else 
+		else if ( !response.equals("1") && !response.equals("2") && !response.equals("3") && !response.equals("4"))
 			System.out.println("There are no exits in that direction.");
 		
 		
@@ -392,10 +507,6 @@ public class World {
 			JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
 			List<Room> rooms = new ArrayList<>();
 
-			//for (JsonElement element : jsonArray) {
-				//JsonObject jsonObject = element.getAsJsonObject();
-				//Room room = gson.fromJson(jsonObject, Room.class);
-
 				for (JsonElement element : jsonArray) {
 					JsonObject jsonObject = element.getAsJsonObject();
 					Room room = gson.fromJson(jsonObject, Room.class);
@@ -412,45 +523,36 @@ public class World {
 					room.setExitSE(jsonObject.get("exit se").getAsInt());
 					room.setExitUP(jsonObject.get("exit up").getAsInt());
 					room.setExitDN(jsonObject.get("exit dn").getAsInt());
-					if(jsonObject.get("requiredKey").getAsString().isEmpty()) {
+					
+					if(jsonObject.get("requiredKey").getAsString().isEmpty())
 						room.setRequiredKey(null);
-					}
-					else {
+					else
 						room.setRequiredKey(jsonObject.get("requiredKey").getAsString());
-					}
 
-					if(jsonObject.get("roomItemsFilepath").getAsString().isEmpty()) {
+					if(jsonObject.get("roomItemsFilepath").getAsString().isEmpty())
 						room.setRoomItems(null);
-
-					}
-					else {
+					else
 						room.addItemsToRoomFromJsonFile(jsonObject.get("roomItemsFilepath").getAsString());
-					}
-					if(jsonObject.get("enemyFilepath").getAsString().isEmpty()) {
+					
+					if(jsonObject.get("enemyFilepath").getAsString().isEmpty())
 						room.setEnemies(null);
-					}
-					else {
-						//set room enemies here
-						continue;
-					}
-					if(jsonObject.get("description").getAsString().isEmpty()) {
+					else
+						room.addEnemiesToRoomFromJsonFile(jsonObject.get("enemyFilepath").getAsString());
+					
+					if(jsonObject.get("description").getAsString().isEmpty())
 						room.setRoomDescription(null);
-					}
-					else {
+					else
 						room.setRoomDescription(jsonObject.get("description").getAsString());
-					}
+					
 					rooms.add(room);
-
 				}
-
-			//}
 			return rooms;
 		}
 	}
 
 	public static void clearScreen() {
 		for(int i=0;i<100;i++) {
-			System.out.println("\b");
+			System.out.println();
 		}
 	}
 
@@ -464,7 +566,7 @@ public class World {
 		System.out.println("| \\__/\\ (_| \\__ \\ |_| |  __/ | |  | | \\__ \\ || (_| | (_| | |  |   < ");
 		System.out.println(" \\____/\\__,_|___/\\__|_|\\___| \\_|  |_/_|___/\\__\\__,_|\\__,_|_|  |_|\\_\\");
 		TimeUnit.SECONDS.sleep(4);
-		clearScreen();
+		System.out.println("\nCopyright ©2024 by Seth Grimes and Brianna Hacker. All rights reserved.\nCastle Mistdark is a trademark of Seth Grimes and Brianna Hacker.\nRelease 1 / Serial Number 8675309");
 	}
 
 		public static void main (String[] args) throws InterruptedException {
@@ -493,6 +595,11 @@ public class World {
 			DIRECTIONS.add("DOWN");
 			DIRECTIONS.add("C");
 			DIRECTIONS.add("CANCEL");
+			DIRECTIONS.add("0");
+			DIRECTIONS.add("1");
+			DIRECTIONS.add("2");
+			DIRECTIONS.add("3");
+			DIRECTIONS.add("4");
 
 			String response = "", nameString = "", gender = "";
 
@@ -579,8 +686,15 @@ public class World {
 			//StopWatch watch = new StopWatch();
 			
 			startTime = Instant.now();
-			while(player.getIsDead()==false && playerRoom.getRoomNum()!=100) 
+			while(player.getIsDead()==false && playerRoomNumber !=100) 
 			{
+				if ( player.getHasFled() )
+				{
+					if ( !alreadyVisitedRooms.contains(playerRoomNumber))
+						alreadyVisitedRooms.add(playerRoomNumber);
+					moveToRoomNumber(lastPlayerRoomNumber);
+					player.setHasFled(false);;
+				}
 				System.out.println("\n> What would you like to do? Type \"help\" for a list of available commands.");
 				System.out.print("> ");
 				response = sc.nextLine().trim().toUpperCase();
@@ -621,6 +735,11 @@ public class World {
 
 	public static LinkedList<Integer> getAlreadyVisitedRooms() {
 		return alreadyVisitedRooms;
+	}
+	
+	public static int getPlayerRoomNumber()
+	{
+		return playerRoomNumber;
 	}
 
 	}

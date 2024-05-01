@@ -16,11 +16,15 @@ public class GameEngine
 {
 	
 	public static void startFight(Player player, List<Enemy> enemies) {
+		System.out.println();
+		
         // Check if the player or enemies are null
         if (player == null || enemies == null || enemies.isEmpty()) {
             System.out.println("Invalid player or enemy list provided.");
             return;
         }
+        
+        System.out.println("There " + ( enemies.size() > 1  ? "are enemies in this room!" : "is an enemy in this room!"));
         
         for (Enemy enemy : enemies)
         {
@@ -31,9 +35,7 @@ public class GameEngine
         }
 
         // Start the fight
-        System.out.println("The battle begins!");
-
-        while (!player.getIsDead() && !enemies.isEmpty()) {
+        while (!player.getIsDead() && !enemies.isEmpty() && !player.getHasFled()) {
             // Player's turn
             player.takeTurn(enemies);
 
@@ -45,8 +47,13 @@ public class GameEngine
 
             // Enemies' turns
             for (Enemy enemy : enemies) {
-                if (!enemy.getIsDead()) {
+                if (!enemy.getIsDead() && !player.getHasFled()) 
+                {
                     enemy.takeTurn(player);
+                }
+                else if ( player.getHasFled() ) 
+                {
+                	break;
                 }
             }
             
@@ -60,6 +67,8 @@ public class GameEngine
 	
 	public static void startFight(Player player, Enemy enemy)
 	{
+		System.out.println();
+		
 		if ( player == null || enemy == null )
 		{
 			System.out.println("Invalid player or enemy provided.");
@@ -76,11 +85,11 @@ public class GameEngine
     	// Start the fight
         System.out.println("The battle begins!");
         
-        while (!player.getIsDead()) 
+        while (!player.getIsDead() && !player.getHasFled()) 
         {
             // Player's turn
             player.takeTurn(enemy);
-            if ( enemy.getIsDead())
+            if ( enemy.getIsDead() || player.getHasFled())
             	break;
             enemy.takeTurn(player);
         }

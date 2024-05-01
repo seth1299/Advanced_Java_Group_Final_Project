@@ -28,7 +28,7 @@ public class Room {
 	private int exitUP;
 	private int exitDN;
 	private boolean locked;
-	private List<Enemy> enemies;
+	private List<Enemy> enemies = new LinkedList<>();
 	private String roomDescription;
 	private String requiredKey;
 	private List<Item> roomItems;
@@ -211,31 +211,19 @@ public class Room {
 	
 	public void getExits()
 	{
+		if ( World.getPlayerRoomNumber() == 100 )
+			return;
+		
 		StringBuilder possibleExits = new StringBuilder("");
 		StringBuilder possibleExitRoomNames = new StringBuilder("");
-		// This is a size of 10 because there are 10 possible directions.
-		List<Integer> INDEXES_FOR_EXIT_ROOMS = new LinkedList<Integer>();
-		/*
-		int[] INDEXES_FOR_EXIT_ROOMS = new int[10];
-		// Fill the array with -1 values, this will make sense later.
-		for ( int i = 0; i < INDEXES_FOR_EXIT_ROOMS.length; i++ )
-			INDEXES_FOR_EXIT_ROOMS[i] = -1;
-		*/
-		int numberOfPossibleExits = 0, currentIndex = 0;
+		int numberOfPossibleExits = 0;
 		
 		if( exitN > 0 )
 		{
 			if ( World.getAlreadyVisitedRooms().contains(exitN) )
-			{
 				possibleExits.append("North (" + ( World.getRoomByNum(World.getRooms(), exitN) ).getRoomName() + "),");
-				//possibleExitRoomNames.append( "(" + ( World.getRoomByNum(World.getRooms(), exitN) ).getRoomName() + ")###");
-				//INDEXES_FOR_EXIT_ROOMS.add(0);
-				//INDEXES_FOR_EXIT_ROOMS[0] = 0;
-			}
 			else
-			{
 				possibleExits.append("North,");
-			}
 			
 			numberOfPossibleExits++;
 		}
@@ -243,12 +231,7 @@ public class Room {
 		if( exitS > 0 )
 		{
 			if ( World.getAlreadyVisitedRooms().contains(exitS) )
-			{
 				possibleExits.append("South (" + ( World.getRoomByNum(World.getRooms(), exitS) ).getRoomName() + "),");
-				//System.out.println("Already visited " + ( World.getRoomByNum(World.getRooms(), exitS) ).getRoomName() + " which is to the south of " + roomName + "!");
-				//possibleExitRoomNames.append( "(" + ( World.getRoomByNum(World.getRooms(), exitS) ).getRoomName() + ")###");
-				//INDEXES_FOR_EXIT_ROOMS.add(1);
-			}
 			else
 				possibleExits.append("South,");
 			
@@ -258,15 +241,9 @@ public class Room {
 		if( exitE > 0 ) 
 		{
 			if ( World.getAlreadyVisitedRooms().contains(exitE) )
-			{
 				possibleExits.append("East (" + ( World.getRoomByNum(World.getRooms(), exitE) ).getRoomName() + "),");
-				//possibleExitRoomNames.append( "(" + ( World.getRoomByNum(World.getRooms(), exitE) ).getRoomName() + ")###");
-				//INDEXES_FOR_EXIT_ROOMS.add(2);
-			}
 			else
-			{
 				possibleExits.append("East,");
-			}
 			
 			numberOfPossibleExits++;
 		}
@@ -274,15 +251,9 @@ public class Room {
 		if( exitW > 0 )
 		{
 			if ( World.getAlreadyVisitedRooms().contains(exitW) )
-			{
 				possibleExits.append("West (" + ( World.getRoomByNum(World.getRooms(), exitW) ).getRoomName() + "),");
-				//possibleExitRoomNames.append( "(" + ( World.getRoomByNum(World.getRooms(), exitW) ).getRoomName() + ")###");
-				//INDEXES_FOR_EXIT_ROOMS.add(3);
-			}
 			else
-			{
 				possibleExits.append("West,");
-			}
 			
 			numberOfPossibleExits++;
 		}
@@ -290,15 +261,9 @@ public class Room {
 		if( exitNE > 0 )
 		{
 			if ( World.getAlreadyVisitedRooms().contains(exitNE) )
-			{
 				possibleExits.append("Northeast (" + ( World.getRoomByNum(World.getRooms(), exitNE) ).getRoomName() + "),");
-				//possibleExitRoomNames.append( "(" + ( World.getRoomByNum(World.getRooms(), exitNE) ).getRoomName() + ")###");
-				//INDEXES_FOR_EXIT_ROOMS.add(4);
-			}
 			else
-			{
 				possibleExits.append("Northeast,");
-			}
 			
 			numberOfPossibleExits++;
 		}
@@ -306,15 +271,9 @@ public class Room {
 		if( exitNW > 0 )
 		{
 			if ( World.getAlreadyVisitedRooms().contains(exitNW) )
-			{
 				possibleExits.append("Northwest (" + ( World.getRoomByNum(World.getRooms(), exitNW) ).getRoomName() + "),");
-				//possibleExitRoomNames.append( "(" + ( World.getRoomByNum(World.getRooms(), exitNW) ).getRoomName() + ")###");
-				//INDEXES_FOR_EXIT_ROOMS.add(5);
-			}
 			else
-			{
 				possibleExits.append("Northwest,");
-			}
 			
 			numberOfPossibleExits++;
 		}
@@ -322,15 +281,9 @@ public class Room {
 		if( exitSE > 0 )
 		{
 			if ( World.getAlreadyVisitedRooms().contains(exitSE) )
-			{
 				possibleExits.append("Southeast (" + ( World.getRoomByNum(World.getRooms(), exitSE) ).getRoomName() + "),");
-				//possibleExitRoomNames.append( "(" + ( World.getRoomByNum(World.getRooms(), exitSE) ).getRoomName() + ")###");
-				//INDEXES_FOR_EXIT_ROOMS.add(6);
-			}
 			else
-			{
 				possibleExits.append("Southeast,");
-			}
 			
 			numberOfPossibleExits++;
 		}	
@@ -338,15 +291,9 @@ public class Room {
 		if( exitSW > 0 )
 		{
 			if ( World.getAlreadyVisitedRooms().contains(exitSW) )
-			{
 				possibleExits.append("Southewest (" + ( World.getRoomByNum(World.getRooms(), exitSW) ).getRoomName() + "),");
-				//possibleExitRoomNames.append( "(" + ( World.getRoomByNum(World.getRooms(), exitSW) ).getRoomName() + ")###");
-				//INDEXES_FOR_EXIT_ROOMS.add(7);
-			}
 			else
-			{
 				possibleExits.append("Southwest,");
-			}
 			
 			numberOfPossibleExits++;
 		}
@@ -354,15 +301,9 @@ public class Room {
 		if( exitUP > 0 )
 		{
 			if ( World.getAlreadyVisitedRooms().contains(exitUP) )
-			{
 				possibleExits.append("Up (" + ( World.getRoomByNum(World.getRooms(), exitUP) ).getRoomName() + "),");
-				//possibleExitRoomNames.append( "(" + ( World.getRoomByNum(World.getRooms(), exitUP) ).getRoomName() + ")###");
-				//INDEXES_FOR_EXIT_ROOMS.add(8);
-			}
 			else
-			{
 				possibleExits.append("Up,");
-			}
 			
 			numberOfPossibleExits++;
 		}
@@ -370,31 +311,20 @@ public class Room {
 		if( exitDN > 0 )
 		{
 			if ( World.getAlreadyVisitedRooms().contains(exitDN) )
-			{
 				possibleExits.append("Down (" + ( World.getRoomByNum(World.getRooms(), exitDN) ).getRoomName() + "),");
-				//possibleExitRoomNames.append( "(" + ( World.getRoomByNum(World.getRooms(), exitDN) ).getRoomName() + ")###");
-				//INDEXES_FOR_EXIT_ROOMS.add(9);
-			}
 			else
-			{
 				possibleExits.append("Down,");
-			}
 			
 			numberOfPossibleExits++;
 		}
 			
 		String[] possibleExitsArray = possibleExits.toString().split(",");
-		String[] possibleExitRoomNamesArray = possibleExitRoomNames.toString().split("###");
-		/*
-		for ( String name : possibleExitRoomNamesArray )
-			System.out.println(name);
-		for ( int ind : INDEXES_FOR_EXIT_ROOMS )
-			System.out.println(ind);
-		*/
 		
 		//Only lists an exit if it is valid
 		if ( numberOfPossibleExits == 1 )
 		{
+			if ( possibleExitsArray[0].equals("South (THE GATE)"))
+				return;
 			if ( possibleExitRoomNames.length() > 2 )
 			{
 				System.out.println("\n(The only possible exit is to the " + possibleExits.substring(0, possibleExits.length()-1) + ".) " + possibleExitRoomNames.substring(0, possibleExitRoomNames.length() - 3));
@@ -408,51 +338,7 @@ public class Room {
 			System.out.println("\nThe possible room exits are: ");
 			
 			for ( String exit : possibleExitsArray )
-			{
 				System.out.println(exit);
-			}
-			
-			
-			
-			/*
-			int index = 0, slowerIndex = 0;
-			
-			for ( Integer roomNum : INDEXES_FOR_EXIT_ROOMS )
-			{
-				if ( World.getAlreadyVisitedRooms().contains(roomNum) )
-				{
-					System.out.println("* " + possibleExitsArray[slowerIndex++]);
-				}
-				index++;
-			}
-			
-			for ( String exit : possibleExitsArray )
-			{
-				if ( World.getAlreadyVisitedRooms().contains(1) )
-				{
-					
-				}
-				/*
-				if ( INDEXES_FOR_EXIT_ROOMS.size() <= index && slowerIndex < possibleExitRoomNamesArray.length)
-				{
-					System.out.println("rawr?");
-					System.out.println("* " + exit + possibleExitRoomNamesArray[slowerIndex++]);
-				}
-					
-				else
-					System.out.println("* " + exit);
-				
-				index++;
-				*/
-				/*
-				if ( index < possibleExitRoomNamesArray.length )
-					System.out.println("* " + exit + possibleExitRoomNamesArray[index++]);
-				else
-					System.out.println("* " + exit);
-					
-			}
-			*/
-				
 		}
 	}
 
@@ -463,6 +349,11 @@ public class Room {
 			System.out.println("- " + roomDescription);
 		
 		getExits();
+		
+		if ( enemies != null && !enemies.isEmpty() )
+		{
+			GameEngine.startFight(player, enemies);
+		}
 		
 		if (roomItems!=null && roomItems.size() > 0 )
 		{
@@ -496,11 +387,6 @@ public class Room {
 			roomItems.clear();
 		}
 		
-		if ( enemies != null )
-		{
-			GameEngine.startFight(player, enemies);
-		}
-		
 	}
 	
 	public void addItemsToRoomFromJsonFile(String filepath) {
@@ -515,10 +401,6 @@ public class Room {
             	int armorValue = 0, weaponDamage = 0, healingAmount = 0;
             	Item newItem;
                 String name = itemElement.getAsJsonObject().get("name").getAsString();
-                if ( getRoomName().equals("DUNGEON STORAGE"))
-                {
-                	
-                }
                 	
                 String description = itemElement.getAsJsonObject().get("description").getAsString();
                 Item.ItemType type = Item.ItemType.valueOf(itemElement.getAsJsonObject().get("type").getAsString());
@@ -545,6 +427,36 @@ public class Room {
                 
                 // Create a new item and add it to the player's inventory
                 addItemToRoom(newItem, amount);
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid amount format for item: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.err.println("Invalid item type: " + e.getMessage());
+        }
+    }
+	
+public void addEnemiesToRoomFromJsonFile(String filepath) {
+		
+		if ( filepath == null || filepath.isEmpty() )
+			return;
+		
+		try (FileReader reader = new FileReader(filepath)) {
+            JsonArray enemyArray = JsonParser.parseReader(reader).getAsJsonArray();
+            
+            for (JsonElement enemy : enemyArray) {
+            	Enemy newEnemy;
+            	int enemyHealth = 0, enemyDamage = 0;
+                String name = "", dialogue = "";
+                
+                name = enemy.getAsJsonObject().get("name").getAsString();
+                dialogue = enemy.getAsJsonObject().get("enemyDialogue").getAsString();
+                enemyHealth = enemy.getAsJsonObject().get("enemyHealth").getAsInt();
+                enemyDamage = enemy.getAsJsonObject().get("enemyDamage").getAsInt();
+                
+                newEnemy = new Enemy(name, enemyHealth, enemyDamage, dialogue);
+                addEnemyToRoom(newEnemy);
             }
         } catch (IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
@@ -588,6 +500,11 @@ public class Room {
 
 	        
 	    }
+	 
+	 public void addEnemyToRoom(Enemy enemy)
+	 {
+		 enemies.add(enemy);
+	 }
 
 	//Getters and Setters
 	public int getRoomNum() {

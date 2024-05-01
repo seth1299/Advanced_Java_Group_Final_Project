@@ -15,7 +15,7 @@
     {
         "name": "Coffee",
         "description": "Delicious magical coffee that will never go cold or spoil. However, you can't bring yourself to drink it. What if you need something warm to drink later?",
-        "type": "FOOD",
+        "type": "POTION",
         "amount": 1,
         "healingAmount": 5
     },

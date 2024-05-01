@@ -34,6 +34,7 @@ public class Player {
     private LinkedList<String> outOfCombatActions = new LinkedList<>();
     private Map<EquipmentSlot, Item> equipment;
     private static Scanner sc;
+    private boolean hasFled = false;
     
     /**
 	 * Default Player constructor, all values are automatically assigned to garbage values.
@@ -45,9 +46,8 @@ public class Player {
         gender = "UNINSTANTIATED";
         isDead = false;
         inventory = new LinkedList<>();
-        damage = 2;
+        damage = 1;
         playerMovesList.add("ATTACK");
-        playerMovesList.add("DEFEND");
         playerMovesList.add("FLEE");
         playerMovesList.add("ITEM");
         outOfCombatActions.add("ZORK");
@@ -67,6 +67,13 @@ public class Player {
         outOfCombatActions.add("USE");
         outOfCombatActions.add("U");
         outOfCombatActions.add("DONTREMINDME");
+        outOfCombatActions.add("DONT");
+        outOfCombatActions.add("EQUIPMENT");
+        outOfCombatActions.add("EQUIP");
+        outOfCombatActions.add("E");
+        outOfCombatActions.add("UNEQUIP");
+        outOfCombatActions.add("UN");
+        outOfCombatActions.add("DIAGNOSE");
         outOfCombatActions.add("D");
         outOfCombatActions.add("REMINDME");
         outOfCombatActions.add("R");
@@ -95,9 +102,9 @@ public class Player {
     	sc = new Scanner (System.in);
         this.name = name;
         this.gender = gender;
+        damage = 1;
         inventory = new LinkedList<>();
         playerMovesList.add("ATTACK");
-        playerMovesList.add("DEFEND");
         playerMovesList.add("FLEE");
         playerMovesList.add("ITEM");
         outOfCombatActions.add("ZORK");
@@ -117,6 +124,13 @@ public class Player {
         outOfCombatActions.add("USE");
         outOfCombatActions.add("U");
         outOfCombatActions.add("DONTREMINDME");
+        outOfCombatActions.add("DONT");
+        outOfCombatActions.add("EQUIP");
+        outOfCombatActions.add("E");
+        outOfCombatActions.add("EQUIPMENT");
+        outOfCombatActions.add("UNEQUIP");
+        outOfCombatActions.add("UN");
+        outOfCombatActions.add("DIAGNOSE");
         outOfCombatActions.add("D");
         outOfCombatActions.add("REMINDME");
         outOfCombatActions.add("R");
@@ -155,16 +169,37 @@ public class Player {
     		if ( action.equals("USE"))
     			System.out.println("* USE - Allows you to use an item from your inventory. You must specify which item after you type in USE, or say CANCEL.");
     		if ( action.equals("DONTREMINDME"))
-    			System.out.println("* DONTREMINDME - Prevents the entire inventory from being displayed every time that you use an item.");
+    			System.out.println("* DONTREMINDME - Prevents the entire inventory from being displayed every time that you use/equip an item.");
     		if ( action.equals("REMINDME"))
     			System.out.println("* REMINDME - Displays the entire inventory every time that you use an item (default).");
     		if ( action.equals("TIME"))
     			System.out.println("* TIME - Displays how long you've been playing for (in seconds).");
+    		if ( action.equals("EQUIP"))
+    			System.out.println("* EQUIP - Equips an item onto your body. Automatically unequips anything in that slot in order to equip the item there.");
+    		if ( action.equals("UNEQUIP"))
+    			System.out.println("* UNEQUIP - Unequips an item onto your body. Automatically unequips anything in that slot in order to equip the item there.");
+    		if ( action.equals("EQUIPMENT"))
+    			System.out.println("* EQUIPMENT - Displays your current equipment.");
+    		if ( action.equals("DIAGNOSE"))
+    			System.out.println("* DIAGNOSE - displays your current health.");
     		
     	}
-    	System.out.println("\nAny command can be entered by only putting in the first letter of the command as well.");
+    	System.out.println("\nAny command can be entered by only putting in the first letter of the command as well (except for \"UNEQUIP\" which must be \"UN\" because of \"USE\" already being shortened to \"U\" and \"DONTREMINDME\" which must be \"DONT\" because of \"DIAGNOSE\" already being shortened to \"D\").");
     	// The "magic number" here is the amount of commands shown in the Help screen, minus the "NOTHING" command which does nothing. I suppose it technically counts?
-    	System.out.println("There are also " + ( outOfCombatActions.size() - 22 ) + " secret commands, see if you can find them all! ;)");
+    	System.out.println("There are also " + ( outOfCombatActions.size() - 26 ) + " secret commands, see if you can find them all! ;)");
+    	System.out.println("Also, an enemy will always do a minimum of 1 damage during combat and enemies will keep whatever damage you inflict on them before you flee combat.");
+    }
+    
+    public int getDamageReduction()
+    {
+    	int returnValue = 0;
+    	
+    	for (EquipmentSlot slot : EquipmentSlot.values())
+    		if ( equipment.get(slot) != null && equipment.get(slot).getType().equals(Item.ItemType.ARMOR) )
+    			returnValue += equipment.get(slot).getArmorValue();
+            
+        return returnValue;
+        
     }
     
     public boolean getRemindMe()
@@ -187,7 +222,8 @@ public class Player {
     		System.out.println("\n---------------------\n");
     	}
     	
-		System.out.println("Use what item?");
+		System.out.println("Use what item? Or say \"cancel\" to cancel.");
+		System.out.print("> ");
 		nameOfItem = sc.nextLine().trim();
     	
     	String[] funnyCoffeeResponses = {"The coffee does look delicious, but you're saving it for later.", "You shouldn't drink the coffee now, what if someone sneaks up behind you?",
@@ -199,7 +235,12 @@ public class Player {
     	if ( nameOfItem == null || nameOfItem.isBlank())
     		return;
     	
-    	if ( nameOfItem.equals("Coffee"))
+    	else if ( nameOfItem.equalsIgnoreCase("CANCEL"))
+    	{
+    		System.out.println("Alright, you don't have to use an item if you don't want to.");
+    	}
+    	
+    	else if ( nameOfItem.equalsIgnoreCase("COFFEE"))
     	{
     		Random rand = new Random();
     		int randNum = rand.nextInt(0, funnyCoffeeResponses.length);
@@ -216,9 +257,18 @@ public class Player {
     			return;
     		}
     		
-    		else if ( item.getType() == Item.ItemType.FOOD || item.getType() == Item.ItemType.POTION )
+    		else if ( (item.getType() == Item.ItemType.FOOD || item.getType() == Item.ItemType.POTION) )
     		{
-    			
+    			if ( health == MAX_HEALTH )
+    			{
+    				System.out.println("You feel like " + (item.getType() == Item.ItemType.FOOD ? "eating" : "drinking" ) + " the " + item.getName() + " would be a waste since you're at full health.");
+    			}
+    			else
+    			{
+    				System.out.println("You " + (item.getType() == Item.ItemType.FOOD ? "eat" : "drink" ) + " the " + item.getName() + ". You restore " + item.getHealingAmount() + " health!");
+        			changeHealth(item.getHealingAmount());
+        			removeItemFromInventory(item, 1);
+    			}
     		}
     		
     		else
@@ -269,19 +319,26 @@ public class Player {
 		String response = "";
 		do {
 			System.out.println("\nWhat would you like to do?");
+			System.out.print("> ");
 			response = sc.nextLine().toUpperCase().trim();
 		} while (!playerMoves.contains(response));
 
 		// Player performs action
 		if (response.equals("ATTACK") || response.equals("A")) {
-			do {
-				System.out.println("\nWho would you like to attack?");
-				response = sc.nextLine().trim().toLowerCase(); // Convert player's input to lowercase for comparison
-			} while (!nameCountMap.keySet().stream().map(String::toLowerCase).collect(Collectors.toSet())
-					.contains(response)); // Convert each key in the map to lowercase before comparison
-
-			System.out.println("You attack the " + response + " for " + playerDamage + " damage!\n");
 			
+			if ( enemies.size() != 1 )
+			{
+				do {
+					System.out.println("\nWho would you like to attack?");
+					System.out.print("> ");
+					response = sc.nextLine().trim().toLowerCase(); // Convert player's input to lowercase for comparison
+				} while (!nameCountMap.keySet().stream().map(String::toLowerCase).collect(Collectors.toSet())
+						.contains(response)); // Convert each key in the map to lowercase before comparison
+			}
+			else
+				response = enemies.get(0).getName();
+			
+			System.out.println("You attack the " + response + " for " + playerDamage + " damage!\n");
 			
 			// Inflict damage on the enemy
 		    Iterator<Enemy> iterator = enemies.iterator();
@@ -298,8 +355,76 @@ public class Player {
 		            break;
 		        }
 		    }
-		} else {
-			System.out.println(response + " IS NOT IMPLEMENTED YET.");
+		} 
+		else if ( response.equals("FLEE") || response.equals("F"))
+		{
+			System.out.println("You flee from the combat!");
+			hasFled = true;	
+		}
+		else if ( response.equals("ITEM") || response.equals("I"))
+		{
+			printCombatInventory();
+			System.out.println();
+			
+			while ( true )
+			{
+				System.out.println("Use what item? Or type \"cancel\" to cancel.");
+				System.out.print("> ");
+				response = sc.nextLine().trim();
+				
+				Item item = getItemFromInventoryByName(response);
+				
+				if ( response.equalsIgnoreCase("CANCEL"))
+		    	{
+		    		System.out.println("Alright, you don't have to use an item if you don't want to.");
+		    		takeTurn(enemies);
+		    		break;
+		    	}
+				
+				else if ( item == null )
+				{
+					System.out.println("You don't have a \"" + response + "\" in your inventory.");
+				}
+				else if ( item.getType() == Item.ItemType.FOOD || item.getType() == Item.ItemType.POTION )
+	    		{
+					if ( item.getName().equals("Coffee"))
+			    	{
+						String[] funnyCoffeeResponses = {"The coffee does look delicious, but you're saving it for later.", "You shouldn't drink the coffee now, what if someone sneaks up behind you?",
+				    			"Hmm, it just doesn't feel like the right time to drink the coffee. Maybe later.", "You should save the coffee for once you get outside!"};
+			    		Random rand = new Random();
+			    		int randNum = rand.nextInt(0, funnyCoffeeResponses.length);
+			    		System.out.println(funnyCoffeeResponses[randNum] + "\n");
+			    		continue;
+			    	}
+					
+	    			if ( health == MAX_HEALTH )
+	    			{
+	    				System.out.println("You feel like " + (item.getType() == Item.ItemType.FOOD ? " eating " : " drinking " ) + " the " + item.getName() + " would be a waste since you're at full health.\n");
+	    			}
+	    			else
+	    			{
+	    				System.out.println("You " + (item.getType() == Item.ItemType.FOOD ? " eat " : " drink " ) + " the " + item.getName() + ". You restore " + item.getHealingAmount() + " health!\n");
+	        			changeHealth(item.getHealingAmount());
+	        			removeItemFromInventory(item, 1);
+	        			break;
+	    			}
+	    		}
+				else if ( response.equalsIgnoreCase("CANCEL"))
+				{
+					System.out.println("Alright, you won't use an item then.");
+					takeTurn(enemies);
+					break;
+				}
+				else
+				{
+					System.out.println("You don't see how using a " + response + " will help you in combat.");
+				}
+			}
+			
+		}
+		else {
+			System.out.println(response + " IS NOT IMPLEMENTED YET. RESTARTING PLAYER TURN.");
+			takeTurn(enemies);
 		}
         
     }
@@ -313,6 +438,7 @@ public class Player {
 		String enemyName = enemy.getName();
 
 		System.out.println("\n" + getName() + "'s move! What will you do? (Current health: " + getHealth() + ")");
+		System.out.print("> ");
 		
 		for (String move : playerMoves)
 			System.out.println(move);
@@ -323,6 +449,7 @@ public class Player {
 		String response = "";
 		do {
 			System.out.println("\nWhat would you like to do?");
+			System.out.print("> ");
 			response = sc.nextLine().toUpperCase().trim();
 		} while (!playerMoves.contains(response));
 
@@ -350,25 +477,9 @@ public class Player {
 
 	}
     
-    /**
-     * The possible moves that the player can take during combat.
-     */
-    public enum PlayerMoves {
-    	ATTACK,
-    	DEFEND,
-    	FLEE,
-    	ITEM,
-    	MAGIC
-    }
-    
     public enum EquipmentSlot {
-        HEAD,
-        CHEST,
-        LEGS,
-        HANDS,
-        FEET,
-        WEAPON,
-        OFF_HAND
+        ARMOR,
+        WEAPON
     }
     
 	/**
@@ -383,16 +494,27 @@ public class Player {
 			return;
 		}
 
-		// Check if the item is already equipped in another slot
-		for (Map.Entry<EquipmentSlot, Item> entry : equipment.entrySet()) {
-			if (entry.getValue() == item) {
-				unequipItem(entry.getKey());
-				break;
-			}
-		}
-
 		// Equip the item to the specified slot
-		equipment.put(slot, item);
+		if ( equipment.get(slot) != null )
+		{
+			if ( equipment.get(slot) == item )
+				System.out.println("You already have the " + item.getName() + " equipped.");
+			else
+			{
+				System.out.println("Unequipped " + equipment.get(slot).getName() + ".");
+				System.out.println("Equipped " + item.getName() + ".");
+				equipment.put(slot, item);
+			}
+				
+		}
+		else
+		{
+			System.out.println("Equipped " + item.getName() + ".");
+			equipment.put(slot, item);
+		}
+			
+			
+		
 	}
 	
 	/**
@@ -400,8 +522,24 @@ public class Player {
      * @param slot The equipment slot to unequip the item from.
      */
     public void unequipItem(EquipmentSlot slot) {
-        if (slot != null) {
+    	Item item = equipment.get(slot);
+    	
+    	if ( item == null )
+    	{
+    		System.out.println("You don't have that item equipped.");
+    		return;
+    	}
+    	
+    	String itemName = item.getName();
+    	
+        if (equipment.containsValue(item)) 
+        {
+        	System.out.println("Unequipped " + itemName + ".");
             equipment.put(slot, null);
+        }
+        else if ( !equipment.containsValue(item) && getItemFromInventory(item) != null )
+        {
+        	System.out.println("You already have the " + itemName + " equipped.");
         }
     }
     
@@ -416,9 +554,47 @@ public class Player {
         }
         return null;
     }
-
+    
+    public void printEquipment()
+    {
+    	for ( Map.Entry<EquipmentSlot, Item> entry : equipment.entrySet() )
+    	{
+    		if ( entry != null )
+    		{
+    			EquipmentSlot slot = entry.getKey();
+    			Item item = entry.getValue();
+    			
+    			if ( entry.toString().contains("null") )
+				{
+					System.out.println("You don't have any " + slot.toString().toLowerCase() + " equipped.");
+				}
+    			else
+    			{
+    				if ( item.getType().equals(Item.ItemType.ARMOR))
+    				{
+    					System.out.println("You are wearing " + item.getName() + ", which protects against " + item.getArmorValue() + " damage.");
+    				}
+    				else if ( item.getType().equals(Item.ItemType.WEAPON)) 
+    				{
+    					System.out.println("Your weapon is a " + item.getName() + ", which deals " + item.getWeaponDamage() + " damage.");
+    				}
+    				
+    			}
+    			
+    		}
+    	}
+    }
+    
+    
 	public int getDamage() {
-		return damage;
+		
+		int returnValue = 0;
+    	
+    	for (EquipmentSlot slot : EquipmentSlot.values())
+    		if ( equipment.get(slot) != null && equipment.get(slot).getType().equals(Item.ItemType.WEAPON) )
+    			returnValue += equipment.get(slot).getWeaponDamage();
+            
+        return damage + returnValue;
 	}
 
 	public void setDamage(int damage) {
@@ -531,6 +707,14 @@ public class Player {
     
     public LinkedList<String> getOutOfCombatActions() {
 		return outOfCombatActions;
+	}
+
+	public boolean getHasFled() {
+		return hasFled;
+	}
+
+	public void setHasFled(boolean hasFled) {
+		this.hasFled = hasFled;
 	}
 
 	/**
@@ -710,31 +894,272 @@ public class Player {
 
             // Print items within the group
             for (Item currentItem : itemsOfType) {
+            	if ( currentItem == null )
+            		continue;
+            	
             	ItemType currentItemType = currentItem.getType();
+            	int itemAmount = currentItem.getAmount(), armorValue = currentItem.getArmorValue(), weaponDamage = currentItem.getWeaponDamage(), healingAmount = currentItem.getHealingAmount();
+            	String itemName = currentItem.getName(), itemDescription = currentItem.getDescription();
+            	
+                // Print the item's name and description
+                if (itemAmount > 1 && !itemName.endsWith("s"))
+                {
+                	boolean currentlyEquipped = false;
+                	switch ( currentItemType )
+                	{
+                		case ARMOR:
+                			for (Map.Entry<EquipmentSlot, Item> entry : equipment.entrySet()) 
+                			{
+                				if ( entry == null || entry.getValue() == null)
+                					continue;
+                				
+                				if (entry.getValue().getName().equals(itemName))
+                				{
+                					
+                					currentlyEquipped = true;
+                					break;
+                				}
+                			}
+                			
+                			if (currentlyEquipped)
+                				System.out.println("* " + itemName + "s (" + itemAmount + "). " + itemDescription
+                        			+ " (Protects against " + armorValue + " damage) (Currently equipped)");
+                			else
+                				System.out.println("* " + itemName + "s (" + itemAmount + "). " + itemDescription
+                        			+ " (Protects against " + armorValue + " damage) (Not equipped)");
+                			
+                			break;
+                			
+                		case FOOD:
+                		case POTION:
+                			System.out.println("* " + itemName + "s (" + itemAmount + "). " + itemDescription
+                			+ " (Heals for " + healingAmount + " health)");
+                			break;
+                			
+                		case WEAPON:
+                			for (Map.Entry<EquipmentSlot, Item> entry : equipment.entrySet()) 
+                			{
+                				if ( entry == null || entry.getValue() == null)
+                					continue;
+                				
+                				if (entry.getValue() == currentItem)
+                				{
+                					currentlyEquipped = true;
+                					break;
+                				}
+                			}
+                			
+                			if (currentlyEquipped)
+                				System.out.println("* " + itemName + "s (" + itemAmount + "). " + itemDescription
+                				+ " (Deals " + weaponDamage + " damage) (Currently equipped)");
+                			else
+                				System.out.println("* " + itemName + "s (" + itemAmount + "). " + itemDescription
+                				+ " (Deals " + weaponDamage + " damage) (Not equipped)");
+                			
+                			break;
+                	
+                		default:
+                			System.out.println("* " + itemName + ". " + itemDescription);
+                			break;
+                	}
+                	
+                	
+                }
+                    //System.out.println("* " + currentItem.getName() + "s (" + currentItem.getAmount() + "). " + currentItem.getDescription() 
+                    //+ ( ( currentItem.getType().equals(Item.ItemType.ARMOR) ? currentItem.getArmorValue() ) : );
+                else if (currentItem.getAmount() > 1 && itemName.endsWith("s"))
+                {
+                	boolean currentlyEquipped = false;
+                	switch ( currentItemType )
+                	{
+                		case ARMOR:
+                			for (Map.Entry<EquipmentSlot, Item> entry : equipment.entrySet()) 
+                			{
+                				if ( entry == null || entry.getValue() == null)
+                					continue;
+                				
+                				if (entry.getValue().getName().equals(itemName))
+                				{
+                					currentlyEquipped = true;
+                					break;
+                				}
+                			}
+                			
+                			if (currentlyEquipped)
+                				System.out.println("* " + itemName + " (" + itemAmount + ") " + itemDescription 
+                        			+ " (Protects against " + armorValue + " damage) (Currently equipped)");
+                			else
+                				System.out.println("* " + itemName + " (" + itemAmount + ") " + itemDescription 
+                        			+ " (Protects against " + armorValue + " damage) (Not equipped)");
+                			break;
+                			
+                		case FOOD:
+                		case POTION:
+                			System.out.println("* " + itemName + " (" +  itemAmount + "). " + itemDescription
+                			+ " (Heals for " + healingAmount + " health)");
+                			break;
+                			
+                		case WEAPON:
+                			for (Map.Entry<EquipmentSlot, Item> entry : equipment.entrySet()) 
+                			{
+                				if ( entry == null || entry.getValue() == null)
+                					continue;
+                				
+                				if (entry.getValue().getName().equals(itemName))
+                				{
+                					currentlyEquipped = true;
+                					break;
+                				}
+                			}
+                			
+                			if (currentlyEquipped)
+                				System.out.println("* " + itemName + " (" + itemAmount + ") " + itemDescription
+                        			+ " (Deals " + weaponDamage + " damage) (Currently equipped)");
+                			else
+                				System.out.println("* " + itemName + " (" + itemAmount + ") " + itemDescription
+                        			+ " (Deals " + weaponDamage + " damage) (Not equipped)");
+                			System.out.println();
+                			break;
+                	
+                		default:
+                			System.out.println("* " + itemName + ". " + itemDescription);
+                			break;
+                	}
+                }
+                
+                else if ( currentItem.getAmount() == 1)
+                {
+                	boolean currentlyEquipped = false;
+                	switch ( currentItemType )
+                	{
+                		case ARMOR:
+                			for (Map.Entry<EquipmentSlot, Item> entry : equipment.entrySet()) 
+                			{
+                				if ( entry == null || entry.getValue() == null)
+                					continue;
+                				
+                				if (entry.getValue().getName().equals(itemName))
+                				{
+                					currentlyEquipped = true;
+                					break;
+                				}
+                			}
+                			
+                			if (currentlyEquipped)
+                				System.out.println("* " + itemName + ". " + itemDescription
+                        			+ " (Protects against " + armorValue + " damage) (Currently equipped)");
+                			else
+                				System.out.println("* " + itemName + ". " + itemDescription 
+                        			+ " (Protects against " + armorValue + " damage) (Not equipped)");
+                			break;
+                			
+                		case FOOD:
+                		case POTION:
+                			System.out.println("* " + itemName + ". " + itemDescription
+                			+ " (Heals for " + healingAmount + " health)");
+                			break;
+                			
+                		case WEAPON:
+                			for (Map.Entry<EquipmentSlot, Item> entry : equipment.entrySet()) 
+                			{
+                				if ( entry == null || entry.getValue() == null)
+                					continue;
+                				
+                				if (entry.getValue().getName().equals(itemName))
+                				{
+                					currentlyEquipped = true;
+                					break;
+                				}
+                			}
+                			
+                			if (currentlyEquipped)
+                				System.out.println("* " + itemName + ". " + itemDescription
+                        			+ " (Deals " + weaponDamage + " damage) (Currently equipped)");
+                			else
+                				System.out.println("* " + itemName + ". " + itemDescription 
+                        			+ " (Deals " + weaponDamage + " damage) (Not equipped)");
+                			break;
+                	
+                		default:
+                			System.out.println("* " + itemName + ". " + itemDescription);
+                			break;
+                	}
+                }
+                
+                
+                else
+                {
+                	System.out.println("THIS LINE SHOULD NOT BE REACHED.");
+                	System.exit(-1);
+                }
+                
+                    
+            }
+        }
+    }
+
+
+    /**
+     * Prints only the items that can be used during combat, skipping over useless combat items.
+     */
+    public void printCombatInventory()
+    {
+    	if ( inventory.size() == 0 )
+    	{
+    		System.out.println("Your inventory is empty.\n");
+    		return;
+    	}
+    		
+        System.out.println("\nINVENTORY:");
+
+        // Initialize a map to store items grouped by type
+        Map<Item.ItemType, List<Item>> groupedItems = new HashMap<Item.ItemType, List<Item>>();
+
+        // Group items by type
+        for (Item currentItem : inventory) {
+            groupedItems.computeIfAbsent(currentItem.getType(), k -> new ArrayList<>()).add(currentItem);
+        }
+
+        // Sort keys (item types) alphabetically
+        List<Item.ItemType> sortedTypes = new ArrayList<>(groupedItems.keySet());
+        Collections.sort(sortedTypes, Comparator.comparing(Enum::name));
+
+        // Iterate through the sorted item types and print items
+        for (Item.ItemType currentType : sortedTypes) {
+        	if ( ! (currentType == Item.ItemType.FOOD || currentType == Item.ItemType.POTION) )
+        		continue;
+            // Print type label
+            String currentTypeString = currentType.toString().toLowerCase();
+            currentTypeString = currentTypeString.substring(0, 1).toUpperCase() + currentTypeString.substring(1) + "s";
+            currentTypeString = currentTypeString.replaceAll("_", " ");
+            System.out.println("\n" + currentTypeString + ": ");
+
+            // Get items of the current type
+            List<Item> itemsOfType = groupedItems.get(currentType);
+
+            // Sort items of the current type alphabetically by name
+            Collections.sort(itemsOfType, Comparator.comparing(Item::getName));
+
+            // Print items within the group
+            for (Item currentItem : itemsOfType) {
+            	ItemType currentItemType = currentItem.getType();
+            	if ( !currentItemType.equals(Item.ItemType.FOOD) && !currentItemType.equals(Item.ItemType.POTION))
+            	{
+            		continue;
+            	}
             	
                 // Print the item's name and description
                 if (currentItem.getAmount() > 1 && !currentItem.getName().endsWith("s"))
                 {
                 	switch ( currentItemType )
-                	{
-                		case ARMOR:
-                			System.out.println("* " + currentItem.getName() + "s (" + currentItem.getAmount() + "). " + currentItem.getDescription() 
-                			+ " (Protects against " + currentItem.getArmorValue() + " damage)");
-                			break;
-                			
+                	{                			
                 		case FOOD:
                 		case POTION:
                 			System.out.println("* " + currentItem.getName() + "s (" + currentItem.getAmount() + "). " + currentItem.getDescription() 
                 			+ " (Heals for " + currentItem.getHealingAmount() + " health)");
                 			break;
-                			
-                		case WEAPON:
-                			System.out.println("* " + currentItem.getName() + "s (" + currentItem.getAmount() + "). " + currentItem.getDescription() 
-                			+ " (Deals " + currentItem.getWeaponDamage() + " damage)");
-                			break;
                 	
                 		default:
-                			System.out.println("* " + currentItem.getName() + ". " + currentItem.getDescription());
                 			break;
                 	}
                 	
@@ -746,24 +1171,13 @@ public class Player {
                 {
                 	switch ( currentItemType )
                 	{
-                		case ARMOR:
-                			System.out.println("* " + currentItem.getName() + " (" +  currentItem.getAmount() + "). " + currentItem.getDescription() 
-                			+ " (Protects against " + currentItem.getArmorValue() + " damage)");
-                			break;
-                			
                 		case FOOD:
                 		case POTION:
                 			System.out.println("* " + currentItem.getName() + " (" +  currentItem.getAmount() + "). " + currentItem.getDescription() 
                 			+ " (Heals for " + currentItem.getHealingAmount() + " health)");
                 			break;
-                			
-                		case WEAPON:
-                			System.out.println("* " + currentItem.getName() + " (" +  currentItem.getAmount() + "). " + currentItem.getDescription() 
-                			+ " (Deals " + currentItem.getWeaponDamage() + " damage)");
-                			break;
                 	
                 		default:
-                			System.out.println("* " + currentItem.getName() + ". " + currentItem.getDescription());
                 			break;
                 	}
                 }
@@ -772,24 +1186,13 @@ public class Player {
                 {
                 	switch ( currentItemType )
                 	{
-                		case ARMOR:
-                			System.out.println("* " + currentItem.getName() + ". " + currentItem.getDescription() 
-                			+ " (Protects against " + currentItem.getArmorValue() + " damage)");
-                			break;
-                			
                 		case FOOD:
                 		case POTION:
                 			System.out.println("* " + currentItem.getName() + ". " + currentItem.getDescription() 
                 			+ " (Heals for " + currentItem.getHealingAmount() + " health)");
                 			break;
-                			
-                		case WEAPON:
-                			System.out.println("* " + currentItem.getName() + ". " + currentItem.getDescription() 
-                			+ " (Deals " + currentItem.getWeaponDamage() + " damage)");
-                			break;
                 	
                 		default:
-                			System.out.println("* " + currentItem.getName() + ". " + currentItem.getDescription());
                 			break;
                 	}
                 }
