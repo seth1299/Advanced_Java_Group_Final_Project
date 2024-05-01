@@ -197,6 +197,10 @@ public class World {
 					
 				break;
 				
+			case "ZORK":
+				System.out.println("At your service!");
+				break;
+				
 			default:
 				break;
 		}
@@ -257,7 +261,6 @@ public class World {
 			{
 				System.out.println("Can't find room #" + destinationRoomNum + "!");
 				return;
-				//return playRoom;
 			}
 				
 			String destinationRoomRequiredKey = destinationRoom.getRequiredKey();
@@ -267,7 +270,6 @@ public class World {
 			if (isLocked && destinationRoomRequiredKey != null && !destinationRoomRequiredKey.isEmpty()) 
 			{
 				String required_key_as_String = required_key_as_item.getName();
-				// TODO: Check if this actually works.
 				
 				if (required_key_as_String.equals(destinationRoomRequiredKey)) 
 				{
@@ -276,33 +278,24 @@ public class World {
 					System.out.println("You unlock the door! " + funnyKeyDiscardQuips[randInt]);
 					player.removeItemFromInventory(required_key_as_item, 1);
 					destinationRoom.display(showDescription);
-					//return destinationRoom;
 				} 
 				
 				else 
-				{
 					System.out.println("The room is locked. You need the " + destinationRoomRequiredKey + " to enter that room.");
-					//return playRoom;
-				}
 				
 			} 
 			else 
-			{
 				destinationRoom.display(showDescription);
-				//return destinationRoom;
-			}
 		}
+		
 		else if ( response.equals("CANCEL") || response.equals("C"))
-		{
 			System.out.println("Movement cancelled.");
-		}
+		
 		else 
-		{
 			System.out.println("There are no exits in that direction.");
-			//return playRoom;
-		}
 	}
 	
+	@SuppressWarnings("unused")
 	public static List<Room> loadRooms(String filename) throws IOException {
 
 		if (filename == null || filename.isBlank())

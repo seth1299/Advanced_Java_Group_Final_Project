@@ -20,13 +20,12 @@ public class Item implements Comparable<Item> {
      */
     private String name, description;
     private ItemType type;
-    @SuppressWarnings("unused")
-	private int amount, armorValue, weaponDamage;
+	private int amount, armorValue, weaponDamage, healingAmount;
     
     // Constructor without armor value and weapon damage
     public Item(String name, String description, ItemType type) 
     {
-    		this(name, description, type, 0, 0);
+    		this(name, description, type, 0);
     }
 
     /**
@@ -34,13 +33,25 @@ public class Item implements Comparable<Item> {
      * @param description The item's description.
      * @param type What type of item it is. This is an enum value that must be ItemType.POTION, ItemType.WEAPON, etc.
      */
-    public Item(String name, String description, ItemType type, int armorValue, int weaponDamage) {
+    public Item(String name, String description, ItemType type, int integerAmount) {
         this.name = name;
         this.description = description;
         this.type = type;
         this.amount = 1;
-        this.armorValue = armorValue;
-        this.weaponDamage = weaponDamage;
+        switch ( type )
+        {
+        	case ARMOR:
+        		armorValue = integerAmount;
+        		break;
+        	case FOOD:
+        	case POTION:
+        		healingAmount = integerAmount;
+        		break;
+        	case WEAPON:
+        		weaponDamage = integerAmount;
+        	default:
+        		break;
+        }
     }
     
     // Implementing Comparable interface
@@ -52,7 +63,18 @@ public class Item implements Comparable<Item> {
     @Override
     public String toString()
     {
-    	return name + ", " + description;
+    	switch ( getType() )
+    	{
+    		case ARMOR:
+    			return name + ", " + description + " (Protects against " + armorValue + " damage)";
+    		case POTION:
+    		case FOOD:
+    			return name + ", " + description + " (Heals for " + healingAmount + " health)";
+    		case WEAPON:
+    			return name + ", " + description + " (dooes " + weaponDamage + " damage)";
+    		default:
+    			return name + ", " + description;
+    	}
     }
 
     /**
@@ -86,7 +108,31 @@ public class Item implements Comparable<Item> {
     	return amount;
     }
 
-    /**
+    public int getArmorValue() {
+		return armorValue;
+	}
+
+	public void setArmorValue(int armorValue) {
+		this.armorValue = armorValue;
+	}
+
+	public int getWeaponDamage() {
+		return weaponDamage;
+	}
+
+	public void setWeaponDamage(int weaponDamage) {
+		this.weaponDamage = weaponDamage;
+	}
+
+	public int getHealingAmount() {
+		return healingAmount;
+	}
+
+	public void setHealingAmount(int healingAmount) {
+		this.healingAmount = healingAmount;
+	}
+
+	/**
      * @param name The item's new name.
      */
     public void setName(String name) {

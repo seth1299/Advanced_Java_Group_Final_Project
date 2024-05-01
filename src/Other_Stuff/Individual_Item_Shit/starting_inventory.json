@@ -10,13 +10,21 @@
         "description": "The clothes that you have been wearing for the past however long. They smell pretty bad. You should probably go take a bath and change clothes.",
         "type": "ARMOR",
         "amount": 1,
-        "armorValue": 0
+        "armorValue": 1
     },
     {
         "name": "Coffee",
         "description": "Delicious magical coffee that will never go cold or spoil. However, you can't bring yourself to drink it. What if you need something warm to drink later?",
         "type": "FOOD",
-        "amount": 1
+        "amount": 1,
+        "healingAmount": 5
+    },
+    {
+        "name": "Cool Rock",
+        "description": "A cool rock you found on the ground.",
+        "type": "WEAPON",
+        "amount": 1,
+        "weaponDamage": 1
     }
 
 

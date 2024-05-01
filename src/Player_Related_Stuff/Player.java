@@ -18,6 +18,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import Other_Stuff.Enemy;
+import Player_Related_Stuff.Item.ItemType;
 
 public class Player {
 	
@@ -177,6 +178,11 @@ public class Player {
     		{
     			System.out.println("You don't have a " + nameOfItem + " in your inventory.");
     			return;
+    		}
+    		
+    		else if ( item.getType() == Item.ItemType.FOOD || item.getType() == Item.ItemType.POTION )
+    		{
+    			
     		}
     		
     		else
@@ -508,13 +514,34 @@ public class Player {
             JsonArray itemsArray = JsonParser.parseReader(reader).getAsJsonArray();
             
             for (JsonElement itemElement : itemsArray) {
+            	int armorValue = 0, weaponDamage = 0, healingAmount = 0;
+            	Item newItem;
                 String name = itemElement.getAsJsonObject().get("name").getAsString();
                 String description = itemElement.getAsJsonObject().get("description").getAsString();
                 Item.ItemType type = Item.ItemType.valueOf(itemElement.getAsJsonObject().get("type").getAsString());
                 int amount = itemElement.getAsJsonObject().get("amount").getAsInt();
+                if (type.equals(Item.ItemType.ARMOR))
+                {
+                	armorValue = itemElement.getAsJsonObject().get("armorValue").getAsInt();
+                	newItem = new Item(name, description, type, armorValue);
+                }
+                else if (type.equals(Item.ItemType.WEAPON))
+                {
+                	weaponDamage = itemElement.getAsJsonObject().get("weaponDamage").getAsInt();
+                	newItem = new Item(name, description, type, weaponDamage);
+                }
+                else if (type.equals(Item.ItemType.FOOD) || type.equals(Item.ItemType.POTION))
+                {
+                	healingAmount = itemElement.getAsJsonObject().get("healingAmount").getAsInt();
+                	newItem = new Item(name, description, type, healingAmount);
+                }
+                else
+                {
+                	newItem = new Item(name, description, type);
+                }
                 
                 // Create a new item and add it to the player's inventory
-                Item newItem = new Item(name, description, type);
+                
                 addItemToInventory(newItem, amount);
             }
         } catch (IOException e) {
@@ -647,13 +674,98 @@ public class Player {
 
             // Print items within the group
             for (Item currentItem : itemsOfType) {
+            	ItemType currentItemType = currentItem.getType();
+            	
                 // Print the item's name and description
                 if (currentItem.getAmount() > 1 && !currentItem.getName().endsWith("s"))
-                    System.out.println("* " + currentItem.getName() + "s (" + currentItem.getAmount() + "). " + currentItem.getDescription());
+                {
+                	switch ( currentItemType )
+                	{
+                		case ARMOR:
+                			System.out.println("* " + currentItem.getName() + "s (" + currentItem.getAmount() + "). " + currentItem.getDescription() 
+                			+ " (Protects against " + currentItem.getArmorValue() + " damage)");
+                			break;
+                			
+                		case FOOD:
+                		case POTION:
+                			System.out.println("* " + currentItem.getName() + "s (" + currentItem.getAmount() + "). " + currentItem.getDescription() 
+                			+ " (Heals for " + currentItem.getHealingAmount() + " health)");
+                			break;
+                			
+                		case WEAPON:
+                			System.out.println("* " + currentItem.getName() + "s (" + currentItem.getAmount() + "). " + currentItem.getDescription() 
+                			+ " (Deals " + currentItem.getWeaponDamage() + " damage)");
+                			break;
+                	
+                		default:
+                			System.out.println("* " + currentItem.getName() + ". " + currentItem.getDescription());
+                			break;
+                	}
+                	
+                	
+                }
+                    //System.out.println("* " + currentItem.getName() + "s (" + currentItem.getAmount() + "). " + currentItem.getDescription() 
+                    //+ ( ( currentItem.getType().equals(Item.ItemType.ARMOR) ? currentItem.getArmorValue() ) : );
                 else if (currentItem.getAmount() > 1 && currentItem.getName().endsWith("s"))
-                    System.out.println("* " + currentItem.getName() + " (" +  currentItem.getAmount() + "). " + currentItem.getDescription());
+                {
+                	switch ( currentItemType )
+                	{
+                		case ARMOR:
+                			System.out.println("* " + currentItem.getName() + " (" +  currentItem.getAmount() + "). " + currentItem.getDescription() 
+                			+ " (Protects against " + currentItem.getArmorValue() + " damage)");
+                			break;
+                			
+                		case FOOD:
+                		case POTION:
+                			System.out.println("* " + currentItem.getName() + " (" +  currentItem.getAmount() + "). " + currentItem.getDescription() 
+                			+ " (Heals for " + currentItem.getHealingAmount() + " health)");
+                			break;
+                			
+                		case WEAPON:
+                			System.out.println("* " + currentItem.getName() + " (" +  currentItem.getAmount() + "). " + currentItem.getDescription() 
+                			+ " (Deals " + currentItem.getWeaponDamage() + " damage)");
+                			break;
+                	
+                		default:
+                			System.out.println("* " + currentItem.getName() + ". " + currentItem.getDescription());
+                			break;
+                	}
+                }
+                
+                else if ( currentItem.getAmount() == 1)
+                {
+                	switch ( currentItemType )
+                	{
+                		case ARMOR:
+                			System.out.println("* " + currentItem.getName() + ". " + currentItem.getDescription() 
+                			+ " (Protects against " + currentItem.getArmorValue() + " damage)");
+                			break;
+                			
+                		case FOOD:
+                		case POTION:
+                			System.out.println("* " + currentItem.getName() + ". " + currentItem.getDescription() 
+                			+ " (Heals for " + currentItem.getHealingAmount() + " health)");
+                			break;
+                			
+                		case WEAPON:
+                			System.out.println("* " + currentItem.getName() + ". " + currentItem.getDescription() 
+                			+ " (Deals " + currentItem.getWeaponDamage() + " damage)");
+                			break;
+                	
+                		default:
+                			System.out.println("* " + currentItem.getName() + ". " + currentItem.getDescription());
+                			break;
+                	}
+                }
+                
+                
                 else
-                    System.out.println("* " + currentItem.getName() + ". " + currentItem.getDescription());
+                {
+                	System.out.println("THIS LINE SHOULD NOT BE REACHED.");
+                	System.exit(-1);
+                }
+                
+                    
             }
         }
     }
