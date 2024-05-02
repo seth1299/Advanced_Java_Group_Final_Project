@@ -4,7 +4,7 @@
         "description": "A boring loaf of bread. It's not even sliced.",
         "type": "FOOD",
         "amount": 1,
-        "healingAmount":20
+        "healingAmount": 20
     },
     {
         "name": "Round of Cheese",

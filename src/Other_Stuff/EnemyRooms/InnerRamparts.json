@@ -1,8 +1,8 @@
 [
     {
         "name": "Goblin Warrior",
-        "enemyHealth": 12,
-        "enemyDamage": 5,
+        "enemyHealth": 18,
+        "enemyDamage": 8,
         "enemyDialogue": "Never should've come here..."
     }
 ]

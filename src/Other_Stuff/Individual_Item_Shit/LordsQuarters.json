@@ -4,6 +4,6 @@
         "description": "A mighty weapon once wielded by a local tyrant.",
         "type": "WEAPON",
         "amount": 1,
-        "damage": 11
+        "damage": 10
     }
 ]

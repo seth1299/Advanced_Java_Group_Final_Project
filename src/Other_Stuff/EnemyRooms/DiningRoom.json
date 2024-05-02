@@ -1,8 +1,8 @@
 [
     {
         "name": "Massive Troll",
-        "enemyHealth": 15,
-        "enemyDamage": 7,
+        "enemyHealth": 25,
+        "enemyDamage": 12,
         "enemyDialogue": "Ha! Missed one! Come here puny human!"
     }
 ]

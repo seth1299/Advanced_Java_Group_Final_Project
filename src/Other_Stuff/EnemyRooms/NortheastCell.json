@@ -1,8 +1,8 @@
 [
     {
         "name": "Bat",
-        "enemyHealth": 6,
-        "enemyDamage": 2,
+        "enemyHealth": 12,
+        "enemyDamage": 6,
         "enemyDialogue": "Meep!"
     }
 ]

@@ -4,7 +4,7 @@
         "description": "A short wooden sword, capable of cutting even the mightiest of small bushes.",
         "type": "WEAPON",
         "amount": 1,
-        "damage": 5
+        "damage": 3
     },
     {
         "name": "Wooden Dagger",
