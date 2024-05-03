@@ -19,8 +19,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import Other_Stuff.Enemy;
 import Player_Related_Stuff.Item.ItemType;
+import java.io.Serializable;
 
-public class Player {
+public class Player implements Serializable{
+	
 	
 	/**
 	 * Global variable declarations
@@ -35,6 +37,7 @@ public class Player {
     private Map<EquipmentSlot, Item> equipment;
     private static Scanner sc;
     private boolean hasFled = false;
+    private static final long serialVersionUID = 935007948880209692L;
     
     /**
 	 * Default Player constructor, all values are automatically assigned to garbage values.
