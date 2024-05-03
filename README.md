@@ -1,6 +1,6 @@
 How to play the game:
 
-!!! THE GAME ONLY WORKS ON WINDOWS !!!
+!!! THE GAME ONLY WORKS ON WINDOWS !!! (unless you are running it directly in an IDE such as IntelliJ or Eclipse)
 
 1) You need Java version 17.0.10 installed on your machine. All archived downloads can be found on: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
 
