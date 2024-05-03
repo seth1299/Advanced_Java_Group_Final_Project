@@ -30,7 +30,7 @@ public class GameEngine
         {
         	if ( enemy.getEnemyDialogue() != null )
         	{
-        		System.out.println(enemy.getName() + ": " + enemy.getEnemyDialogue());
+        		System.out.println("\n" + enemy.getName() + ": " + enemy.getEnemyDialogue());
         	}
         }
 

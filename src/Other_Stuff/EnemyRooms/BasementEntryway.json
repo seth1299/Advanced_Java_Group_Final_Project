@@ -1,8 +1,8 @@
 [
     {
         "name": "Goblin Looter",
-        "enemyHealth": 15,
-        "enemyDamage": 6,
+        "enemyHealth": 20,
+        "enemyDamage": 9,
         "enemyDialogue": "No! It's all mine!"
     }
 ]

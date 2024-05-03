@@ -882,7 +882,10 @@ public class Player {
         for (Item.ItemType currentType : sortedTypes) {
             // Print type label
             String currentTypeString = currentType.toString().toLowerCase();
-            currentTypeString = currentTypeString.substring(0, 1).toUpperCase() + currentTypeString.substring(1) + "s";
+            if ( !currentTypeString.equals("misc"))
+            	currentTypeString = currentTypeString.substring(0, 1).toUpperCase() + currentTypeString.substring(1) + "s";
+            else
+            	currentTypeString = currentTypeString.toUpperCase();
             currentTypeString = currentTypeString.replaceAll("_", " ");
             System.out.println("\n" + currentTypeString + ": ");
 

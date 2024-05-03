@@ -37,7 +37,7 @@
   "requiredKey": "Cell Key",
   "roomItemsFilepath": "",
   "enemyFilepath": "src/Other_Stuff/EnemyRooms/SoutheastCell.json",
-  "description": "A dank and dreary cell, the only features being a chamber bucket in one corner and a bed of old hay in the other."
+  "description": "It appears that the former residents of this cell perished some time ago. An aura of fear hangs in the air. All you are surrounded by is fear and dead men. Well, and these bats."
 },
 
 {
@@ -61,7 +61,7 @@
 },
 
 {
-  "name": "East Cell",
+  "name": "EAST CELL",
   "roomNum": 4,
   "exit n": 0,
   "exit nw": 0,
@@ -77,7 +77,7 @@
   "requiredKey": "Cell Key",
   "roomItemsFilepath": "",
   "enemyFilepath": "",
-  "description": "A dank and dreary cell, it’s only decorations are a chamber bucket in one corner and a bed of old hay in the other."
+  "description": "There are dead bodies here. You see dead people."
 },
 
 {
@@ -97,7 +97,7 @@
   "requiredKey": "Cell Key",
   "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/SnackRoom.json",
   "enemyFilepath": "src/Other_Stuff/EnemyRooms/NortheastCell.json",
-  "description": "A dank and dreary cell, it’s only decorations are a chamber bucket in one corner and a bed of old hay in the other."
+  "description": "A dank and dreary cell, the only decorations are a chamber bucket in one corner and a bed of old hay in the other."
 },
 
 {
@@ -117,7 +117,7 @@
   "requiredKey": "Cell Key",
   "roomItemsFilepath": "",
   "enemyFilepath": "",
-  "description": "A dank and dreary cell, it’s been your only home for several weeks."
+  "description": "A dank and dreary cell, it has been your only home for several weeks."
 },
 
 {
@@ -177,7 +177,7 @@
   "requiredKey": "",
   "roomItemsFilepath": "",
   "enemyFilepath": "",
-  "description": "A long stone hallway lined with regularly spaced torches, heavy with the suffering of those who have resided in the cells that run along it’s sides."
+  "description": "A long stone hallway lined with regularly spaced torches, heavy with the suffering of those who have resided in the cells that run along its sides."
 },
 
 {
@@ -257,7 +257,7 @@
   "requiredKey": "",
   "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/PienWineRoom.json",
   "enemyFilepath": "",
-  "description": "This room has one bed in each corner. The Northeast corner is covered in unicorns, in sharp contrast to the Northwest corner’s posters for a some band called Bards of Darkness."
+  "description": "This room has one bed in each corner. The Northeast corner is covered in unicorns, in sharp contrast to the Northwest corner's posters for a some band called Bards of Darkness. It's funny how a little place like this brought so many people together."
 },
 
 {
@@ -277,7 +277,7 @@
   "requiredKey": "",
   "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/KeyRoom.json",
   "enemyFilepath": "",
-  "description": "This room has a desk with a notebook to sign the Officer’s Key in and out. There is also a note on the desk that says, 'Dave’s key is in the drawer, he locks himself out a lot.'"
+  "description": "This room has a desk with a notebook to sign the Officer's Key in and out. There is also a note on the desk that says, \"Dave's key is in the drawer, he locks himself out a lot.\""
 },
 
 {
@@ -297,7 +297,7 @@
   "requiredKey": "",
   "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/SnackRoom.json",
   "enemyFilepath": "src/Other_Stuff/EnemyRooms/LowerBarracks.json",
-  "description": "This is another barracks room full of bunk beds and footlockers. It hasn’t been completely looted. An odd light shines behind one bunk, hinting at a hidden passage."
+  "description": "This is another barracks room full of bunk beds and footlockers. It hasn't been completely looted. An odd light shines behind one bunk, hinting at a hidden passage."
 },
 
 {
@@ -335,9 +335,9 @@
   "exit dn": 0,
   "locked": false,
   "requiredKey": "",
-  "roomItemsFilepath": "",
+  "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/MagesOffice.json",
   "enemyFilepath": "",
-  "description": "The Mage’s Office hasn’t been looted yet. The entire room smells like an angry skunk. There is a massive portal against the wall, with a notebook on a side table. The notebook has a series of dates scrawled on the pages, impossibly far in the future."
+  "description": "The Mage's Office hasn't been looted yet. The entire room smells like an angry skunk. There is a massive portal against the wall, with a notebook on a side table. The notebook has a series of dates scrawled on the pages, impossibly far in the future."
 },
 
 {
@@ -357,7 +357,7 @@
   "requiredKey": "Mage's Office Key",
   "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/MagePotionRoom.json",
   "enemyFilepath": "",
-  "description": "This room hasn’t been looted yet. It it full of very complicated equipment, some potions, and several small packages of a clear flexible material full of herbs. The bags seem to be the source of the skunk smell."
+  "description": "This room hasn't been looted yet. It it full of very complicated equipment, some potions, and several small packages of a clear flexible material full of herbs. The bags seem to be the source of the skunk smell."
 },
 
 {
@@ -377,7 +377,7 @@
   "requiredKey": "",
   "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/QuestioningRoom.json",
   "enemyFilepath": "",
-  "description": "What kind of advisor is this? There is a table covered in bloodstains with restraints in each corner. A set of shelves runs across one wall with a torturer’s tools lining them, laid out with perfect precision."
+  "description": "What kind of advisor is this? There is a table covered in bloodstains with restraints in each corner. A set of shelves runs across one wall with a torturer's tools lining them, laid out with perfect precision."
 },
 
 {
@@ -477,7 +477,7 @@
   "requiredKey": "Lord's Guard Key",
   "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/AdvisorsQuarters.json",
   "enemyFilepath": "",
-  "description": "These appear to be the Advisor’s room. A shudder runs through you as you remember the torture room in the basement. The room is so clean that you can hardly believe it has ever been used."
+  "description": "These appear to be the Advisor's room. A shudder runs through you as you remember the torture room in the basement. The room is so clean that you can hardly believe it has ever been used."
 },
 
 {
@@ -837,7 +837,7 @@
   "requiredKey": "Keep Key",
   "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/PotionLoot.json",
   "enemyFilepath": "",
-  "description": "The storage room at the base of the Keep. It looks like they could have held out for days, if not weeks. There are also a lot of potions here, and if this game had music I’m sure it would be getting pretty ominous. Why did the devs not make a save game function!?"
+  "description": "The storage room at the base of the Keep. It looks like they could have held out for days, if not weeks. There are also a lot of potions here, and if this game had music I'm sure it would be getting pretty ominous. Why did the devs not make a save game function!?"
 },
 
 {
@@ -877,7 +877,7 @@
   "requiredKey": "",
   "roomItemsFilepath": "",
   "enemyFilepath": "",
-  "description": "A long section of the walls running from North to South. It feels like you are so close to freedom. Have to find the key to the Gates…"
+  "description": "A long section of the walls running from North to South. It feels like you are so close to freedom. Have to find the key to the Gates..."
 },
 
 {
@@ -1057,7 +1057,7 @@
   "requiredKey": "",
   "roomItemsFilepath": "src/Other_Stuff/Individual_Item_Shit/KeepArmory.json",
   "enemyFilepath": "src/Other_Stuff/EnemyRooms/KeepArmory.json",
-  "description": "It looks like this was originally where the Keep’s Armory was, but has been turned into a loot room by the Troll Chief. A breeze lifts one of the wall hangings, flashing a view of a secret passage to the West."
+  "description": "It looks like this was originally where the Keep's Armory was, but has been turned into a loot room by the Troll Chief. A breeze lifts one of the wall hangings, flashing a view of a secret passage to the West. Hanging on the wall looks like a key big enough to open the gate to the outside world. You suspect that this will be the most difficult fight in this area and you should probably only fight if you're completely ready. Remember that FLEEing is always an option."
 },
 
 {

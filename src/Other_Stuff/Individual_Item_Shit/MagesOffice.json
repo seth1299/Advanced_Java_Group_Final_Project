@@ -1,0 +1,15 @@
+[
+    {
+        "name": "Mage's Notebook",
+        "description": "A notebook full of complicated-looking equations and spell incantations, for those with the talent to cast them (that's not you, just to be clear).",
+        "type": "BOOK",
+        "amount": 1
+    },
+    {
+        "name": "Killing Note",
+        "description": "A black, leather-bound ordinary notebook that says \"Killing Note\" on the front cover. Inside of the cover, it says \"The human whose name is written in this note shall die.\" Well, that's a bit ominous, isn't it? There are no names written in the notebook.",
+        "type": "BOOK",
+        "amount": 1
+    }
+
+]

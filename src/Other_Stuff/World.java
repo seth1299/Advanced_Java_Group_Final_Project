@@ -58,8 +58,8 @@ public class World {
 			for (JsonElement element : jsonArray) {
 				JsonObject jsonObject = element.getAsJsonObject();
 				Enemy enemy = gson.fromJson(jsonObject, Enemy.class);
-				if (jsonObject.has("dialogue")) {
-					enemy.setEnemyDialogue(jsonObject.get("dialogue").getAsString());
+				if (jsonObject.has("enemyDialogue")) {
+					enemy.setEnemyDialogue(jsonObject.get("enemyDialogue").getAsString());
 				}
 				enemies.add(enemy);
 			}

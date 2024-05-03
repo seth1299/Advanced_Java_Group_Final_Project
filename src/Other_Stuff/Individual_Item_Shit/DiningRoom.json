@@ -12,5 +12,12 @@
         "type": "POTION",
         "amount": 1,
         "healingAmount": 15
+    },
+    {
+        "name": "Quarter Pounder With Cheese",
+        "description": "A yummy-looking quarter pound burger with cheese on top. You know what they call a Quarter Pounder with Cheese in Paris? They call it Royale with Cheese.",
+        "type": "FOOD",
+        "amount": 1,
+        "healingAmount": 20
     }
 ]

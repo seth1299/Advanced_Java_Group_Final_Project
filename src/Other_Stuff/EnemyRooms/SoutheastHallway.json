@@ -1,14 +1,14 @@
 [
     {
         "name": "Goblin Looter",
-        "enemyHealth": 16,
-        "enemyDamage": 7,
-        "enemyDialogue": "No! It's all mine!"
+        "enemyHealth": 20,
+        "enemyDamage": 9,
+        "enemyDialogue": "It's all mine!"
     },
     {
         "name": "Goblin Looter",
-        "enemyHealth": 16,
-        "enemyDamage": 7,
-        "enemyDialogue": "Finders keepers!"
+        "enemyHealth": 20,
+        "enemyDamage": 9,
+        "enemyDialogue": "No! It's all mine!"
     }
 ]

@@ -7,9 +7,11 @@ public class Item implements Comparable<Item> {
      */
     public enum ItemType {
     	ARMOR,
+    	BOOK,
     	FOOD,
     	KEY,
     	NULL,
+    	MISC,
     	POTION,
     	QUEST_ITEM,
     	WEAPON

@@ -25,6 +25,12 @@
         "type": "WEAPON",
         "amount": 1,
         "damage": 1
+    },
+    {
+        "name": "Strange Drawing",
+        "description": "This drawing is of a caucasian man in his early 30's wearing a blue fancy button-up coattail with sleeves that look like white doilies and black shiny dress shoes. The man is making a coy smile and holds a finger up to his lips as if to signify that he's supposed to be secretive. To the left of the man stands a young-looking caucasian woman wearing a silver dress and silver galoushes that have high heels. In the corner of the picture is a handwritten message that says \"Yeah, baby!\". You can't fathom why you have this drawing, but you feel compelled to keep it.",
+        "type": "MISC",
+        "amount": 1
     }
 
 
