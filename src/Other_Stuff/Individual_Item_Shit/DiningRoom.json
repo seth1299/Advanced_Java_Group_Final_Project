@@ -19,5 +19,11 @@
         "type": "FOOD",
         "amount": 1,
         "healingAmount": 20
+    },
+    {
+        "name": "Cookbook",
+        "description": "A cookbook with plenty of recipes in it. The instructions have a lot of shouting and swearing and the \"About the Author\" section has a picture of an angry-looking man named Jordan Handsy.",
+        "type": "BOOK",
+        "amount": 1
     }
 ]
