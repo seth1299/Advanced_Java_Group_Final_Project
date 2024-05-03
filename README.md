@@ -7,4 +7,4 @@ How to play the game:
 Direct Download link for Windowsx64: https://download.oracle.com/java/17/archive/jdk-17.0.10_windows-x64_bin.exe
 
 2) Once you have the correct version of Java 17.0.10 installed, all you need to do is click on the "runGame" Windows Command and that's it! If any security pop-ups show up,
-click "run anyway" or some similar option.
+click "more information" and then "run anyway" for the Windows Defender popup.
