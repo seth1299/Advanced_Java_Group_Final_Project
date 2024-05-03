@@ -11,7 +11,7 @@
         "description": "Armor made from steel, proof against all but the strongest of attacks.",
         "type": "ARMOR",
         "amount": 1,
-        "armorValue": 10
+        "armorValue": 9
     },
     {
         "name": "Health Potion",

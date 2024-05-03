@@ -4,6 +4,24 @@
         "description": "A mighty weapon once wielded by a local tyrant.",
         "type": "WEAPON",
         "amount": 1,
-        "damage": 11
+        "damage": 10
+    },
+    {
+        "name": "The Salacious Reptilian Housekeeper",
+        "description": "This appears to be a play about a lizard housekeeper whose employer keeps getting the wrong idea about her. The play starts off innocently enough, but I cannot bring myself to describe the rest of it after Act IV, Scene III starts.",
+        "type": "BOOK",
+        "amount": 1
+    },
+    {
+        "name": "Semidarkness",
+        "description": "This is a fantasy love story about a human woman who has to choose between a vampire and a werewolf who both are attracted to her for whatever reason, even though it is clearly obvious that the woman has no distinct personality. The cover of the book are two hands, feminine in appearance, holding an apple.",
+        "type": "BOOK",
+        "amount": 1
+    },
+    {
+        "name": "2059",
+        "description": "Taking place in the far-off future of 2059, this is a dystopian book describing a future in which the government spies on and controls its private citizens. If you turn the book horizontally, you can see the image of an eye underneath the title of the book.",
+        "type": "BOOK",
+        "amount": 1
     }
 ]

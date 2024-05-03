@@ -58,8 +58,8 @@ public class World {
 			for (JsonElement element : jsonArray) {
 				JsonObject jsonObject = element.getAsJsonObject();
 				Enemy enemy = gson.fromJson(jsonObject, Enemy.class);
-				if (jsonObject.has("dialogue")) {
-					enemy.setEnemyDialogue(jsonObject.get("dialogue").getAsString());
+				if (jsonObject.has("enemyDialogue")) {
+					enemy.setEnemyDialogue(jsonObject.get("enemyDialogue").getAsString());
 				}
 				enemies.add(enemy);
 			}
@@ -566,7 +566,7 @@ public class World {
 		System.out.println("| \\__/\\ (_| \\__ \\ |_| |  __/ | |  | | \\__ \\ || (_| | (_| | |  |   < ");
 		System.out.println(" \\____/\\__,_|___/\\__|_|\\___| \\_|  |_/_|___/\\__\\__,_|\\__,_|_|  |_|\\_\\");
 		TimeUnit.SECONDS.sleep(4);
-		System.out.println("\nCopyright ©2024 by Seth Grimes and Brianna Hacker. All rights reserved.\nCastle Mistdark is a trademark of Seth Grimes and Brianna Hacker.\nRelease 1 / Serial Number 8675309");
+		System.out.println("\nCopyright 2024 by Seth Grimes and Brianna Hacker. All rights reserved.\nCastle Mistdark is a trademark of Seth Grimes and Brianna Hacker.\nRelease 1 / Serial Number 8675309");
 	}
 
 		public static void main (String[] args) throws InterruptedException {
@@ -678,7 +678,7 @@ public class World {
 			System.out.println("\nYou aren't sure how long you've been in this cell.\nYou're pretty sure that it's more than a week, less than a month.\n" +
 					"When you hear a ruckus start somewhere above you, you're pretty sure the chaos you hear is actually in your head, until the dungeon guards run up the stairs.\n" +
 					"A guard's helmet comes flying down the stairs, skips off the opposite wall, and slams into your cell door.\n" +
-					"The door pops open, and you're sure you've gone mad until you see the gaping hole in the helmet\n" +
+					"The door pops open, and you're sure you've gone mad until you see the gaping hole in the helmet.\n" +
 					"No, if you'd gone mad the last thing that you would have imagined was being freed from your cell into a castle under attack.\n" +
 					"You immediately burst out of the cell, look both ways down the hall, and decide to hide in the storage room until the noise dies down.");
 
@@ -722,6 +722,7 @@ public class World {
 				System.out.println("That's " + numHours + " hours, " + numMinutesClone + " minutes, and " + numSecondsClone + " seconds!");
 			
 			System.out.println("Thanks for playing Castle Mistdark!");
+			response = sc.nextLine();
 			sc.close();
 		}
 

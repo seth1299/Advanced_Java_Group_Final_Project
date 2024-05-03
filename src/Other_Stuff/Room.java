@@ -343,7 +343,7 @@ public class Room {
 	}
 
 	//Displays the room to the player
-	public void display(boolean showDescription) {
+	public void display(boolean showDescription) {		
 		System.out.println("\n" + roomName);
 		if ( showDescription )
 			System.out.println("- " + roomDescription);
@@ -355,7 +355,7 @@ public class Room {
 			GameEngine.startFight(player, enemies);
 		}
 		
-		if (roomItems!=null && roomItems.size() > 0 )
+		if ((enemies == null || enemies.isEmpty()) && roomItems!=null && roomItems.size() > 0 )
 		{
 			if ( roomItems.size() > 1 )
 				System.out.print("\nYou find some items in the room! ");

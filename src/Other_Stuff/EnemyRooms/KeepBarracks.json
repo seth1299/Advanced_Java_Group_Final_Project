@@ -1,14 +1,14 @@
 [
     {
         "name": "Goblin Warrior",
-        "enemyHealth": 12,
-        "enemyDamage": 5,
+        "enemyHealth": 24,
+        "enemyDamage": 13,
         "enemyDialogue": "Never should've come here..."
     },
     {
         "name": "Goblin Looter",
-        "enemyHealth": 9,
-        "enemyDamage": 3,
+        "enemyHealth": 20,
+        "enemyDamage": 9,
         "enemyDialogue": "No! It's all mine!"
     }
 ]

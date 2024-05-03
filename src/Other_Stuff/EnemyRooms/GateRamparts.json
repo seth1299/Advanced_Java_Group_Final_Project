@@ -1,14 +1,14 @@
 [
     {
-        "name": "Goblin Warrior",
-        "enemyHealth": 12,
-        "enemyDamage": 5,
+        "name": "Goblin Bandit",
+        "enemyHealth": 24,
+        "enemyDamage": 13,
         "enemyDialogue": "Never should've come here..."
     },
     {
         "name": "Goblin Warrior",
-        "enemyHealth": 12,
-        "enemyDamage": 5,
+        "enemyHealth": 24,
+        "enemyDamage": 13,
         "enemyDialogue": "Fresh Meat!"
     }
 ]

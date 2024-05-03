@@ -11,6 +11,7 @@ public class Enemy extends NPC {
 		super(name);
 		this.enemyHealth = enemyHealth;
 		this.enemyDamage = enemyDamage;
+		this.enemyDialogue = enemyDialogue;
 	}
     
     public int[] getEnemyStats()

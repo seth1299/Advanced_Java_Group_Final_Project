@@ -1,8 +1,20 @@
 [
     {
         "name": "Troll Chief",
-        "enemyHealth": 18,
-        "enemyDamage": 9,
-        "enemyDialogue": "How did you make it this far? You'll not take my treasure!"
+        "enemyHealth": 60,
+        "enemyDamage": 20,
+        "enemyDialogue": "How did you make it this far? You'll not take my treasure! Get him, boys!"
+    },
+    {
+        "name": "Troll Minion",
+        "enemyHealth": 10,
+        "enemyDamage": 14,
+        "enemyDialogue": "You got it, boss!"
+    },
+    {
+        "name": "Bigger Troll Minion",
+        "enemyHealth": 20,
+        "enemyDamage": 16,
+        "enemyDialogue": "He won't get by us!"
     }
 ]

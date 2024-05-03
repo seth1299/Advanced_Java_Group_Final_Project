@@ -186,7 +186,7 @@ public class Player {
     	}
     	System.out.println("\nAny command can be entered by only putting in the first letter of the command as well (except for \"UNEQUIP\" which must be \"UN\" because of \"USE\" already being shortened to \"U\" and \"DONTREMINDME\" which must be \"DONT\" because of \"DIAGNOSE\" already being shortened to \"D\").");
     	// The "magic number" here is the amount of commands shown in the Help screen, minus the "NOTHING" command which does nothing. I suppose it technically counts?
-    	System.out.println("There are also " + ( outOfCombatActions.size() - 26 ) + " secret commands, see if you can find them all! ;)");
+    	System.out.println("There are also 3 secret commands, see if you can find them all! ;)");
     	System.out.println("Also, an enemy will always do a minimum of 1 damage during combat and enemies will keep whatever damage you inflict on them before you flee combat.");
     }
     
@@ -882,7 +882,10 @@ public class Player {
         for (Item.ItemType currentType : sortedTypes) {
             // Print type label
             String currentTypeString = currentType.toString().toLowerCase();
-            currentTypeString = currentTypeString.substring(0, 1).toUpperCase() + currentTypeString.substring(1) + "s";
+            if ( !currentTypeString.equals("misc"))
+            	currentTypeString = currentTypeString.substring(0, 1).toUpperCase() + currentTypeString.substring(1) + "s";
+            else
+            	currentTypeString = currentTypeString.toUpperCase();
             currentTypeString = currentTypeString.replaceAll("_", " ");
             System.out.println("\n" + currentTypeString + ": ");
 
